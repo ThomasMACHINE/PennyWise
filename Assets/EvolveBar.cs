@@ -9,12 +9,10 @@ public class EvolveBar : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
 
-    private int coinToEvolve = 5;
-    
-    public void UpdateSlider(int amount) {
-        slider.value = (float)amount / coinToEvolve;
+    public void UpdateSlider(float fillPercentage) {
+        slider.value = fillPercentage;
         bar.color = gradient.Evaluate(slider.value);
         
-        if ((float)amount / coinToEvolve >= 1) Debug.Log("Press E to evolve!");
+        if (fillPercentage >= 1) Debug.Log("Press E to evolve!");
     }
 }

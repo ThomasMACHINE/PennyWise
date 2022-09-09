@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,33 +6,46 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {   
-    int coinScore;
-    [SerializeField] EvolveBar evolveBar;
-
+    [SerializeField] PlayerStatController statController;
     private void Awake()
     {
-        coinScore = 0;
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && coinScore >= 5)
-        {
-            GetComponent<Transform>().gameObject.transform.localScale = new Vector3(3,1,1);
-            coinScore += -5;
-            evolveBar.UpdateSlider(coinScore);
+        MoveCharacter();
+        CheckEvolve();
+        CheckCollision();
+    }
+
+    private void CheckCollision()
+    {
+        if (statController.activeDragon.IsCaught) {
+            statController.activeDragon.IsCaught = false;
+            ReloadLevel();
         }
     }
 
-    private void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag("Guard")) {
-            ReloadLevel();
+    private void MoveCharacter()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        if(horizontalInput != 0 || verticalInput != 0)
+        {
+            statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }
 
-        if (collider.gameObject.CompareTag("Coin")) {
-            Destroy(collider.gameObject);
-            coinScore += 1;
-            evolveBar.UpdateSlider(coinScore);
+        if (Input.GetKeyDown(KeyCode.Space))
+            statController.activeDragon.DoJump();
+    }
+
+    private void CheckEvolve()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && statController.CanEvolve())
+        {
+            statController.DoEvolve();
         }
     }
     
@@ -40,5 +54,5 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-
+        
 }
