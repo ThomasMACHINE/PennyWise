@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class EvolveBar : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class EvolveBar : MonoBehaviour
         slider.value = fillPercentage;
         bar.color = gradient.Evaluate(slider.value);
         
-        if (fillPercentage >= 1) Debug.Log("Press E to evolve!");
+        if ((float)amount / coinToEvolve >= 1)
+        {
+            evolveNotificationEventEnable.Invoke();
+        }
+        else
+        {
+            evolveNotificationEventDisable.Invoke();
+        }
     }
 }
