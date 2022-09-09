@@ -576,7 +576,7 @@ Transform:
   - {fileID: 1400867044}
   - {fileID: 1459164110}
   m_Father: {fileID: 1068748578}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &712361020
 MonoBehaviour:
@@ -595,14 +595,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  coinLayer:
-    serializedVersion: 2
-    m_Bits: 0
   CoinToEvolve: 25
-  CharacterSpeed: 5
-  JumpSpeed: 5
-  DiveSpeed: 0
-  CanDoubleJump: 0
+  characterSpeed: 5
+  jumpSpeed: 5
+  diveSpeed: 0
+  canDoubleJump: 0
   IsCaught: 0
   UnAccountedCoins: 0
 --- !u!54 &712361021
@@ -1083,6 +1080,7 @@ Transform:
   m_LocalPosition: {x: 1.6297488, y: 11.4702015, z: -19.384106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1995935784}
   - {fileID: 1833170868}
   - {fileID: 712361019}
   m_Father: {fileID: 0}
@@ -1596,6 +1594,12 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  evolveNotificationEventEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  evolveNotificationEventDisable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1625613212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,6 +1698,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833170868}
+  - component: {fileID: 1833170869}
   m_Layer: 3
   m_Name: PlayerStats
   m_TagString: Untagged
@@ -1713,8 +1718,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0411611, z: 1}
   m_Children: []
   m_Father: {fileID: 1068748578}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1833170869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833170867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10863123da22c446b9128537c722529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeDragon: {fileID: 712361020}
+  evolveBar: {fileID: 1625613211}
+  coinScore: 0
 --- !u!1 &1924549431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1830,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924549431}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1995935783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1995935784}
+  - component: {fileID: 1995935785}
+  m_Layer: 0
+  m_Name: PlayerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995935784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995935783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1068748578}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1995935785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995935783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38edd2ef0cfbf4944891fb6d2bd2c032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statController: {fileID: 1833170869}
 --- !u!1 &2087292872
 GameObject:
   m_ObjectHideFlags: 0

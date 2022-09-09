@@ -9,12 +9,14 @@ public class EvolveBar : MonoBehaviour
     public Image bar;
     public Slider slider;
     public Gradient gradient;
+    public UnityEvent evolveNotificationEventEnable;
+    public UnityEvent evolveNotificationEventDisable;
 
     public void UpdateSlider(float fillPercentage) {
         slider.value = fillPercentage;
         bar.color = gradient.Evaluate(slider.value);
         
-        if ((float)amount / coinToEvolve >= 1)
+        if (fillPercentage >= 1)
         {
             evolveNotificationEventEnable.Invoke();
         }
