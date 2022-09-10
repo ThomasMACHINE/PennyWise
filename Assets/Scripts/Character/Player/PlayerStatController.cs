@@ -23,6 +23,14 @@ public class PlayerStatController : MonoBehaviour
             activeDragon.UnAccountedCoins = 0;
         }
     }
+/*
+    //Test fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.
+    //NullReferenceException: Object reference not set to an instance of an object
+    public bool IsCaught() {
+        activeDragon.IsCaught = false;
+        return activeDragon.IsCaught;
+    } */
+
     public bool CanEvolve() {
         return coinScore >= activeDragon.CoinToEvolve;
     }
