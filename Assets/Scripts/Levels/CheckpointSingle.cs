@@ -21,7 +21,7 @@ public class CheckpointSingle : MonoBehaviour {
 	void TeleportPlayerToTargetObject() {
 		//beingTeleported.transform.position = targetToTeleportTo.transform.position;
 		beingTeleported.transform.position = new Vector3(targetToTeleportTo.transform.position.x, 
-			targetToTeleportTo.transform.position.y + 3, targetToTeleportTo.transform.position.z);
+			targetToTeleportTo.transform.position.y + 1, targetToTeleportTo.transform.position.z);
 		
 	}
 	/*if (other.TryGetComponent(out Player player)) {
