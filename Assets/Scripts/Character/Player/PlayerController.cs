@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         MoveCharacter();
         CheckEvolve();
         CheckCollision();
+        ReloadLevelOnCommand();
     }
 
     private void CheckCollision()
@@ -48,9 +49,18 @@ public class PlayerController : MonoBehaviour
             statController.DoEvolve();
         }
     }
+
+    private void ReloadLevelOnCommand()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("You reloaded the level!");
+            ReloadLevel();
+        }
+    }
     
     public void ReloadLevel() {
-        Debug.Log("You were caught by the Guard!");
+        //Debug.Log("You were caught by the Guard!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

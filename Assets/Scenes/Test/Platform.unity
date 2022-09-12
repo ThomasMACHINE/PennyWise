@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -347,6 +347,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 5
+  pointA: {x: 5.24, y: 1.85, z: 15.24}
+  pointB: {x: 10.24, y: 1.85, z: 15.24}
+  speed: 1
   playerModel: {fileID: 0}
   player: {fileID: 0}
   playerMask:
@@ -590,8 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b8b8c6ebb2b5d4f839af4d72acf7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Model: {fileID: 0}
-  Bottom: {fileID: 0}
+  Model: {fileID: 2105644878}
+  Bottom: {fileID: 2105644878}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1594,12 +1597,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  evolveNotificationEventEnable:
-    m_PersistentCalls:
-      m_Calls: []
-  evolveNotificationEventDisable:
-    m_PersistentCalls:
-      m_Calls: []
+  text: {fileID: 0}
 --- !u!114 &1625613212
 MonoBehaviour:
   m_ObjectHideFlags: 0
