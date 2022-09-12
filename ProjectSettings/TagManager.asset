@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Guard
   - Coin
+  - SpawnNextLevel
   layers:
   - Default
   - TransparentFX

@@ -34,6 +34,7 @@ public class Dragon : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
     }
