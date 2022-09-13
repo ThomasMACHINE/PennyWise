@@ -9,7 +9,7 @@ public class TeleportToNextLevel : MonoBehaviour
 
 
 	//The playable object (the one being teleported)
-	public GameObject beingTeleported;
+	//public GameObject beingTeleported;
 
     // Name of the next scene/level to be loaded
     public string nextLevelScene;
@@ -19,7 +19,9 @@ public class TeleportToNextLevel : MonoBehaviour
     public string tagToNextLevel = "SpawnNextLevel";
 
     public Dictionary<string, Vector3> dicOfCoordsToSpawnPoints =  new Dictionary <string, Vector3>();
-   // dicOfCoordsToSpawnPoints.Add("OAscene", Vector3(0,20,0));
+    
+    public GameObject beingTeleported;
+
   /*  dicOfCoordsToSpawnPoints.Add("2OAscene", Vector3(0,20,0));
     dicOfCoordsToSpawnPoints.Add("3OAscene", Vector3(0,20,0));*/
 
@@ -36,6 +38,13 @@ public class TeleportToNextLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Locates the player GameObject
+        beingTeleported = GameObject.FindWithTag("Player");
+        
+        //Have to manually enter the coords of platform to teleport to. NOTE: y must be above the platform in the end.
+        dicOfCoordsToSpawnPoints.Add("OAscene", new Vector3(0,0,0));
+        dicOfCoordsToSpawnPoints.Add("2OAscene", new Vector3(8.12f,4.10f,-14.61f));
+        dicOfCoordsToSpawnPoints.Add("3OAscene", new Vector3(-7,4.10f,0.6f));
        // GameObject[] objsByTags = FindInActiveObjectsByTag("SpawnNextLevel");
     }
 
@@ -52,9 +61,10 @@ public class TeleportToNextLevel : MonoBehaviour
 			Debug.Log("Teleporting to next level!");
             //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
            StartCoroutine(LoadYourAsyncScene());
+           
 
           
-            Debug.Log(SceneManager.GetActiveScene());
+        
 
             //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
             //TODO: Active not foud
@@ -127,13 +137,29 @@ public class TeleportToNextLevel : MonoBehaviour
 	//To avoid being stuck, teleports a few meters(?) above the object. NOTE: Need to adjust from the CENTER of the object (so flat objects is the best)
 	void TeleportPlayerToTargetObjectSpawn() {
 		//beingTeleported.transform.position = targetToTeleportTo.transform.position;
-       
+        Vector3 teleportObjcet = new Vector3(0,0,-20);
 
+        //Name of the scene being teleported to. Note. The corutine have not yet "finished".
+        Debug.Log(nextLevelScene);
+        if (dicOfCoordsToSpawnPoints.ContainsKey(nextLevelScene)) {
+            teleportObjcet = dicOfCoordsToSpawnPoints[nextLevelScene];
+        }
+        else {
+             Debug.Log("ERROR");
+            //Throw an error. Something went horribly wrong.
+        }
+  /*      beingTeleported.transform.position.x = teleportObjcet.x;
+        beingTeleported.transform.position.y = teleportObjcet.y;
+        beingTeleported.transform.position.z = teleportObjcet.z;
 
-        beingTeleported.transform.position = new Vector3(4,5,-5);
+*/
+
+        beingTeleported.transform.position = new Vector3(teleportObjcet.x, teleportObjcet.y + 1, teleportObjcet.z);
     
 	/*	beingTeleported.transform.position = new Vector3(spawnObjectInScene.transform.position.x, 
 			spawnObjectInScene.transform.position.y + 1, spawnObjectInScene.transform.position.z);
 	*/}
 
 }
+
+//NOTE: pressing q will duplicate the number of players due to not destroying on load. Fix.
