@@ -14,7 +14,21 @@ public class TeleportToNextLevel : MonoBehaviour
     // Name of the next scene/level to be loaded
     public string nextLevelScene;
 
-    private GameObject[] gameObjectList55;
+    public GameObject[] objsByTags;
+
+    public string tagToNextLevel = "SpawnNextLevel";
+
+    public Dictionary<string, Vector3> dicOfCoordsToSpawnPoints =  new Dictionary <string, Vector3>();
+   // dicOfCoordsToSpawnPoints.Add("OAscene", Vector3(0,20,0));
+  /*  dicOfCoordsToSpawnPoints.Add("2OAscene", Vector3(0,20,0));
+    dicOfCoordsToSpawnPoints.Add("3OAscene", Vector3(0,20,0));*/
+
+//8.12 4.10. -14.61
+    
+    
+
+
+
 
 
 
@@ -22,7 +36,7 @@ public class TeleportToNextLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       // GameObject[] objsByTags = FindInActiveObjectsByTag("SpawnNextLevel");
     }
 
     // Update is called once per frame
@@ -40,25 +54,47 @@ public class TeleportToNextLevel : MonoBehaviour
            StartCoroutine(LoadYourAsyncScene());
 
           
-           // Debug.Log(SceneManager.GetActiveScene().name);
+            Debug.Log(SceneManager.GetActiveScene());
 
             //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
             //TODO: Active not foud
            // gameObjectList55 = Resources.FindObjectsOfTypeAll<GameObject>();
-            gameObjectList55 = GameObject.FindGameObjectsWithTag("SpawnNextLevel");
-            GameObject[] spawnObjectsList = gameObjectList55;
-            
+            //var gameObjectList = FindObjectOfType<Material>(true);
+           /* 
+           GameObject[] objsByTags = FindInActiveObjectsByTag(tagToNextLevel);
+           GameObject[] spawnObjectsList = objsByTags;
+           Debug.Log("Hello " + spawnObjectsList.Length);
+           Debug.Log(spawnObjectsList.Length + " Before teleport");
+            */
                    
-           TeleportPlayerToTargetObjectSpawn(spawnObjectsList);
-
-           
-
-
-           
+           TeleportPlayerToTargetObjectSpawn();
 
 			//TeleportPlayerToTargetObjectSpawn(spawnObjectsList);
 		}
     }
+/*
+//https://stackoverflow.com/questions/44456133/find-inactive-gameobject-by-name-tag-or-layer?rq=1
+   GameObject[] FindInActiveObjectsByTag(string tag)
+{
+    List<GameObject> validTransforms = new List<GameObject>();
+    Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+    Debug.Log(objs.Length + " Number of elements found");
+    for (int i = 0; i < objs.Length; i++)
+    { 
+        
+        if (objs[i].hideFlags == HideFlags.None)
+        {
+            Debug.Log("The tag: " + objs[i].gameObject.tag);
+            if (objs[i].gameObject.tag == tag)
+            {
+                Debug.Log("Found it");
+                validTransforms.Add(objs[i].gameObject);
+            }
+        }
+    }
+    return validTransforms.ToArray();
+}*/
+    
     
     //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
      IEnumerator LoadYourAsyncScene()
@@ -83,37 +119,21 @@ public class TeleportToNextLevel : MonoBehaviour
 
 
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
-        Debug.Log(SceneManager.GetActiveScene().name + " Co");
+       
     }
 
 
     // Teleports player to the spawn object in the next scene.
 	//To avoid being stuck, teleports a few meters(?) above the object. NOTE: Need to adjust from the CENTER of the object (so flat objects is the best)
-	void TeleportPlayerToTargetObjectSpawn(GameObject[] spawnObjectsList) {
+	void TeleportPlayerToTargetObjectSpawn() {
 		//beingTeleported.transform.position = targetToTeleportTo.transform.position;
-        GameObject spawnObjectInScene = null;
+       
 
-        foreach (GameObject obj in spawnObjectsList) {
-         if (obj.scene == SceneManager.GetActiveScene() && obj.tag == "SpawnNextLevel") {
-            spawnObjectInScene = obj;
-            break;
-         }
-        }
 
-        beingTeleported.transform.position = new Vector3(4,5,0);
-    /*
-		beingTeleported.transform.position = new Vector3(spawnObjectInScene.transform.position.x, 
-			spawnObjectInScene.transform.position.y + 1, spawnObjectInScene.transform.position.z);*/
-	}
-/*
-    GameObject FindCurrentActiveSpawn(GameObject[] spawnObjectsList){
-        GameObject spawnObjectInScene = null;
-        foreach (GameObject obj in spawnObjectsList) {
-         if (obj.scene == SceneManager.GetActiveScene()) {
-            spawnObjectInScene = obj;
-         }
-         //TODO: fix
-        return spawnObjectInScene;
-        }
-    }*/
+        beingTeleported.transform.position = new Vector3(4,5,-5);
+    
+	/*	beingTeleported.transform.position = new Vector3(spawnObjectInScene.transform.position.x, 
+			spawnObjectInScene.transform.position.y + 1, spawnObjectInScene.transform.position.z);
+	*/}
+
 }

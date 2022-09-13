@@ -889,7 +889,7 @@ PrefabInstance:
     - target: {fileID: 7133623721231177254, guid: 0d6440a4d4596b34d9aeb3bba3e377d8, type: 3}
       propertyPath: beingTeleported
       value: 
-      objectReference: {fileID: 189025116}
+      objectReference: {fileID: 3776736651069871888, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
     - target: {fileID: 7133623721231177255, guid: 0d6440a4d4596b34d9aeb3bba3e377d8, type: 3}
       propertyPath: m_Name
       value: TeleportToNextLevelCheckpoint
