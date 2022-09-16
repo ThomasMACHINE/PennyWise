@@ -51,13 +51,21 @@ public class Dragon : MonoBehaviour
 
     public void DoJump()
     {
-        if(IsGrounded())
+       
+        if(IsGrounded()) {
             rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
-
+        }
+        else
+        {
+            //Remember to remove when double jump has been implemented.
+            Debug.Log("Not on the ground layer! Can not jump!");
+        }
     }
+    //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
+    //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(Bottom.transform.position, .1f, groundLayer);
+        return Physics.CheckSphere(Bottom.transform.position, 1.1f, groundLayer);
     }
 
     private void OnTriggerEnter(Collider other)

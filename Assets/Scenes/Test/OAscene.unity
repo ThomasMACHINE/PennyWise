@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 386007545}
   - component: {fileID: 386007544}
   - component: {fileID: 386007543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 1923490780}
   - component: {fileID: 1923490779}
   - component: {fileID: 1923490778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,6 +789,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3776736651069871888, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776736651069871889, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+      propertyPath: sphereRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776736651069871889, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+      propertyPath: canDoubleJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776736651069871889, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3776736651069871912, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -832,6 +848,10 @@ PrefabInstance:
     - target: {fileID: 3776736651069871912, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776736651069871916, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
