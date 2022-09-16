@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStatController : MonoBehaviour
 {
     // This must be kept in the order of low to highest level dragon
-    [SerializeField] LinkedList<Dragon> dragons;
+    [SerializeField] CameraController cameraController;
     [SerializeField] public Dragon activeDragon;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] int coinScore;
@@ -35,8 +35,17 @@ public class PlayerStatController : MonoBehaviour
         return coinScore >= activeDragon.CoinToEvolve;
     }
 
-    internal void DoEvolve()
+    public void DoEvolve()
     {
-        throw new NotImplementedException();
+        GameObject newDragon = activeDragon.NextDragon; 
+        
+        if(newDragon == null)
+        {
+            Debug.Log("There is no higher tier dragon!");
+            return;
+        }
+
+        cameraController.SetNewTarget(newDragon);
+        Instantiate(newDragon);
     }
 }
