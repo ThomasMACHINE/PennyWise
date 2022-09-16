@@ -682,6 +682,10 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7296958975487200999, guid: ad0781fd1b5e98c4eb958bb4523487a6, type: 3}
+      propertyPath: speed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296958975487200999, guid: ad0781fd1b5e98c4eb958bb4523487a6, type: 3}
       propertyPath: pointA.x
       value: 2
       objectReference: {fileID: 0}
@@ -695,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7296958975487200999, guid: ad0781fd1b5e98c4eb958bb4523487a6, type: 3}
       propertyPath: pointB.x
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7296958975487200999, guid: ad0781fd1b5e98c4eb958bb4523487a6, type: 3}
       propertyPath: pointB.y
