@@ -48,11 +48,15 @@ public class PlayerController : MonoBehaviour
         {
             statController.DoEvolve();
         }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            statController.DoDevolve();
+        }
     }
 
     private void ReloadLevelOnCommand()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("You reloaded the level!");
             ReloadLevel();

@@ -1,6 +1,3 @@
-/*
-Most of this code is authored by Unity found at: https://learn.unity.com/tutorial/controlling-unity-camera-behaviour 
- */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +20,9 @@ public class CameraController : MonoBehaviour
         _renderer = trackedObject.gameObject.GetComponent<MeshRenderer>();
     }
 
-    // Late update is each frame after all normal update functions has been ran
+    /*
+        Most of this code is authored by Unity found at: https://learn.unity.com/tutorial/controlling-unity-camera-behaviour 
+    */    
     void LateUpdate()
     {
         ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);

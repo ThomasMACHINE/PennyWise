@@ -37,15 +37,40 @@ public class PlayerStatController : MonoBehaviour
 
     public void DoEvolve()
     {
-        GameObject newDragon = activeDragon.NextDragon; 
-        
+        GameObject newDragon = activeDragon.NextDragon;
+        coinScore -= activeDragon.CoinToEvolve;
         if(newDragon == null)
         {
             Debug.Log("There is no higher tier dragon!");
             return;
         }
+        SetNewDragon(newDragon);
+    }
 
+    public void DoDevolve() {
+        GameObject newDragon = activeDragon.LastDragon;
+
+        if (newDragon == null)
+        {
+            Debug.Log("There is no lower tier dragon!");
+            return;
+        }
+        SetNewDragon(newDragon);
+    }
+
+    private void SetNewDragon(GameObject newDragon) {
+        activeDragon.gameObject.SetActive(false);
+        // Create new dragon and assign old position 
+        newDragon.SetActive(true);
+        newDragon.transform.position = activeDragon.transform.position;
+
+        
+
+        // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
-        Instantiate(newDragon);
+        activeDragon = newDragon.GetComponent<Dragon>();
+
+        // Set fill bar to appropriate level
+        evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
     }
 }

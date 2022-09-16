@@ -162,9 +162,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  CoinToEvolve: 25
+  CoinToEvolve: 5
   LastDragon: {fileID: 0}
-  NextDragon: {fileID: 0}
+  NextDragon: {fileID: 5271313708216350319, guid: a39e474ed92768642834c2ed725dc526, type: 3}
   characterSpeed: 5
   jumpSpeed: 5
   diveSpeed: 0
