@@ -8,7 +8,7 @@ public class Guard : MonoBehaviour
 
     //Needed to move the object
     [SerializeField] Vector3 pointA = new Vector3(3,0,0); 
-    [SerializeField] Vector3 pointB = new Vector3(2,0,0);
+    [SerializeField] Vector3 pointB = new Vector3(0,0,0);
     [SerializeField] float speed = 1;
     private float t;
 
@@ -24,6 +24,7 @@ public class Guard : MonoBehaviour
     void Start()
     {
         playerModel = GameObject.Find("Player").transform;
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
     }
 
     // Update is called once per frame
