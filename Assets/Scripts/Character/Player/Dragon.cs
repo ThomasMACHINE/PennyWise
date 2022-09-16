@@ -23,6 +23,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [SerializeField] public int CoinToEvolve;
+    [SerializeField] public GameObject LastDragon;
+    [SerializeField] public GameObject NextDragon;
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;

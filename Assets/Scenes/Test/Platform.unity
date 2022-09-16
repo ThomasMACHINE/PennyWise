@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -573,10 +573,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712361018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1097488, y: -9.629, z: 7.7041054}
+  m_LocalPosition: {x: -0.96, y: -9.629, z: 8.46}
   m_LocalScale: {x: 1, y: 1.0411611, z: 1}
   m_Children:
-  - {fileID: 1400867044}
   - {fileID: 1459164110}
   m_Father: {fileID: 1068748578}
   m_RootOrder: 2
@@ -598,7 +597,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  CoinToEvolve: 25
+  CoinToEvolve: 5
+  LastDragon: {fileID: 0}
+  NextDragon: {fileID: 0}
   characterSpeed: 5
   jumpSpeed: 5
   diveSpeed: 0
@@ -1411,6 +1412,7 @@ GameObject:
   - component: {fileID: 1400867044}
   - component: {fileID: 1400867046}
   - component: {fileID: 1400867045}
+  - component: {fileID: 1400867047}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1425,12 +1427,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400867043}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 7, z: -12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
+  m_LocalPosition: {x: -0.48000002, y: 9.12933, z: -23.68}
+  m_LocalScale: {x: 1, y: 1.0308707, z: 1.0102903}
   m_Children: []
-  m_Father: {fileID: 712361019}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!81 &1400867045
 AudioListener:
@@ -1483,6 +1485,24 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1400867047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400867043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2cb4ae1512eb8409706bdf992d05a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedObject: {fileID: 712361019}
+  maxDistance: 10
+  moveSpeed: 200
+  updateSpeed: 10
+  currentDistance: 5
+  hideDistance: 0.5
 --- !u!1 &1459164109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 712361019}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1625613209
 GameObject:
@@ -1731,6 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10863123da22c446b9128537c722529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraController: {fileID: 0}
   activeDragon: {fileID: 712361020}
   evolveBar: {fileID: 1625613211}
   coinScore: 0
