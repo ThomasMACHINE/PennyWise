@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class PlayerStatController : MonoBehaviour
 {
-    // This must be kept in the order of low to highest level dragon
+    [SerializeField] CoinDrop coinDropper;
     [SerializeField] CameraController cameraController;
     [SerializeField] public Dragon activeDragon;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] int coinScore;
-
 
     public void Update()
     {
@@ -55,7 +54,9 @@ public class PlayerStatController : MonoBehaviour
             Debug.Log("There is no lower tier dragon!");
             return;
         }
+        // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
+        coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
     private void SetNewDragon(GameObject newDragon) {
@@ -63,8 +64,6 @@ public class PlayerStatController : MonoBehaviour
         // Create new dragon and assign old position 
         newDragon.SetActive(true);
         newDragon.transform.position = activeDragon.transform.position;
-
-        
 
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
