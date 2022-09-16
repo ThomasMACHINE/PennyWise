@@ -23,7 +23,9 @@ public class Guard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Why is this used?
         playerModel = GameObject.Find("Player").transform;
+        
         //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
     }
 
