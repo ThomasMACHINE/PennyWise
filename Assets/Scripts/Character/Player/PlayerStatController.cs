@@ -60,8 +60,20 @@ public class PlayerStatController : MonoBehaviour
     }
 
     private void SetNewDragon(GameObject newDragon) {
+
         activeDragon.gameObject.SetActive(false);
+        //NOTE: There is some weirdness here. One of the lines below should suffice, but somehow BOTH are needed?! It worked before,
+        // so could be a order of execution/frame updating going out of sync causing errors.
         activeDragon.NextDragon.SetActive(true);
+        newDragon.SetActive(true);
+        if (activeDragon.NextDragon.activeInHierarchy ) {
+            Debug.Log("Active next");
+        }
+        if (newDragon.activeInHierarchy ) {
+            Debug.Log("Active newDragon");
+        }
+       // Debug.Log(activeDragon.NextDragon.name);
+        
         // Create new dragon and assign old position 
       //  newDragon.gameObject.SetActive(true);
         
