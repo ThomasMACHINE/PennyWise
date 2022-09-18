@@ -60,7 +60,7 @@ public class Dragon : MonoBehaviour
         }
         else
         {
-            //Remember to remove when double jump has been implemented.
+            //Remember to remove when double jump has been implemented(?)
             Debug.Log("Not on the ground layer! Can not jump!");
         }
     }
@@ -68,7 +68,11 @@ public class Dragon : MonoBehaviour
     //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(Bottom.transform.position, 0.1f, groundLayer);
+        
+
+        //NOTE: Can't use the model as bottom due to distance to ground from center of the model. Adding a cube object as a "platform" could work,
+        // but it would have to be flat
+        return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
     private void OnTriggerEnter(Collider other)
