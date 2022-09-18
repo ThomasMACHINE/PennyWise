@@ -29,7 +29,9 @@ public class Dragon : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
 
+    //Can remove if not needed
     [SerializeField] bool canDoubleJump;
+    private int jumpCount;
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
@@ -56,20 +58,30 @@ public class Dragon : MonoBehaviour
     {
        
         if(IsGrounded()) {
+            jumpCount = 1;
             rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
         }
         else
         {
-            //Remember to remove when double jump has been implemented(?)
-            Debug.Log("Not on the ground layer! Can not jump!");
+            if (this.gameObject.name.Contains("MEDIUM") && jumpCount == 1) {
+                // Can add another else if to allow triple jump and so on.
+                jumpCount += 1;
+                rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
+            }
+            else if (jumpCount != 1) {
+                Debug.Log("Can't jump more in the air");
+            }
+            else {
+                Debug.Log("Not on the ground layer! Can not jump!");
+            }
+            
         }
     }
     //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
-    {
+     {  
         
-
         //NOTE: Can't use the model as bottom due to distance to ground from center of the model. Adding a cube object as a "platform" could work,
         // but it would have to be flat
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
