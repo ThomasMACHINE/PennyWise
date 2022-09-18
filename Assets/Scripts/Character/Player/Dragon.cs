@@ -65,7 +65,7 @@ public class Dragon : MonoBehaviour
     //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(Bottom.transform.position, 1.1f, groundLayer);
+        return Physics.CheckSphere(Bottom.transform.position, 0.1f, groundLayer);
     }
 
     private void OnTriggerEnter(Collider other)

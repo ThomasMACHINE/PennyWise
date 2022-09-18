@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 1404015882}
     - target: {fileID: 3330025307063667143, guid: 8a7963fec58b7494882120d86940d400, type: 3}
       propertyPath: speed
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3330025307063667143, guid: 8a7963fec58b7494882120d86940d400, type: 3}
       propertyPath: movement
@@ -526,6 +526,14 @@ PrefabInstance:
     - target: {fileID: 5925737042555944443, guid: 8a7963fec58b7494882120d86940d400, type: 3}
       propertyPath: diveSpeed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925737042555944443, guid: 8a7963fec58b7494882120d86940d400, type: 3}
+      propertyPath: NextDragon
+      value: 
+      objectReference: {fileID: 3776736651069871888, guid: b65ac8727c9cc2341a27185d8ef81821, type: 3}
+    - target: {fileID: 5925737042555944443, guid: 8a7963fec58b7494882120d86940d400, type: 3}
+      propertyPath: CoinToEvolve
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7963fec58b7494882120d86940d400, type: 3}
