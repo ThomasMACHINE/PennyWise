@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3776736651069871888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.12, y: 14.1, z: -14.61}
+  m_LocalPosition: {x: 16.041819, y: 4.927039, z: -11.253427}
   m_LocalScale: {x: 0.55343, y: 0.55343, z: 0.55343}
   m_Children:
   - {fileID: 3776736649870159390}
@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10863123da22c446b9128537c722529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinDropper: {fileID: 0}
+  cameraController: {fileID: 0}
   activeDragon: {fileID: 3776736651069871889}
   evolveBar: {fileID: 0}
   coinScore: 0
@@ -228,6 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statController: {fileID: 3776736651069871891}
+  turn: {x: 0, y: 0}
+  deltaMovement: {x: 0, y: 0, z: 0}
+  movement: {fileID: 0}
+  sensitivity: 1
+  speed: 1
 --- !u!114 &3776736651069871889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +253,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   CoinToEvolve: 0
+  LastDragon: {fileID: 0}
+  NextDragon: {fileID: 0}
   characterSpeed: 5
   jumpSpeed: 4
   diveSpeed: 0

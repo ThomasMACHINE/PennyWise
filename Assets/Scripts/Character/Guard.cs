@@ -15,7 +15,7 @@ public class Guard : MonoBehaviour
     //Temp
     float degreesPerSecond = 20;
 
-    [SerializeField] Transform playerModel;
+   // [SerializeField] Transform playerModel;
     [SerializeField] PlayerController player;
     [SerializeField] LayerMask playerMask;
 
@@ -24,7 +24,7 @@ public class Guard : MonoBehaviour
     void Start()
     {
         //Why is this used?
-        playerModel = GameObject.Find("Player").transform;
+       // playerModel = GameObject.Find("Player").transform;
         
         //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
     }

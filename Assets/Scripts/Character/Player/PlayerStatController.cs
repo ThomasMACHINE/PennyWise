@@ -36,14 +36,14 @@ public class PlayerStatController : MonoBehaviour
 
     public void DoEvolve()
     {
-        GameObject newDragon = activeDragon.NextDragon;
+        //GameObject newDragon = activeDragon.NextDragon;
         coinScore -= activeDragon.CoinToEvolve;
-        if(newDragon == null)
+        if(activeDragon.NextDragon == null)
         {
             Debug.Log("There is no higher tier dragon!");
             return;
         }
-        SetNewDragon(newDragon);
+        SetNewDragon(activeDragon.NextDragon);
     }
 
     public void DoDevolve() {
@@ -61,12 +61,16 @@ public class PlayerStatController : MonoBehaviour
 
     private void SetNewDragon(GameObject newDragon) {
         activeDragon.gameObject.SetActive(false);
+        activeDragon.NextDragon.SetActive(true);
         // Create new dragon and assign old position 
-        newDragon.SetActive(true);
-        newDragon.transform.position = activeDragon.transform.position;
+      //  newDragon.gameObject.SetActive(true);
+        
+        
+        newDragon.transform.position = new Vector3(activeDragon.transform.position.x, activeDragon.transform.position.y + 3, activeDragon.transform.position.z);
 
+       
         // Make the camera target the new model
-        cameraController.SetNewTarget(newDragon);
+      //  cameraController.SetNewTarget(newDragon);
         activeDragon = newDragon.GetComponent<Dragon>();
 
         // Set fill bar to appropriate level

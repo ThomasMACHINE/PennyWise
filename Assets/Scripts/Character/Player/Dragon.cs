@@ -33,12 +33,15 @@ public class Dragon : MonoBehaviour
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
-
+   
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(NextDragon);
+        NextDragon.SetActive(false);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
+
     }
 
     public void DoMove(float horizontalInput, float verticalInput) 
