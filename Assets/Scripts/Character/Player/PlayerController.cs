@@ -58,9 +58,14 @@ public class PlayerController : MonoBehaviour
 
         deltaMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
         movement.transform.Translate(deltaMovement);
+        
+        statController.activeDragon.DoGlide();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) {
             statController.activeDragon.DoJump();
+        }
+            
+        
     }
 
     private void CheckEvolve()

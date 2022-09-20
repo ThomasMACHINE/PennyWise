@@ -32,6 +32,7 @@ public class Dragon : MonoBehaviour
     //Can remove if not needed
     [SerializeField] bool canDoubleJump;
     private int jumpCount;
+    private bool toggleGlide;
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
@@ -60,10 +61,22 @@ public class Dragon : MonoBehaviour
        
         if(IsGrounded()) {
             jumpCount = 1;
+            toggleGlide = false;
             rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
+            
+            
         }
-        else
-        {
+        else {
+            //Dragon can glide if it is small size, here it checks to toggle or untoggle it
+            if (this.gameObject.name.Contains("SMALL") && Input.GetKeyDown(KeyCode.Space)) {
+                if (toggleGlide) {
+                    toggleGlide = false;
+                } else {
+                    toggleGlide = true;
+                }
+            }
+
+            //Dragon can double jump if it is medum size
             if (this.gameObject.name.Contains("MEDIUM") && jumpCount == 1) {
                 // Can add another else if to allow triple jump and so on.
                 jumpCount += 1;
@@ -78,6 +91,16 @@ public class Dragon : MonoBehaviour
             
         }
     }
+
+    //Function for updating the decent of a gliding dragon
+    public void DoGlide()
+    {
+        if (IsGrounded() == false && toggleGlide){
+            rigBody.velocity = new Vector3(rigBody.velocity.x, -1, rigBody.velocity.z);
+        }
+    }
+
+
     //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
