@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }*/
 
+        //Movement for the camera
         turn.x += Input.GetAxis("Mouse X") * sensitivity;
         //for up/down/left/right movement of camera.
         //  turn.y += Input.GetAxis("Mouse Y") * sensitivity;
@@ -59,14 +60,19 @@ public class PlayerController : MonoBehaviour
         deltaMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
         movement.transform.Translate(deltaMovement);
         
+        //Gliding for the smallest dragon
         statController.activeDragon.DoGlide();
 
+        //Jumping
         if (Input.GetKeyDown(KeyCode.Space)) {
             statController.activeDragon.DoJump();
         }
-            
-        
+
+        //Holding
+        statController.activeDragon.DoHold();
     }
+
+    
 
     private void CheckEvolve()
     {

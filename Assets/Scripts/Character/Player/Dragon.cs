@@ -21,6 +21,7 @@ public class Dragon : MonoBehaviour
     private Rigidbody rigBody;
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] Interactable interactable;
 
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
@@ -31,8 +32,10 @@ public class Dragon : MonoBehaviour
 
     //Can remove if not needed
     [SerializeField] bool canDoubleJump;
+    
     private int jumpCount;
     private bool toggleGlide;
+    public bool toggleHold;
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
@@ -45,6 +48,7 @@ public class Dragon : MonoBehaviour
         NextDragon.SetActive(false);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
+        toggleHold = false;
 
     }
 
@@ -55,6 +59,8 @@ public class Dragon : MonoBehaviour
 
         rigBody.velocity = new Vector3(horizontalSpeed, rigBody.velocity.y, verticalSpeed);
     }
+
+    
 
     public void DoJump()
     {
@@ -100,6 +106,18 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    public void DoHold(){
+        if (Input.GetKeyDown(KeyCode.C) && toggleHold)
+        {
+            interactable.Hold();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            interactable.Drop();
+        }
+
+    }
+
 
     //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     //Player also needs to have ground as the groundLayer.
@@ -120,6 +138,20 @@ public class Dragon : MonoBehaviour
         {
             Destroy(other.gameObject);
             UnAccountedCoins += 1;
+        
         }
+        if (other.gameObject.CompareTag("Crate") && this.gameObject.name.Contains("SMALL") == false)
+        {
+            toggleHold = true;
+        } 
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Crate"))
+        {
+            toggleHold = false; 
+        } 
+    }
+
 }
