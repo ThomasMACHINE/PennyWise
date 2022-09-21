@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
     }
     
     public void ReloadLevel() {
-        //Debug.Log("You were caught by the Guard!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

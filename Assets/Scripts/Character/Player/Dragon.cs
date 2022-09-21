@@ -45,7 +45,6 @@ public class Dragon : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(NextDragon);
-        NextDragon.SetActive(false);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
@@ -127,6 +126,19 @@ public class Dragon : MonoBehaviour
         //NOTE: Can't use the model as bottom due to distance to ground from center of the model. Adding a cube object as a "platform" could work,
         // but it would have to be flat
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            Coin coin = collision.gameObject.GetComponent<Coin>();
+            if (coin.CanBePicked) {
+                Destroy(collision.gameObject);
+                UnAccountedCoins += 1;
+            }
+            
+        }
     }
 
     private void OnTriggerEnter(Collider other)
