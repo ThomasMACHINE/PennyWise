@@ -7,8 +7,11 @@ public class Coin : MonoBehaviour
     [SerializeField] Rigidbody  rb;
     [SerializeField] BoxCollider boxColl;
 
+    public bool CanBePicked { get; internal set; }
+
     private void Awake()
     {
+        CanBePicked = false;
         rb = GetComponent<Rigidbody>();
         boxColl = GetComponent<BoxCollider>();
     }
@@ -17,8 +20,6 @@ public class Coin : MonoBehaviour
         if (collider.gameObject.name != "Floor")
             return;
 
-        //Turn of physics and enable the boxCollider
-        rb.useGravity = false;
-        boxColl.isTrigger = true;
+        CanBePicked = true;
     }
 }

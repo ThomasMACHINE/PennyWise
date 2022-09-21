@@ -1075,6 +1075,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721805874}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &773367697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1652679426469544030, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+  m_PrefabInstance: {fileID: 1963368400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &881601499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,6 +1720,30 @@ PrefabInstance:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 531725439}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: turn.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: turn.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 773367697}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: deltaMovement.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: deltaMovement.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652679426267870433, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
+      propertyPath: deltaMovement.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1652679426469544016, guid: 066ec150b53ccfb418b680ef87c7cf36, type: 3}
       propertyPath: Model
       value: 
