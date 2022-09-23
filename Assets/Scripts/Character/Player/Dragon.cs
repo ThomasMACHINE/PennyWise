@@ -31,9 +31,10 @@ public class Dragon : MonoBehaviour
     [SerializeField] float diveSpeed;
 
     //Can remove if not needed
+    [SerializeField] bool canGlide;
     [SerializeField] bool canDoubleJump;
-    
-    private int jumpCount;
+
+    [SerializeField] private int jumpCount;
     private bool toggleGlide;
     public bool toggleHold;
 
@@ -48,7 +49,6 @@ public class Dragon : MonoBehaviour
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
-
     }
 
     public void DoMove(float horizontalInput, float verticalInput) 
@@ -63,7 +63,6 @@ public class Dragon : MonoBehaviour
 
     public void DoJump()
     {
-       
         if(IsGrounded()) {
             jumpCount = 1;
             toggleGlide = false;
@@ -72,18 +71,17 @@ public class Dragon : MonoBehaviour
             
         }
         else {
-            //Dragon can glide if it is small size, here it checks to toggle or untoggle it
+            // Dragon can glide if it is small size, here it checks to toggle or untoggle it
             if (this.gameObject.name.Contains("SMALL") && Input.GetKeyDown(KeyCode.Space)) {
+                Debug.Log("I am gliding!");
                 if (toggleGlide) {
                     toggleGlide = false;
                 } else {
                     toggleGlide = true;
                 }
             }
-
-            //Dragon can double jump if it is medum size
-            if (this.gameObject.name.Contains("MEDIUM") && jumpCount == 1) {
-                // Can add another else if to allow triple jump and so on.
+            // If the dragon can double jump AND the jump count is below 2
+            if (canDoubleJump && jumpCount < 2) {
                 jumpCount += 1;
                 rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
             }
@@ -97,7 +95,7 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    //Function for updating the decent of a gliding dragon
+    // Function for updating the decent of a gliding dragon
     public void DoGlide()
     {
         if (IsGrounded() == false && toggleGlide){
@@ -121,10 +119,9 @@ public class Dragon : MonoBehaviour
     //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     //Player also needs to have ground as the groundLayer.
     public bool IsGrounded()
-     {  
-        
-        //NOTE: Can't use the model as bottom due to distance to ground from center of the model. Adding a cube object as a "platform" could work,
-        // but it would have to be flat
+     {
+        bool isGrounded = Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
+        if (isGrounded) { jumpCount = 1; }
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
