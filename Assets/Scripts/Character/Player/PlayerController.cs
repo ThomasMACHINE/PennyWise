@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }*/
 
-        //Movement for turning with mouse
+        //Movement for turning with mouse. DO NOT MOVE TO CAMERA. THE CAMERA FOLLOWS THE PLAYER, NOT A FREE-ROAM.
         turn.x += Input.GetAxis("Mouse X") * sensitivity;
         //for up/down/left/right movement of camera, add line below.
         //  turn.y += Input.GetAxis("Mouse Y") * sensitivity;

@@ -12,6 +12,41 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] int coinScore;
 
+    //Global coinscore. Not implemented
+    public static int globalCoinScore;
+    
+    //Name of model in use. Need to rework
+    public enum GlobalModelENUM
+    {
+        SMALL, MEDIUM, LARGE
+    };
+    //Variable to initilize to.
+    public static GlobalModelENUM globalModel = GlobalModelENUM.SMALL;
+    //Need to change the dragon model from here.
+    void Start() {
+          //Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
+        if(globalModel == GlobalModelENUM.SMALL) {
+         // The dragon initilizes with the small model active.
+        }
+        else if (globalModel == GlobalModelENUM.MEDIUM) {
+            //NOTE: THE NAMING CONVENTION USED  (ADDED IN PREFAB)
+            activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
+            SetNewDragon(activeDragon.NextDragon);
+        }
+        else if (globalModel == GlobalModelENUM.LARGE) {
+            activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(true);
+            SetNewDragon(activeDragon.NextDragon);
+            SetNewDragon(activeDragon.NextDragon);
+        }
+        // Need to add a graceful exit here. (should not be able to trigger unless an inspector value is missing or naming convention is wrong)
+        else {
+            Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
+        }  
+    }
     public void Update()
     {
         //Possible to move out of update?
@@ -62,8 +97,9 @@ public class PlayerStatController : MonoBehaviour
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
-    public void SetNewDragon(GameObject newDragon) {
-
+    private void SetNewDragon(GameObject newDragon) {
+        Debug.Log(activeDragon + ":::ACTIVE DRAGON");
+        Debug.Log(newDragon + ":::: NEW DRAGON");
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
         Debug.Log(newDragon.name + "was turned on");
@@ -76,4 +112,5 @@ public class PlayerStatController : MonoBehaviour
         // Set fill bar to appropriate level
         evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
     }
+
 }

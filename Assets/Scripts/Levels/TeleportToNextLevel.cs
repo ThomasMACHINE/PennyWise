@@ -23,6 +23,8 @@ public class TeleportToNextLevel : MonoBehaviour
     //The object to be teleported
     public GameObject beingTeleported;
 
+    
+
   /*  dicOfCoordsToSpawnPoints.Add("2OAscene", Vector3(0,20,0));
     dicOfCoordsToSpawnPoints.Add("3OAscene", Vector3(0,20,0));*/
 
@@ -40,13 +42,13 @@ public class TeleportToNextLevel : MonoBehaviour
     void Start()
     {
         //Locates the player GameObject
-        beingTeleported = GameObject.FindWithTag("Player");
+        //beingTeleported = GameObject.FindWithTag("Player");
         
         //Have to manually enter the coords of platform to teleport to. NOTE: y must be above the platform in the end.
         dicOfCoordsToSpawnPoints.Add("OAscene", new Vector3(0,0,0));
         dicOfCoordsToSpawnPoints.Add("2OAscene", new Vector3(8.12f,4.10f,-14.61f));
         dicOfCoordsToSpawnPoints.Add("3OAscene", new Vector3(-7,4.10f,0.6f));
-       // GameObject[] objsByTags = FindInActiveObjectsByTag("SpawnNextLevel");
+       
     }
 
     // Update is called once per frame
@@ -59,49 +61,34 @@ public class TeleportToNextLevel : MonoBehaviour
 	// Checks if the player touches/enters the checkpoint.
     void OnTriggerEnter(Collider other) {
 		if(other.tag.Equals("Player")) {
-			Debug.Log("Teleporting to next level!");
+            Debug.Log("Teleporting to next level!");
             //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
-           if (other.gameObject.name.Contains("SMALL")) {
-            Debug.Log("Contains small");
-           } 
-           StartCoroutine(LoadYourAsyncScene());
-           ModelCheck(other);
-
-        
-           
-           //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
-            //TODO: Active not foud
-           // gameObjectList55 = Resources.FindObjectsOfTypeAll<GameObject>();
-            //var gameObjectList = FindObjectOfType<Material>(true);
-           /* 
-           GameObject[] objsByTags = FindInActiveObjectsByTag(tagToNextLevel);
-           GameObject[] spawnObjectsList = objsByTags;
-           Debug.Log("Hello " + spawnObjectsList.Length);
-           Debug.Log(spawnObjectsList.Length + " Before teleport");
-            */
-                   
-           //TeleportPlayerToTargetObjectSpawn();
-
-			//TeleportPlayerToTargetObjectSpawn(spawnObjectsList);
-		}
+            StartCoroutine(LoadYourAsyncScene());
+            UpdateGlobalModelCheck(other);
+                       
+    	}
     }
 
-    private void ModelCheck(Collider other) {
+    //Checks the model of the player when entering teleporter and update the global variable.
+    private void UpdateGlobalModelCheck(Collider other) {
         //Determines which model was in use when entering the teleporter.Works
-           Debug.Log(Dragon.globalModel + ":::::1");
-           if(other.gameObject.name.Contains("SMALL")) {
-            Dragon.globalModel = "SMALL";
-           }
-           else if (other.gameObject.name.Contains("MEDIUM")) {
-            Dragon.globalModel = "MEDIUM";
-           }
-           else if (other.gameObject.name.Contains("LARGE")) {
-            Dragon.globalModel = "LARGE";
-           }
-           else {
+        Debug.Log(PlayerStatController.globalModel + ":::::1");
+        if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.SMALL))) {
+            PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.SMALL;
+        }
+        //else if (other.gameObject.name.Contains(Dragon.GlobalModelENUM.MEDIUM)) {
+        else if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.MEDIUM))) {
+            PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.MEDIUM;
+        }
+        //else if (other.gameObject.name.Contains(Dragon.GlobalModelENUM.LARGE)) {
+        else if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.LARGE))) {
+            PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.LARGE;
+        }
+        else {
             Debug.Log("COULD NOT FIND CORRECT NAME FOR GAME OBJECT");
-           }
-           Debug.Log(Dragon.globalModel + ":::::2");
+        }
+        Debug.Log(PlayerStatController.globalModel + ":::::2");
+
     }
 
     
@@ -156,6 +143,7 @@ public class TeleportToNextLevel : MonoBehaviour
     }
 
 
+    //Teleports the player model insted of creating a new GameObject for each scene.
     // Teleports player to the spawn object in the next scene.
 	//To avoid being stuck, teleports a few meters(?) above the object. NOTE: Need to adjust from the CENTER of the object (so flat objects is the best)
 	void TeleportPlayerToTargetObjectSpawn() {
