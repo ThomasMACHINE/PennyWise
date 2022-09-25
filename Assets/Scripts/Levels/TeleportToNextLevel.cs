@@ -14,47 +14,21 @@ public class TeleportToNextLevel : MonoBehaviour
     // Name of the next scene/level to be loaded
     public string nextLevelScene;
 
-    public GameObject[] objsByTags;
 
-    public string tagToNextLevel = "SpawnNextLevel";
-
-    public Dictionary<string, Vector3> dicOfCoordsToSpawnPoints =  new Dictionary <string, Vector3>();
     
     //The object to be teleported
-    public GameObject beingTeleported;
-
-    
-
-  /*  dicOfCoordsToSpawnPoints.Add("2OAscene", Vector3(0,20,0));
-    dicOfCoordsToSpawnPoints.Add("3OAscene", Vector3(0,20,0));*/
-
-//8.12 4.10. -14.61
-    
-    
-
-
-
-
-
-
+    //public GameObject beingTeleported;
 
     // Start is called before the first frame update
     void Start()
-    {
-        //Locates the player GameObject
-        //beingTeleported = GameObject.FindWithTag("Player");
-        
-        //Have to manually enter the coords of platform to teleport to. NOTE: y must be above the platform in the end.
-        dicOfCoordsToSpawnPoints.Add("OAscene", new Vector3(0,0,0));
-        dicOfCoordsToSpawnPoints.Add("2OAscene", new Vector3(8.12f,4.10f,-14.61f));
-        dicOfCoordsToSpawnPoints.Add("3OAscene", new Vector3(-7,4.10f,0.6f));
-       
+    {      
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 	
@@ -90,31 +64,7 @@ public class TeleportToNextLevel : MonoBehaviour
         Debug.Log(PlayerStatController.globalModel + ":::::2");
 
     }
-
-    
-/*
-//https://stackoverflow.com/questions/44456133/find-inactive-gameobject-by-name-tag-or-layer?rq=1
-   GameObject[] FindInActiveObjectsByTag(string tag)
-{
-    List<GameObject> validTransforms = new List<GameObject>();
-    Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
-    Debug.Log(objs.Length + " Number of elements found");
-    for (int i = 0; i < objs.Length; i++)
-    { 
-        
-        if (objs[i].hideFlags == HideFlags.None)
-        {
-            Debug.Log("The tag: " + objs[i].gameObject.tag);
-            if (objs[i].gameObject.tag == tag)
-            {
-                Debug.Log("Found it");
-                validTransforms.Add(objs[i].gameObject);
-            }
-        }
-    }
-    return validTransforms.ToArray();
-}*/
-    
+   
     
     //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
      IEnumerator LoadYourAsyncScene()
@@ -132,8 +82,7 @@ public class TeleportToNextLevel : MonoBehaviour
             yield return null;
         }
         
-        // Move the GameObject (you attach this in the Inspector) to the newly loaded Scene
-        SceneManager.MoveGameObjectToScene(beingTeleported, SceneManager.GetSceneByName(nextLevelScene));
+        
         // Unload the previous Scene
         SceneManager.UnloadSceneAsync(currentScene);
 
@@ -141,37 +90,6 @@ public class TeleportToNextLevel : MonoBehaviour
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
        
     }
-
-
-    //Teleports the player model insted of creating a new GameObject for each scene.
-    // Teleports player to the spawn object in the next scene.
-	//To avoid being stuck, teleports a few meters(?) above the object. NOTE: Need to adjust from the CENTER of the object (so flat objects is the best)
-	void TeleportPlayerToTargetObjectSpawn() {
-		//beingTeleported.transform.position = targetToTeleportTo.transform.position;
-        Vector3 teleportObjcet = new Vector3(0,0,-20);
-
-        //Name of the scene being teleported to. Note. The corutine have not yet "finished".
-        Debug.Log(nextLevelScene);
-        if (dicOfCoordsToSpawnPoints.ContainsKey(nextLevelScene)) {
-            teleportObjcet = dicOfCoordsToSpawnPoints[nextLevelScene];
-        }
-        else {
-             Debug.Log("ERROR");
-            //Throw an error. Something went horribly wrong.
-        }
-  /*      beingTeleported.transform.position.x = teleportObjcet.x;
-        beingTeleported.transform.position.y = teleportObjcet.y;
-        beingTeleported.transform.position.z = teleportObjcet.z;
-
-*/
-
-        beingTeleported.transform.position = new Vector3(teleportObjcet.x, teleportObjcet.y + 1, teleportObjcet.z);
-    
-	/*	beingTeleported.transform.position = new Vector3(spawnObjectInScene.transform.position.x, 
-			spawnObjectInScene.transform.position.y + 1, spawnObjectInScene.transform.position.z);
-	*/}
-
+   
 }
-
-//NOTE: pressing q will duplicate the number of players due to not destroying on load. Fix.
 
