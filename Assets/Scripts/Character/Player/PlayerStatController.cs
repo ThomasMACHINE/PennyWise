@@ -14,12 +14,15 @@ public class PlayerStatController : MonoBehaviour
 
     public void Update()
     {
+        //Possible to move out of update?
         //TODO This can lead to bugs if evolve is called on the same frame as a coin is picked up and it is called before this Update
         if (activeDragon.UnAccountedCoins != 0)
         {
             coinScore += activeDragon.UnAccountedCoins;
             evolveBar.UpdateSlider((float)coinScore / activeDragon.CoinToEvolve);
             activeDragon.UnAccountedCoins = 0;
+        
+            
         }
     }
 /*
@@ -59,7 +62,7 @@ public class PlayerStatController : MonoBehaviour
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
-    private void SetNewDragon(GameObject newDragon) {
+    public void SetNewDragon(GameObject newDragon) {
 
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);

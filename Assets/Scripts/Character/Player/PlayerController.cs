@@ -49,13 +49,13 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }*/
 
-        //Movement for the camera
+        //Movement for turning with mouse
         turn.x += Input.GetAxis("Mouse X") * sensitivity;
-        //for up/down/left/right movement of camera.
+        //for up/down/left/right movement of camera, add line below.
         //  turn.y += Input.GetAxis("Mouse Y") * sensitivity;
         //for up/down/left/right movement of camera.
         //transform. localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
-        transform. localRotation = Quaternion.Euler(0, turn.x, 0);
+        movement.transform.localRotation = Quaternion.Euler(0, turn.x, 0);
 
         deltaMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
         movement.transform.Translate(deltaMovement);

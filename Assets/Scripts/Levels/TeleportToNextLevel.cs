@@ -20,6 +20,7 @@ public class TeleportToNextLevel : MonoBehaviour
 
     public Dictionary<string, Vector3> dicOfCoordsToSpawnPoints =  new Dictionary <string, Vector3>();
     
+    //The object to be teleported
     public GameObject beingTeleported;
 
   /*  dicOfCoordsToSpawnPoints.Add("2OAscene", Vector3(0,20,0));
@@ -60,13 +61,15 @@ public class TeleportToNextLevel : MonoBehaviour
 		if(other.tag.Equals("Player")) {
 			Debug.Log("Teleporting to next level!");
             //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
+           if (other.gameObject.name.Contains("SMALL")) {
+            Debug.Log("Contains small");
+           } 
            StartCoroutine(LoadYourAsyncScene());
-           
+           ModelCheck(other);
 
-          
         
-
-            //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
+           
+           //SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextLevelScene));
             //TODO: Active not foud
            // gameObjectList55 = Resources.FindObjectsOfTypeAll<GameObject>();
             //var gameObjectList = FindObjectOfType<Material>(true);
@@ -77,11 +80,31 @@ public class TeleportToNextLevel : MonoBehaviour
            Debug.Log(spawnObjectsList.Length + " Before teleport");
             */
                    
-           TeleportPlayerToTargetObjectSpawn();
+           //TeleportPlayerToTargetObjectSpawn();
 
 			//TeleportPlayerToTargetObjectSpawn(spawnObjectsList);
 		}
     }
+
+    private void ModelCheck(Collider other) {
+        //Determines which model was in use when entering the teleporter.Works
+           Debug.Log(Dragon.globalModel + ":::::1");
+           if(other.gameObject.name.Contains("SMALL")) {
+            Dragon.globalModel = "SMALL";
+           }
+           else if (other.gameObject.name.Contains("MEDIUM")) {
+            Dragon.globalModel = "MEDIUM";
+           }
+           else if (other.gameObject.name.Contains("LARGE")) {
+            Dragon.globalModel = "LARGE";
+           }
+           else {
+            Debug.Log("COULD NOT FIND CORRECT NAME FOR GAME OBJECT");
+           }
+           Debug.Log(Dragon.globalModel + ":::::2");
+    }
+
+    
 /*
 //https://stackoverflow.com/questions/44456133/find-inactive-gameobject-by-name-tag-or-layer?rq=1
    GameObject[] FindInActiveObjectsByTag(string tag)
@@ -163,3 +186,4 @@ public class TeleportToNextLevel : MonoBehaviour
 }
 
 //NOTE: pressing q will duplicate the number of players due to not destroying on load. Fix.
+

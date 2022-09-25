@@ -26,6 +26,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
     [SerializeField] public GameObject NextDragon;
+    //Does not affect the actual speed of the object on a horizontal level (unsure about vertical). That is handled in playerController.
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
@@ -40,12 +41,55 @@ public class Dragon : MonoBehaviour
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
-   
-   
-    private void Awake()
+
+    //Global coinscore
+    public static int globalCoinScore;
+    // statecontroller after func.  Dragon.globalCoinScore = coinScore;
+    //Name of model in use
+    /*public static enum GlobalModel
     {
-        DontDestroyOnLoad(this.gameObject);
-        DontDestroyOnLoad(NextDragon);
+        SMALL, MEDIUM, LARGE
+    };*/
+    public static string globalModel = "SMALL";
+    
+    void Start() {
+        /*
+    Debug.Log(this.gameObject.name);
+    Debug.Log(this.gameObject.transform.Find("Dragon_SMALL").gameObject.name);
+    GameObject smallChild = transform.Find("Dragon_SMALL").gameObject;  
+    GameObject mediumChild = transform.Find("Dragon_MEDIUM").gameObject;
+    GameObject largeChild = transform.Find("Dragon_LARGE").gameObject;
+    */
+/*
+    if(globalModel == "SMALL") {
+        //this.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(false);
+        //this.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
+    }
+    else if (globalModel == "MEDIUM") {
+        Debug.Log("NAME OF ACTIVE D: " + this.gameObject.name);
+        this.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
+        this.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
+        Debug.Log("NAME OF ACTIVE D: " + this.gameObject.name);
+        PlayerStatController.cameraController.SetNewTarget(this.gameObject);
+        
+        
+    }
+    else if (globalModel == "LARGE") {
+        this.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
+        this.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(true);
+        PlayerStatController.cameraController.SetNewTarget(this.gameObject);
+        
+    }
+    else {
+        Debug.Log("CRITICAL ERROR IMPENDING. PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED!");
+    }
+  */  
+    }
+
+    private void Awake() {
+    
+       // DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(NextDragon);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
@@ -63,6 +107,7 @@ public class Dragon : MonoBehaviour
 
     public void DoJump()
     {
+        Debug.Log(jumpCount);
         if(IsGrounded()) {
             jumpCount = 1;
             toggleGlide = false;
