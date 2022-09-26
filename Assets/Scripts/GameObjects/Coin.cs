@@ -17,6 +17,9 @@ public class Coin : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collider)
     {
+            // the ground layer
+        if (collider.gameObject.layer == 6)
+            CanBePicked = true;
         if (collider.gameObject.name != "Floor")
             return;
 
