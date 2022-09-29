@@ -44,9 +44,9 @@ public class TeleportToNextLevel : MonoBehaviour
     }
 
     //Checks the model of the player when entering teleporter and update the global variable.
+    //TODO: ADD A COINSCORE VARIABLE TO BE UPDATED ON ENTERING
     private void UpdateGlobalModelCheck(Collider other) {
-        //Determines which model was in use when entering the teleporter.Works
-        Debug.Log(PlayerStatController.globalModel + ":::::1");
+        //Determines which model was in use when entering the teleporter
         if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.SMALL))) {
             PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.SMALL;
         }
@@ -61,8 +61,6 @@ public class TeleportToNextLevel : MonoBehaviour
         else {
             Debug.Log("COULD NOT FIND CORRECT NAME FOR GAME OBJECT");
         }
-        Debug.Log(PlayerStatController.globalModel + ":::::2");
-
     }
    
     

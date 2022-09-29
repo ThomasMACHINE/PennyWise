@@ -127,7 +127,8 @@ public class Dragon : MonoBehaviour
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    //Should move this into the coin, and from there update the global coinscore.
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
@@ -138,8 +139,9 @@ public class Dragon : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
+    // ... Look at the comment above.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Guard"))
@@ -147,6 +149,9 @@ public class Dragon : MonoBehaviour
 
         if (other.gameObject.CompareTag("Coin"))
         {
+            //Updates the global variable
+            CoinScore.globalCoinScore += 1;
+            Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
             UnAccountedCoins += 1;
         
