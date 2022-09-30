@@ -120,8 +120,11 @@ public class PlayerStatController : MonoBehaviour
         activeDragon = newDragon.GetComponent<Dragon>();
 
         // Set fill bar to appropriate level
-        //Warning, could divide by zero.
-        evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+        if (activeDragon.CoinToEvolve != 0) {
+            evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+        }
+
+        
     }
 
 }
