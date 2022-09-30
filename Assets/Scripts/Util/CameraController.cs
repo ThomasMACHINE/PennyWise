@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     private GameObject ahead;
     private MeshRenderer _renderer;
     public float hideDistance = 1.5f;
+    private int factorOfScaling = 8;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
-        currentDistance += Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed * Time.deltaTime;
+        currentDistance += Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed * Time.deltaTime * factorOfScaling;
         currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
         
         
@@ -40,6 +41,25 @@ public class CameraController : MonoBehaviour
 
     public void SetNewTarget(GameObject target)
     {
+        //Changes how the camera behaviour based on which model is in use. (How far away the camera is and max distance one can go away).
+        if (target.name.Contains(nameof(PlayerStatController.GlobalModelENUM.SMALL))) {
+            //How far can one scroll away (limit based on puzzles, else free).
+            maxDistance = 2;
+            //How far away should the camera be (scroll with mousewheel). NOTE; resets on scene changing.
+            currentDistance = 1;
+        }
+        else if (target.name.Contains(nameof(PlayerStatController.GlobalModelENUM.MEDIUM))) {
+            maxDistance = 3;
+            currentDistance = 2;
+        }
+        else if (target.name.Contains(nameof(PlayerStatController.GlobalModelENUM.LARGE))) {
+            maxDistance = 4;
+            currentDistance = 3;
+        }
+        else {
+            Debug.Log("CameraController could not get name of model in use");
+        }
+
         trackedObject = target.transform;
         _renderer = trackedObject.gameObject.GetComponent<MeshRenderer>();
 
