@@ -33,6 +33,7 @@ public class Dragon : MonoBehaviour
 
     //Can remove if not needed
     [SerializeField] bool canGlide;
+    
     [SerializeField] bool canDoubleJump;
 
     [SerializeField] private int jumpCount;

@@ -28,6 +28,7 @@ public class PlayerStatController : MonoBehaviour
         Debug.Log(localCoinScore);
         localCoinScore = CoinScore.globalCoinScore;
         Debug.Log(localCoinScore);
+        Debug.Log(globalModel);
           //Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
           //NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
@@ -39,6 +40,8 @@ public class PlayerStatController : MonoBehaviour
             activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
             SetNewDragon(activeDragon.NextDragon);
+            //Work note: works so far.
+            
         }
         else if (globalModel == GlobalModelENUM.LARGE) {
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
@@ -100,6 +103,8 @@ public class PlayerStatController : MonoBehaviour
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+        //CoinDrop.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+
     }
 
     private void SetNewDragon(GameObject newDragon) {
