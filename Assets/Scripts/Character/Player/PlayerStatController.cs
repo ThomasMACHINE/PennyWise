@@ -102,7 +102,7 @@ public class PlayerStatController : MonoBehaviour
         }
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
-        coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+        //coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
         //CoinDrop.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
 
     }
