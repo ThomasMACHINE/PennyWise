@@ -21,7 +21,7 @@ public class Dragon : MonoBehaviour
     private Rigidbody rigBody;
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] Interactable interactable;
+    [SerializeField] Interactable interactable; //Remove Later
 
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
@@ -106,18 +106,6 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    public void DoHold(){
-        if (Input.GetKeyDown(KeyCode.C) && toggleHold)
-        {
-            interactable.Hold();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            interactable.Drop();
-        }
-
-    }
-
 
     //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     //Player also needs to have ground as the groundLayer.
@@ -157,18 +145,9 @@ public class Dragon : MonoBehaviour
             UnAccountedCoins += 1;
         
         }
-        if (other.gameObject.CompareTag("Crate") && this.gameObject.name.Contains("SMALL") == false)
-        {
-            toggleHold = true;
-        } 
+    
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Crate"))
-        {
-            toggleHold = false; 
-        } 
-    }
+   
 
 }

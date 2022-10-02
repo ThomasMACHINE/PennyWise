@@ -68,8 +68,6 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoJump();
         }
 
-        //Holding
-        statController.activeDragon.DoHold();
     }
 
     
