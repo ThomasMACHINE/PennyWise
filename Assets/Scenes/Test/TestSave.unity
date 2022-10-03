@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1127,6 +1127,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127307740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9001382013567346650, guid: c7076e3f292009f4380b0b53da79da99, type: 3}
+  m_PrefabInstance: {fileID: 9001382011834167256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f250294b491b7648a16c8658173972f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1221691843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1443,7 @@ PrefabInstance:
     - target: {fileID: 3294565692627792305, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: coinDropper
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1127307740}
     - target: {fileID: 4698153775188925070, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
