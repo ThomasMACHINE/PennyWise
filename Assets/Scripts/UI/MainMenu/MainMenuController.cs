@@ -17,8 +17,8 @@ public class MainMenuController : MonoBehaviour
     public void OpenKeybindsMenu() {
         KeybindsMenu.gameObject.SetActive(true);
     }
-    public void GoToInstructions() { 
-    
+    public void GoToInstructions() {
+        InstructionsMenu.gameObject.SetActive(true);
     }
     
 
