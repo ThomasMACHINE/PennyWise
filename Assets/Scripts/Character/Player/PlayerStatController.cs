@@ -12,8 +12,9 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] int coinScore;
 
-    //Global coinscore. Not implemented
-    public static int globalCoinScore;
+    //Global coinscore.
+    public static int localCoinScore;
+    //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
     
     //Name of model in use. Need to rework
     public enum GlobalModelENUM
@@ -24,7 +25,12 @@ public class PlayerStatController : MonoBehaviour
     public static GlobalModelENUM globalModel = GlobalModelENUM.SMALL;
     //Need to change the dragon model from here.
     void Start() {
+        Debug.Log(localCoinScore);
+        localCoinScore = CoinScore.globalCoinScore;
+        Debug.Log(localCoinScore);
+        Debug.Log(globalModel);
           //Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
+          //NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
          // The dragon initilizes with the small model active.
         }
@@ -34,6 +40,8 @@ public class PlayerStatController : MonoBehaviour
             activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
             SetNewDragon(activeDragon.NextDragon);
+            //Work note: works so far.
+            
         }
         else if (globalModel == GlobalModelENUM.LARGE) {
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
@@ -94,7 +102,9 @@ public class PlayerStatController : MonoBehaviour
         }
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
-        coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+        //coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+        //CoinDrop.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
+
     }
 
     private void SetNewDragon(GameObject newDragon) {
@@ -110,7 +120,11 @@ public class PlayerStatController : MonoBehaviour
         activeDragon = newDragon.GetComponent<Dragon>();
 
         // Set fill bar to appropriate level
-        evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+        if (activeDragon.CoinToEvolve != 0) {
+            evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+        }
+
+        
     }
 
 }

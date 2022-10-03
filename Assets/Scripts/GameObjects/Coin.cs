@@ -15,6 +15,7 @@ public class Coin : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         boxColl = GetComponent<BoxCollider>();
     }
+     
     private void OnCollisionEnter(Collision collider)
     {
             // the ground layer
