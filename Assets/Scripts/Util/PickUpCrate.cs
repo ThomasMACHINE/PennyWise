@@ -6,7 +6,14 @@ public class PickUpCrate : MonoBehaviour
 {
     private GameObject spottedObj;
     private GameObject heldObj;
+    public Vector3 PrevPos;
+    public Vector3 NewPos;
+    public Vector3 ObjVelocity;
     
+    
+   void Start(){
+        PrevPos = transform.position;
+   }
 
     void Update(){
         
@@ -19,7 +26,9 @@ public class PickUpCrate : MonoBehaviour
         //If holding object
         if (heldObj != null){
             //Update movement
+            
             MoveObject();
+            
 
             //Dropping the crate
             if (Input.GetKeyDown(KeyCode.V)){
@@ -31,6 +40,7 @@ public class PickUpCrate : MonoBehaviour
 
     }
 
+    //Triggers if the holder overlaps with a crate, setting that crate to be interactable
     void OnTriggerEnter(Collider hit){
         if (hit.gameObject.CompareTag("Crate"))
         {   
@@ -40,7 +50,7 @@ public class PickUpCrate : MonoBehaviour
         Debug.Log("Seeing");
     }
 
-   
+   //Triggers if the holder exits the overlap with a crate, setting interactables to null
     void OnTriggerExit(Collider hit){
         if (hit.gameObject.CompareTag("Crate"))
         {
@@ -49,6 +59,7 @@ public class PickUpCrate : MonoBehaviour
         } 
     }
 
+    //Picking up crate
     void PickupObject (GameObject pickObj){
         if(pickObj.GetComponent<Rigidbody>()){
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
@@ -61,6 +72,7 @@ public class PickUpCrate : MonoBehaviour
 
     }
 
+    //Dropping crate
     void DropObject(){
         Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
         objRig.useGravity = true;
@@ -71,6 +83,7 @@ public class PickUpCrate : MonoBehaviour
 
     }
 
+    //Updating the object each turn
     void MoveObject(){
         if(Vector3.Distance(heldObj.transform.position, this.transform.position) > 0.1f){
             Vector3 moveDirection = (this.transform.position - heldObj.transform.position);
