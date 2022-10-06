@@ -21,7 +21,7 @@ public class Dragon : MonoBehaviour
     private Rigidbody rigBody;
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] Interactable interactable; //Remove Later
+    [SerializeField] public GameObject holder; //NB
 
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
@@ -31,7 +31,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
 
-    //Can remove if not needed
+    //Bools for dragonabilities based on size
     [SerializeField] bool canGlide;
     
     [SerializeField] bool canDoubleJump;
@@ -61,6 +61,19 @@ public class Dragon : MonoBehaviour
         rigBody.velocity = new Vector3(horizontalSpeed, rigBody.velocity.y, verticalSpeed);
     }
 
+
+    //Function for making held objects jump with the dragon
+    //NB DOES not work when turning when holding the crate for some reason.
+    public void DoMoveHolder(){
+        if (IsGrounded() == false){
+            float Direction = Bottom.transform.position.y - holder.transform.position.y;
+            Vector2 MovePos = new Vector2(
+            holder.transform.position.x, 
+            holder.transform.position.y + Direction);//MoveTowards on 1 axis
+            holder.transform.position = MovePos;
+        }
+    }
+
     
 
     public void DoJump()
@@ -70,8 +83,6 @@ public class Dragon : MonoBehaviour
             jumpCount = 1;
             toggleGlide = false;
             rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
-            
-            
         }
         else {
             // Dragon can glide if it is small size, here it checks to toggle or untoggle it
