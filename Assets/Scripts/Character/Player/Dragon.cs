@@ -29,6 +29,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
+    [SerializeField] EvolveBar evolveBar;
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
@@ -82,6 +83,7 @@ public class Dragon : MonoBehaviour
         if(distanceToPlayer > 2.0){
             holder.transform.position += (this.transform.position - holder.transform.position).normalized * characterSpeed * Time.deltaTime;
         }
+        
 
         //Make crate jump with the dragon
         if (IsGrounded() == false){
@@ -170,7 +172,11 @@ public class Dragon : MonoBehaviour
             Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
             UnAccountedCoins += 1;
+
+           
+            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         
-        }
+        
     }
+ }
 }

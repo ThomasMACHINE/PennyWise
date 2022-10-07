@@ -15,6 +15,7 @@ public class EvolveBar : MonoBehaviour
     public Gradient gradient;
     public Text text;
     private string evolveMessage = "Press E to evolve!";
+    
 
     public void UpdateSlider(float fillPercentage) {
         slider.value = fillPercentage;

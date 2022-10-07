@@ -86,8 +86,9 @@ public class PickUpCrate : MonoBehaviour
     //Updating the object each turn
     void MoveObject(){
         if(Vector3.Distance(heldObj.transform.position, this.transform.position) > 0.1f){
-            Vector3 moveDirection = (this.transform.position - heldObj.transform.position);
-            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * 100);
+           // Vector3 moveDirection = (this.transform.position - heldObj.transform.position);
+            heldObj.transform.position += (this.transform.position - heldObj.transform.position).normalized * Time.deltaTime;
+            //heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * 100);
         }
     }
 

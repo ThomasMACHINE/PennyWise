@@ -8,5 +8,8 @@ public class CoinScore
 {
     //Global coinscore.
     public static int globalCoinScore { get; set; }
+    public static int tempGlobalCoinScore{ get; set; }
+
+    public static bool flagCheck{ get; set; }
     //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
 }

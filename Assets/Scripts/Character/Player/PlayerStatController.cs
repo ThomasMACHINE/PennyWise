@@ -28,12 +28,14 @@ public class PlayerStatController : MonoBehaviour
     // Need to change the dragon model from here.
     void Start() {
         Debug.Log(localCoinScore);
+        Debug.Log("Flag status " + CoinScore.flagCheck);
         localCoinScore = CoinScore.globalCoinScore;
         Debug.Log(localCoinScore);
         Debug.Log(globalModel);
           // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
           // NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
+            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
          // The dragon initilizes with the small model active.
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
@@ -56,19 +58,21 @@ public class PlayerStatController : MonoBehaviour
         else {
             Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
         }  
+        //Debug.Log("TEST::: " + CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
+
+        //Restarting the scene (caught by guard before evolving causes issues)
+        
     }
     public void Update()
     {
-        // Possible to move out of update?
+       /* // Possible to move out of update?
         // TODO This can lead to bugs if evolve is called on the same frame as a coin is picked up and it is called before this Update
         if (activeDragon.UnAccountedCoins != 0)
         {
             coinScore += activeDragon.UnAccountedCoins;
             evolveBar.UpdateSlider((float)coinScore / activeDragon.CoinToEvolve);
-            activeDragon.UnAccountedCoins = 0;
-        
-            
-        }
+            activeDragon.UnAccountedCoins = 0;    
+        }*/
     }
 
     //Test fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.
@@ -86,13 +90,13 @@ public class PlayerStatController : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public bool CanEvolve() {
-        return coinScore >= activeDragon.CoinToEvolve;
+        return CoinScore.globalCoinScore >= activeDragon.CoinToEvolve;
     }
 
     public void DoEvolve()
     {
         //GameObject newDragon = activeDragon.NextDragon;
-        coinScore -= activeDragon.CoinToEvolve;
+        CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
         if(activeDragon.NextDragon == null)
         {
             Debug.Log("There is no higher tier dragon!");
@@ -131,7 +135,8 @@ public class PlayerStatController : MonoBehaviour
 
         // Set fill bar to appropriate level
         if (activeDragon.CoinToEvolve != 0) {
-            evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+            //evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
+            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
         }
     }
 }

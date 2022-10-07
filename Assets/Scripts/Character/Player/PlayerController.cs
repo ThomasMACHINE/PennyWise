@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (statController.activeDragon.IsCaught) {
             statController.activeDragon.IsCaught = false;
             ReloadLevel();
+            
         }
     }
 
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Moving holder with dragon
-        statController.activeDragon.DoMoveHolder();
+      //  statController.activeDragon.DoMoveHolder();
     }
 
     private void CheckEvolve()
@@ -84,7 +85,8 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void ReloadLevel() {
+    public void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 }
