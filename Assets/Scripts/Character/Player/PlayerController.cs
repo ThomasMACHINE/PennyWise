@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Mouse X") != 0)
         {
             turn.x += Input.GetAxis("Mouse X") * rotationSensitivity;
-            Debug.Log("Moving!");
             Quaternion newQuaternion = Quaternion.Euler(0, turn.x, 0);
             statController.activeDragon.DoRotate(newQuaternion);
         }

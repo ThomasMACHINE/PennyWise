@@ -38,6 +38,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4755998660878765404}
     m_Modifications:
+    - target: {fileID: 48803449425629625, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 4359024386330825480}
     - target: {fileID: 88766722139538898, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_Name
       value: Test_Player_No_Pivot_Fix
@@ -45,6 +49,18 @@ PrefabInstance:
     - target: {fileID: 958320900953352816, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457303824587394321, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 4359024386330825480}
+    - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 4359024386330825480}
+    - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: NextDragon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6147035325645374169, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_RootOrder
