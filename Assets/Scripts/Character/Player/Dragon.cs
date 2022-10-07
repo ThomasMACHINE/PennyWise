@@ -73,9 +73,17 @@ public class Dragon : MonoBehaviour
         Model.transform.localRotation = newQuaternion;
     }
 
-    // Function for making held objects jump with the dragon
-    // TODO DOES not work when turning when holding the crate for some reason.
+    // Function for making held objects move with the dragon
     public void DoMoveHolder(){
+        var distanceToPlayer = Vector3.Distance(holder.transform.position, this.transform.position);
+
+
+        //Make the holder move with the dragon
+        if(distanceToPlayer > 2.0){
+            holder.transform.position += (this.transform.position - holder.transform.position).normalized * characterSpeed * Time.deltaTime;
+        }
+
+        //Make crate jump with the dragon
         if (IsGrounded() == false){
             float Direction = Bottom.transform.position.y - holder.transform.position.y;
             Vector2 MovePos = new Vector2(
