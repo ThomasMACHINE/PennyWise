@@ -12,8 +12,7 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] int coinScore;
 
-    //Global coinscore.
-    public static int localCoinScore;
+    
     //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
     
     //Name of model in use. Need to rework
@@ -27,10 +26,9 @@ public class PlayerStatController : MonoBehaviour
 
     // Need to change the dragon model from here.
     void Start() {
-        Debug.Log(localCoinScore);
-        Debug.Log("Flag status " + CoinScore.flagCheck);
-        localCoinScore = CoinScore.globalCoinScore;
-        Debug.Log(localCoinScore);
+        
+        CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
+
         Debug.Log(globalModel);
           // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
           // NOTE, reworking to be caluculated from coinscore could be better.

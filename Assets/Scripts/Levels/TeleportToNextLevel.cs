@@ -39,6 +39,7 @@ public class TeleportToNextLevel : MonoBehaviour
             //From doc. https://docs.unity3d.com/2020.3/Documentation/ScriptReference/SceneManagement.SceneManager.MoveGameObjectToScene.html
             StartCoroutine(LoadYourAsyncScene());
             UpdateGlobalModelCheck(other);
+            CoinScore.tempGlobalCoinScore = CoinScore.globalCoinScore;
                        
     	}
     }
