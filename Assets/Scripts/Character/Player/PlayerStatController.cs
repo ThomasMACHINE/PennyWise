@@ -21,26 +21,28 @@ public class PlayerStatController : MonoBehaviour
     {
         SMALL, MEDIUM, LARGE
     };
-    //Variable to initilize to.
+
+    // Variable to initilize to.
     public static GlobalModelENUM globalModel = GlobalModelENUM.SMALL;
-    //Need to change the dragon model from here.
+
+    // Need to change the dragon model from here.
     void Start() {
         Debug.Log(localCoinScore);
         localCoinScore = CoinScore.globalCoinScore;
         Debug.Log(localCoinScore);
         Debug.Log(globalModel);
-          //Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
-          //NOTE, reworking to be caluculated from coinscore could be better.
+          // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
+          // NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
          // The dragon initilizes with the small model active.
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
-            //NOTE: THE NAMING CONVENTION USED  (ADDED IN PREFAB)
+            // NOTE: THE NAMING CONVENTION USED  (ADDED IN PREFAB)
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
             SetNewDragon(activeDragon.NextDragon);
-            //Work note: works so far.
+            // Work note: works so far.
             
         }
         else if (globalModel == GlobalModelENUM.LARGE) {
@@ -57,8 +59,8 @@ public class PlayerStatController : MonoBehaviour
     }
     public void Update()
     {
-        //Possible to move out of update?
-        //TODO This can lead to bugs if evolve is called on the same frame as a coin is picked up and it is called before this Update
+        // Possible to move out of update?
+        // TODO This can lead to bugs if evolve is called on the same frame as a coin is picked up and it is called before this Update
         if (activeDragon.UnAccountedCoins != 0)
         {
             coinScore += activeDragon.UnAccountedCoins;
@@ -68,14 +70,21 @@ public class PlayerStatController : MonoBehaviour
             
         }
     }
-/*
+
     //Test fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.
     //NullReferenceException: Object reference not set to an instance of an object
     public bool IsCaught() {
+        throw new NotImplementedException();
+        /*
         activeDragon.IsCaught = false;
         return activeDragon.IsCaught;
-    } */
+        */
+    }
 
+    /// <summary>
+    /// Returns if coinScore is higher than Coins needed to evolve
+    /// </summary>
+    /// <returns></returns>
     public bool CanEvolve() {
         return coinScore >= activeDragon.CoinToEvolve;
     }
@@ -92,6 +101,9 @@ public class PlayerStatController : MonoBehaviour
         SetNewDragon(activeDragon.NextDragon);
     }
 
+    /// <summary>
+    /// Replaces current Player Character by the Next Character
+    /// </summary>
     public void DoDevolve() {
         GameObject newDragon = activeDragon.LastDragon;
 
@@ -121,8 +133,5 @@ public class PlayerStatController : MonoBehaviour
         if (activeDragon.CoinToEvolve != 0) {
             evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
         }
-
-        
     }
-
 }

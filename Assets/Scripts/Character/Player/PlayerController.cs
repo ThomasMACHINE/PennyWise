@@ -13,15 +13,9 @@ public class PlayerController : MonoBehaviour
     public float rotationSensitivity = 1f;
     public float speed = 1;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Awake()
-    {
-
     }
 
     private void Update()
@@ -70,8 +64,6 @@ public class PlayerController : MonoBehaviour
         statController.activeDragon.DoMoveHolder();
     }
 
-    
-
     private void CheckEvolve()
     {
         if (Input.GetKeyDown(KeyCode.E) && statController.CanEvolve())
@@ -96,6 +88,4 @@ public class PlayerController : MonoBehaviour
     public void ReloadLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-        
 }

@@ -26,12 +26,11 @@ public class Dragon : MonoBehaviour
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
     [SerializeField] public GameObject NextDragon;
-    //Does not affect the actual speed of the object on a horizontal level (unsure about vertical). That is handled in playerController.
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
 
-    //Bools for dragonabilities based on size
+    // Bools for dragonabilities
     [SerializeField] bool canGlide;
     
     [SerializeField] bool canDoubleJump;
@@ -42,7 +41,6 @@ public class Dragon : MonoBehaviour
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
-
 
     private void Awake() {
     
@@ -75,8 +73,8 @@ public class Dragon : MonoBehaviour
         Model.transform.localRotation = newQuaternion;
     }
 
-    //Function for making held objects jump with the dragon
-    //NB DOES not work when turning when holding the crate for some reason.
+    // Function for making held objects jump with the dragon
+    // TODO DOES not work when turning when holding the crate for some reason.
     public void DoMoveHolder(){
         if (IsGrounded() == false){
             float Direction = Bottom.transform.position.y - holder.transform.position.y;
@@ -87,8 +85,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    
-
+    /// <summary>
+    /// Makes the Character Jump by adding velocity in vertical axis
+    /// </summary>
     public void DoJump()
     {
         
@@ -122,7 +121,7 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    // Function for updating the decent of a gliding dragon
+    // Makes Character fall slower - Glide
     public void DoGlide()
     {
         if (IsGrounded() == false && toggleGlide){
@@ -130,11 +129,10 @@ public class Dragon : MonoBehaviour
         }
     }
 
-
-    //Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
-    //Player also needs to have ground as the groundLayer.
+    // Checks if Character is in contact with a Ground tagged GameObject
     public bool IsGrounded()
-     {
+    // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
+    {
         bool isGrounded = Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
         if (isGrounded) { jumpCount = 1; }
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
@@ -169,9 +167,5 @@ public class Dragon : MonoBehaviour
             UnAccountedCoins += 1;
         
         }
-    
     }
-
-   
-
 }

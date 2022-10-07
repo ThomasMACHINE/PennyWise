@@ -6,6 +6,7 @@ public class ToggleMainMenu : MonoBehaviour
 {
     private bool isPaused = false;
     [SerializeField] GameObject MenuPrefab;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
