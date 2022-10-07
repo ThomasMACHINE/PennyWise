@@ -116,6 +116,8 @@ public class PlayerStatController : MonoBehaviour
         }
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
+
+        //NOTE: drop coin amount equal to evolve req. (2 for medium -> small, 5 for large -> medium atm)
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
