@@ -53,14 +53,27 @@ public class Dragon : MonoBehaviour
         toggleHold = false;
     }
 
+    /// <summary>
+    /// Moves Character by giving it velocity in given axis
+    /// </summary>
+    /// <param name="horizontalInput"></param>
+    /// <param name="verticalInput"></param>
     public void DoMove(float horizontalInput, float verticalInput) 
     {
         float horizontalSpeed = horizontalInput * characterSpeed;
         float verticalSpeed = verticalInput * characterSpeed;
 
-        rigBody.velocity = new Vector3(horizontalSpeed, rigBody.velocity.y, verticalSpeed);
+        Vector3 deltaMovement = new Vector3(horizontalSpeed, rigBody.velocity.y, verticalSpeed) * Time.deltaTime;
+        Model.transform.Translate(deltaMovement);
     }
 
+    /// <summary>
+    /// Rotates the model by assigning it a new Quaternion
+    /// </summary>
+    /// <param name="newQuaternion"></param>
+    public void DoRotate(Quaternion newQuaternion) {
+        Model.transform.localRotation = newQuaternion;
+    }
 
     //Function for making held objects jump with the dragon
     //NB DOES not work when turning when holding the crate for some reason.

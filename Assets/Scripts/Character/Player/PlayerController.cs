@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 turn;
     public Vector3 deltaMovement;
     public GameObject movement;
-    public float sensitivity = 1f;
+    public float rotationSensitivity = 1f;
     public float speed = 1;
 
     // Start is called before the first frame update
@@ -42,25 +42,22 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCharacter()
     {
-        /*float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
+        // Check for movement
         if(horizontalInput != 0 || verticalInput != 0)
         {
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
-        }*/
-
-        //Movement for turning with mouse. DO NOT MOVE TO CAMERA. THE CAMERA FOLLOWS THE PLAYER, NOT A FREE-ROAM.
-        turn.x += Input.GetAxis("Mouse X") * sensitivity;
-        //for up/down/left/right movement of camera, add line below.
-        //  turn.y += Input.GetAxis("Mouse Y") * sensitivity;
-        //for up/down/left/right movement of camera.
-        //transform. localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
-        movement.transform.localRotation = Quaternion.Euler(0, turn.x, 0);
-
-        deltaMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
-        movement.transform.Translate(deltaMovement);
-        
+        }
+        // Check for rotation
+        if (Input.GetAxis("Mouse X") != 0)
+        {
+            turn.x += Input.GetAxis("Mouse X") * rotationSensitivity;
+            Debug.Log("Moving!");
+            Quaternion newQuaternion = Quaternion.Euler(0, turn.x, 0);
+            statController.activeDragon.DoRotate(newQuaternion);
+        }
         //Gliding for the smallest dragon
         statController.activeDragon.DoGlide();
 
@@ -71,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
         //Moving holder with dragon
         statController.activeDragon.DoMoveHolder();
-
     }
 
     
