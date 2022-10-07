@@ -21,7 +21,7 @@ public class Dragon : MonoBehaviour
     private Rigidbody rigBody;
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] public GameObject holder; //NB
+    [SerializeField] public GameObject holder;
 
     [SerializeField] public int CoinToEvolve;
     [SerializeField] public GameObject LastDragon;
@@ -73,8 +73,6 @@ public class Dragon : MonoBehaviour
             holder.transform.position = MovePos;
         }
     }
-
-    
 
     public void DoJump()
     {
