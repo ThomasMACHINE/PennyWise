@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) {
+            return;
+        }
         MoveCharacter();
         CheckEvolve();
         CheckCollision();
@@ -30,7 +33,9 @@ public class PlayerController : MonoBehaviour
     {
         if (statController.activeDragon.IsCaught) {
             statController.activeDragon.IsCaught = false;
+            Debug.Log("You were caught by a guard");
             ReloadLevel();
+            
         }
     }
 
@@ -44,11 +49,10 @@ public class PlayerController : MonoBehaviour
         {
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }
-        // Check for rotation
+        // Check for rotation. NOTE: add time component
         if (Input.GetAxis("Mouse X") != 0)
         {
             turn.x += Input.GetAxis("Mouse X") * rotationSensitivity;
-            Debug.Log("Moving!");
             Quaternion newQuaternion = Quaternion.Euler(0, turn.x, 0);
             statController.activeDragon.DoRotate(newQuaternion);
         }
@@ -60,18 +64,18 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoJump();
         }
 
-        //Moving holder with dragon
-        statController.activeDragon.DoMoveHolder();
     }
 
     private void CheckEvolve()
     {
         if (Input.GetKeyDown(KeyCode.E) && statController.CanEvolve())
         {
+            
             statController.DoEvolve();
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
+            
             statController.DoDevolve();
         }
     }
@@ -85,7 +89,8 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void ReloadLevel() {
+    public void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 }

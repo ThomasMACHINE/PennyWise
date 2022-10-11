@@ -24,10 +24,10 @@ public class CoinDrop : MonoBehaviour
             newCoin.transform.position = position + new Vector3(0,3,0);
             newCoin.gameObject.SetActive(true);
 
-            //Find a direction and give the coin a velocity in that direction
+            //Find a direction and give the coin a velocity in that direction. Range, inclusive on start/exclusive on end.
             int directionX = Random.Range(0, 2) == 0 ? -1 : 1;
             int directionZ = Random.Range(0, 2) == 0 ? -1 : 1;
-            newCoin.GetComponent<Rigidbody>().velocity = new Vector3(directionX * Random.Range(1, 10), Random.Range(1, 10), directionZ * Random.Range(1, 10));
+            newCoin.GetComponent<Rigidbody>().velocity = new Vector3(directionX * Random.Range(1, 5), Random.Range(1, 5), directionZ * Random.Range(1, 5));
         }
     }
 }
