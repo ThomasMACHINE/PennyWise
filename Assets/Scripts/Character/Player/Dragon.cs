@@ -97,6 +97,23 @@ public class Dragon : MonoBehaviour
         }
     }*/
 
+
+    //Function for making the dragon drop held items
+    public void DropHeldItem () {
+        if(holder){
+            while (holder.transform.childCount > 0) {
+                foreach (Transform child in holder.transform) {
+                    //Turning on gravity
+                    Rigidbody objRig = child.GetComponent<Rigidbody>();
+                    objRig.useGravity = true;
+                    //Removing parent
+                    child.gameObject.transform.parent = null;
+                }
+            }
+        }  
+    }
+
+    //Function for making the dragon jump
     public void DoJump()
     {
         

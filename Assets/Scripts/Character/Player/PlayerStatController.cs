@@ -122,6 +122,9 @@ public class PlayerStatController : MonoBehaviour
     }
 
     private void SetNewDragon(GameObject newDragon) {
+        //Dropping items 
+        activeDragon.DropHeldItem();
+
         Debug.Log(activeDragon + ":::ACTIVE DRAGON");
         Debug.Log(newDragon + ":::: NEW DRAGON");
         activeDragon.gameObject.SetActive(false);
