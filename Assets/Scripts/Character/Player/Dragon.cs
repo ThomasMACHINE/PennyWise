@@ -39,6 +39,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
     private bool toggleGlide;
     public bool toggleHold;
+    public bool hidden;
 
     public bool IsCaught;
     public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
@@ -50,6 +51,7 @@ public class Dragon : MonoBehaviour
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
+        hidden = false;
     }
 
     /// <summary>
@@ -155,6 +157,15 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    //Function handles everything in relation to the bush object
+    public void InteractBush(){
+        //Small
+        if (this.gameObject.name.Contains("SMALL")){
+            hidden = true;
+        }
+    }
+
+
     // Checks if Character is in contact with a Ground tagged GameObject
     public bool IsGrounded()
     // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
@@ -182,7 +193,9 @@ public class Dragon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Guard"))
-            IsCaught = true;
+            if(!hidden) {
+                IsCaught = true;
+            }
 
         if (other.gameObject.CompareTag("Coin"))
         {
@@ -194,8 +207,9 @@ public class Dragon : MonoBehaviour
 
            
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
-        
-        
+        }
+        if (other.gameObject.CompareTag("Bush")){
+            InteractBush();
+        }
     }
- }
 }
