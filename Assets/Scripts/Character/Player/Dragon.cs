@@ -74,7 +74,9 @@ public class Dragon : MonoBehaviour
         Model.transform.localRotation = newQuaternion;
     }
 
+
     // Function for making held objects move with the dragon
+    /*
     public void DoMoveHolder(){
         var distanceToPlayer = Vector3.Distance(holder.transform.position, this.transform.position);
 
@@ -93,7 +95,7 @@ public class Dragon : MonoBehaviour
             holder.transform.position.y + Direction);//MoveTowards on 1 axis
             holder.transform.position = MovePos;
         }
-    }
+    }*/
 
     public void DoJump()
     {

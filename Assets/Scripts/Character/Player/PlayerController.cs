@@ -62,9 +62,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             statController.activeDragon.DoJump();
         }
-
-        //Moving holder with dragon
-      //  statController.activeDragon.DoMoveHolder();
     }
 
     private void CheckEvolve()
