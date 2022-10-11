@@ -41,7 +41,7 @@ public class Dragon : MonoBehaviour
     public bool toggleHold;
 
     public bool IsCaught;
-    public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
+    //public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
 
     private void Awake() {
     
@@ -171,12 +171,8 @@ public class Dragon : MonoBehaviour
             CoinScore.globalCoinScore += 1;
             Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
-            UnAccountedCoins += 1;
-
-           
-            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
-        
-        
+            //UnAccountedCoins += 1;
+            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);       
     }
  }
 }

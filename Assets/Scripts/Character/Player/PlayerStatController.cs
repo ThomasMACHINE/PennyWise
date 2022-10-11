@@ -94,7 +94,9 @@ public class PlayerStatController : MonoBehaviour
     public void DoEvolve()
     {
         //GameObject newDragon = activeDragon.NextDragon;
+        Debug.Log(CoinScore.globalCoinScore + "gg");
         CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
+        Debug.Log(CoinScore.globalCoinScore + "gt");
         if(activeDragon.NextDragon == null)
         {
             Debug.Log("There is no higher tier dragon!");
@@ -117,6 +119,7 @@ public class PlayerStatController : MonoBehaviour
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
 
+        //CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
         //NOTE: drop coin amount equal to evolve req. (2 for medium -> small, 5 for large -> medium atm)
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
