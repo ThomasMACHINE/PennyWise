@@ -39,6 +39,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
     private bool toggleGlide;
     public bool toggleHold;
+    public bool hidden;
 
     public bool IsCaught;
     //public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
@@ -50,6 +51,7 @@ public class Dragon : MonoBehaviour
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
+        hidden = false;
     }
 
     /// <summary>
@@ -74,7 +76,9 @@ public class Dragon : MonoBehaviour
         Model.transform.localRotation = newQuaternion;
     }
 
+
     // Function for making held objects move with the dragon
+    /*
     public void DoMoveHolder(){
         var distanceToPlayer = Vector3.Distance(holder.transform.position, this.transform.position);
 
@@ -93,8 +97,25 @@ public class Dragon : MonoBehaviour
             holder.transform.position.y + Direction);//MoveTowards on 1 axis
             holder.transform.position = MovePos;
         }
+    }*/
+
+
+    //Function for making the dragon drop held items
+    public void DropHeldItem () {
+        if(holder){
+            while (holder.transform.childCount > 0) {
+                foreach (Transform child in holder.transform) {
+                    //Turning on gravity
+                    Rigidbody objRig = child.GetComponent<Rigidbody>();
+                    objRig.useGravity = true;
+                    //Removing parent
+                    child.gameObject.transform.parent = null;
+                }
+            }
+        }  
     }
 
+    //Function for making the dragon jump
     public void DoJump()
     {
         
@@ -136,6 +157,15 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    //Function handles everything in relation to the bush object
+    public void InteractBush(){
+        //Small
+        if (this.gameObject.name.Contains("SMALL")){
+            hidden = true;
+        }
+    }
+
+
     // Checks if Character is in contact with a Ground tagged GameObject
     public bool IsGrounded()
     // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
@@ -163,7 +193,9 @@ public class Dragon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Guard"))
-            IsCaught = true;
+            if(!hidden) {
+                IsCaught = true;
+            }
 
         if (other.gameObject.CompareTag("Coin"))
         {
@@ -171,8 +203,13 @@ public class Dragon : MonoBehaviour
             CoinScore.globalCoinScore += 1;
             Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
-            //UnAccountedCoins += 1;
-            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);       
+            UnAccountedCoins += 1;
+
+           
+            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
+        }
+        if (other.gameObject.CompareTag("Bush")){
+            InteractBush();
+        }
     }
- }
 }

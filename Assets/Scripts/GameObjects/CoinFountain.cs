@@ -9,6 +9,10 @@ public class CoinFountain : MonoBehaviour
     [SerializeField] float coinFrequency;
     private float timeTracker = 0;
 
+    [SerializeField] float startingCoinDepth = 0.5f;
+    [SerializeField] float minCoinDistance = 1.0f;
+    [SerializeField] float maxCoinDistance = 2.75f;
+
     [SerializeField] GameObject coin;
     private void Awake()
     {
@@ -44,13 +48,31 @@ public class CoinFountain : MonoBehaviour
     GameObject DispenseCoin()
     {
         GameObject newCoin = GameObject.Instantiate(coin);
-        newCoin.transform.position = gameObject.transform.position + new Vector3(0,1.5f,0);
         newCoin.gameObject.SetActive(true);
 
-        //Find a direction and give the coin a velocity in that direction
-        int directionX = Random.Range(0, 2) == 0 ? -1 : 1;
-        int directionZ = Random.Range(0, 2) == 0 ? -1 : 1;
-        newCoin.GetComponent<Rigidbody>().velocity = new Vector3(directionX * Random.Range(1, 2), Random.Range(1, 2), directionZ * Random.Range(1, 2));
+        Vector2 direction = Random.insideUnitCircle.normalized;
+                                                                                                                                                        // using Y in place of Z cus the vector is along a 2d plane and thus only has 2 dimensions
+        newCoin.transform.position = gameObject.transform.position + new Vector3(direction.x * Random.Range(minCoinDistance, maxCoinDistance),-startingCoinDepth, direction.y * Random.Range(minCoinDistance, maxCoinDistance));
+
+        newCoin.GetComponent<Collider>().isTrigger = true;  
+        newCoin.transform.rotation = Quaternion.Euler(new Vector3(90, 0, Random.Range(0, 361)));
+
+        // changing tag means the coin cant be picked up
+        newCoin.tag = "Untagged";
+    
+        StartCoroutine(FloatCoinUpwards(newCoin, transform.position.y + 0.5f));
         return(newCoin);
+    }
+
+    IEnumerator FloatCoinUpwards(GameObject coinToFloat, float desiredHeight, float speed = 0.25f)
+    {
+        while (coinToFloat.transform.position.y < desiredHeight)
+        {
+            coinToFloat.transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+            yield return null;
+        }
+
+        // putting the tag back so it can be picked up
+        coinToFloat.tag = "Coin";
     }
 }

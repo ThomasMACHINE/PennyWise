@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - SpawnNextLevel
   - Crate
+  - Bush
   layers:
   - Default
   - TransparentFX

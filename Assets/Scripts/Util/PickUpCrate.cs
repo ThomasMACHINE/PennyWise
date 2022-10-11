@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpCrate : MonoBehaviour
 {
     private GameObject spottedObj;
-    private GameObject heldObj;
+    [SerializeField] public GameObject heldObj;
     public Vector3 PrevPos;
     public Vector3 NewPos;
     public Vector3 ObjVelocity;
@@ -60,7 +60,7 @@ public class PickUpCrate : MonoBehaviour
     }
 
     //Picking up crate
-    void PickupObject (GameObject pickObj){
+    public void PickupObject (GameObject pickObj){
         if(pickObj.GetComponent<Rigidbody>()){
             Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
             objRig.useGravity = false;
@@ -73,7 +73,7 @@ public class PickUpCrate : MonoBehaviour
     }
 
     //Dropping crate
-    void DropObject(){
+    public void DropObject(){
         Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
         objRig.useGravity = true;
         objRig.drag = 1;
@@ -86,10 +86,8 @@ public class PickUpCrate : MonoBehaviour
     //Updating the object each turn
     void MoveObject(){
         if(Vector3.Distance(heldObj.transform.position, this.transform.position) > 0.1f){
-           // Vector3 moveDirection = (this.transform.position - heldObj.transform.position);
             heldObj.transform.position += (this.transform.position - heldObj.transform.position).normalized * Time.deltaTime;
-            //heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * 100);
         }
+ 
     }
-
 }
