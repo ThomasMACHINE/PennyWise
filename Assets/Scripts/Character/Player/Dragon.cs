@@ -30,6 +30,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
+    [SerializeField] Guard guard;
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
@@ -194,7 +195,11 @@ public class Dragon : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Guard"))
             if(!hidden) {
-                IsCaught = true;
+                //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
+                bool canSeePlayerFlag = guard.CheckForLineOfSight(Model);
+                if (canSeePlayerFlag) {
+                    IsCaught = true;
+                }
             }
 
         if (other.gameObject.CompareTag("Coin"))

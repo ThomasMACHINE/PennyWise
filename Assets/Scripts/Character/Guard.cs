@@ -19,6 +19,8 @@ public class Guard : MonoBehaviour
    // [SerializeField] Transform playerModel;
     [SerializeField] PlayerController player;
     [SerializeField] LayerMask playerMask;
+    [SerializeField] LayerMask obstructionMask;
+    [SerializeField] Transform guardObject;
 
     
     // Start is called before the first frame update
@@ -55,4 +57,14 @@ public class Guard : MonoBehaviour
         t = 0;
         }   
     }
+
+    // Checks for LOS from the guard object to the player. Obstuction layer objects block view.
+    public bool CheckForLineOfSight(GameObject dragonModel) {
+        if (Physics.Linecast(guardObject.transform.position, dragonModel.transform.position, obstructionMask)) {
+            Debug.Log("No line of sight to the player");
+            return false;
+        }
+        return true;
+    }
+     
 }

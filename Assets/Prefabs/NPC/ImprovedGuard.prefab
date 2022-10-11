@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 0.41858, y: 0.41858, z: 0.41858}
   m_Children:
   - {fileID: 364382486709750040}
+  - {fileID: 2999436808262814759}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,11 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {x: 3, y: 0, z: 0}
   pointB: {x: 0, y: 0, z: 0}
-  speed: 1
+  speed: 0.4
   player: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 8
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  guardObject: {fileID: 364382486709750040}
 --- !u!1 &2936722275916058295
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,11 +82,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2936722275916058295}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.007060563, y: -0.57, z: 2.1971955}
-  m_LocalScale: {x: 4.4398217, y: 2.8206408, z: 0.3530201}
+  m_LocalPosition: {x: -0.020000458, y: -1.6146388, z: 6.223994}
+  m_LocalScale: {x: 12.576685, y: 7.9900284, z: 1}
   m_Children: []
-  m_Father: {fileID: 364382486709750040}
-  m_RootOrder: 3
+  m_Father: {fileID: 463839133625883705}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &609516143797819835
 SpriteRenderer:
@@ -427,7 +432,6 @@ Transform:
   - {fileID: 8994784860705942205}
   - {fileID: 577101417173037982}
   - {fileID: 5766396641093112612}
-  - {fileID: 2999436808262814759}
   m_Father: {fileID: 463839133625883705}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
