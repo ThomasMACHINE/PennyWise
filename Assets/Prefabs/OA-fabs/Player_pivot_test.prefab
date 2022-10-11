@@ -146,6 +146,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1681325646491956467}
     - target: {fileID: 1457303824587394321, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: toggleHold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457303824587394321, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: CoinToEvolve
       value: 3
       objectReference: {fileID: 0}
@@ -160,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: NextDragon
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: toggleHold
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: CoinToEvolve

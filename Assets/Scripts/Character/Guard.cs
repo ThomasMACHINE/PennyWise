@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-    [SerializeField] float detectionRange;
+   // [SerializeField] float detectionRange;
 
     //Needed to move the object
     [SerializeField] Vector3 pointA = new Vector3(3,0,0); 
     [SerializeField] Vector3 pointB = new Vector3(0,0,0);
     [SerializeField] float speed = 1;
+    //??
     private float t;
 
     //Temp
-    float degreesPerSecond = 20;
+    //float degreesPerSecond = 20;
 
    // [SerializeField] Transform playerModel;
     [SerializeField] PlayerController player;
@@ -36,7 +37,7 @@ public class Guard : MonoBehaviour
         
         
         //Rotering
-        transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime);
+        //transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime);
 
         
 
@@ -52,19 +53,6 @@ public class Guard : MonoBehaviour
         pointA = b;
         pointB = a;
         t = 0;
-        }
-
-
-        //If the guard spots the dragon the level is reloaded
-        if (Physics.CheckSphere(transform.position, detectionRange, playerMask)){
-            //player.ReloadLevel();                             //This made it crash for me so I have commented it out
-            Debug.Log("You were caught by the Guard!");
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(255, 0, 0, 0.5f);
-        Gizmos.DrawSphere(GetComponent<Transform>().position, detectionRange);
+        }   
     }
 }

@@ -203,9 +203,7 @@ public class Dragon : MonoBehaviour
             CoinScore.globalCoinScore += 1;
             Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
-            //UnAccountedCoins += 1;
-
-           
+                       
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         }
         if (other.gameObject.CompareTag("Bush")){
