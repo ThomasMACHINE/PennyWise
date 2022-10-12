@@ -1258,6 +1258,24 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1587849811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1138384918822683212, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
+  m_PrefabInstance: {fileID: 1927008842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1587849814
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587849811}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1625613209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1570,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8645262398775316903, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
 --- !u!1001 &1927008842
@@ -1567,7 +1589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839802438281717470, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.2875595
+      value: -0.68
       objectReference: {fileID: 0}
     - target: {fileID: 839802438281717470, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1575,7 +1597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839802438281717470, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2397242
+      value: 10.63
       objectReference: {fileID: 0}
     - target: {fileID: 839802438281717470, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1605,6 +1627,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1138384918822683212, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 2099534902555377429, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1618,8 +1644,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3253424968680059668, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3253424968680059668, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334302775907392851, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.118
       objectReference: {fileID: 0}
     - target: {fileID: 5176249715483162346, guid: fa05d3bd848d7e54ebe4ae8710e2186b, type: 3}
       propertyPath: m_LocalScale.x

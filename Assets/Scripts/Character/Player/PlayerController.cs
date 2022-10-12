@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         if (statController.activeDragon.IsCaught) {
             statController.activeDragon.IsCaught = false;
-            Debug.Log("You were caught by a guard");
             ReloadLevel();
             
         }
@@ -64,6 +63,8 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoJump();
         }
 
+        //Bush
+        statController.activeDragon.UpdateBush();
     }
 
     private void CheckEvolve()

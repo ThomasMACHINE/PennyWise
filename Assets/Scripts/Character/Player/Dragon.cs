@@ -32,6 +32,9 @@ public class Dragon : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Guard guard;
 
+    //Bush
+    private GameObject insideBush;
+
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
     
@@ -40,6 +43,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
     private bool toggleGlide;
     public bool toggleHold;
+    //public bool holdBush; //remove
     public bool hidden;
 
     public bool IsCaught;
@@ -103,6 +107,7 @@ public class Dragon : MonoBehaviour
 
     //Function for making the dragon drop held items
     public void DropHeldItem () {
+        //Dropping crates
         if(holder){
             while (holder.transform.childCount > 0) {
                 foreach (Transform child in holder.transform) {
@@ -113,7 +118,26 @@ public class Dragon : MonoBehaviour
                     child.gameObject.transform.parent = null;
                 }
             }
-        }  
+        }
+        //Dropping bush
+        if(insideBush){
+            if (insideBush.transform.parent != null){
+                insideBush.transform.parent = null;
+            }
+        }
+        
+    }
+
+    // Function for picking up bush
+    public void UpdateBush(){
+        //Picking up bush
+        if(insideBush && Input.GetKeyDown(KeyCode.C)){
+            insideBush.transform.parent = this.transform;
+        }
+        //Dropping bush
+        if(insideBush && Input.GetKeyDown(KeyCode.V)){
+            insideBush.transform.parent = null;
+        }
     }
 
     //Function for making the dragon jump
@@ -158,11 +182,36 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    //Function handles everything in relation to the bush object
-    public void InteractBush(){
+    //Function handles entering a bush
+    public void InteractBushEnter(GameObject seenBush){
         //Small
         if (this.gameObject.name.Contains("SMALL")){
             hidden = true;
+        }
+        //Medium
+        if (this.gameObject.name.Contains("MEDIUM")){
+            hidden = true;
+            insideBush = seenBush;
+        }
+        if (this.gameObject.name.Contains("LARGE")){
+            insideBush = seenBush;
+        }
+    }
+
+    //Function handles leaving a bush
+    public void InteractBushLeave(){
+        //Small
+        if (this.gameObject.name.Contains("SMALL")){
+            hidden = false;
+        }
+        //Medium
+        if (this.gameObject.name.Contains("MEDIUM")){
+            hidden = false;
+           insideBush = null;
+        }
+        //Large
+        if (this.gameObject.name.Contains("LARGE")){
+            insideBush = null;
         }
     }
 
@@ -212,7 +261,13 @@ public class Dragon : MonoBehaviour
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         }
         if (other.gameObject.CompareTag("Bush")){
-            InteractBush();
+            InteractBushEnter(other.gameObject);
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if (other.gameObject.CompareTag("Bush")){
+            InteractBushLeave();
         }
     }
 }
