@@ -22,5 +22,4 @@ public class Coin : MonoBehaviour
             boxColl.isTrigger = true;
             }
     }
-
 }
