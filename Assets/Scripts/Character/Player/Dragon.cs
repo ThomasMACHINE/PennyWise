@@ -31,6 +31,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Guard guard;
+    private int concheck;
+   // private PickUpCrate pickUpCrate;
 
     //Bush
     private GameObject insideBush;
@@ -109,6 +111,8 @@ public class Dragon : MonoBehaviour
     public void DropHeldItem () {
         //Dropping crates
         if(holder){
+            //pickUpCrate.DropObject();
+            
             while (holder.transform.childCount > 0) {
                 foreach (Transform child in holder.transform) {
                     //Turning on gravity
@@ -242,6 +246,8 @@ public class Dragon : MonoBehaviour
     // ... Look at the comment above.
     private void OnTriggerEnter(Collider other)
     {
+        if (this.gameObject.CompareTag("Holder")) {}
+        else {
         if (other.gameObject.CompareTag("Guard"))
             if(!hidden) {
                 //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
@@ -262,6 +268,7 @@ public class Dragon : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Bush")){
             InteractBushEnter(other.gameObject);
+        }
         }
     }
 
