@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-   // [SerializeField] float detectionRange;
-
+    // [SerializeField] float detectionRange;
+    [SerializeField] bool usesPathWalker = false;
     //Needed to move the object
     [SerializeField] Vector3 pointA = new Vector3(3,0,0); 
     [SerializeField] Vector3 pointB = new Vector3(0,0,0);
@@ -22,6 +22,7 @@ public class Guard : MonoBehaviour
     [SerializeField] LayerMask obstructionMask;
     [SerializeField] Transform guardObject;
 
+    [SerializeField] PathWalker walkController;
     
     // Start is called before the first frame update
     void Start()
@@ -35,13 +36,8 @@ public class Guard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Locks the guard so it cannot rotate in the z-axis
-        
-        
-        //Rotering
-        //transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime);
-
-        
+        // If you dont want to use this, just set this field to false in the inspector on Unity.
+        if (usesPathWalker == true) { return; }
 
         //Makes the guard move back and forth
         t += Time.deltaTime * speed;
