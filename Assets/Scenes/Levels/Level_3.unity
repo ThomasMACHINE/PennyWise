@@ -482,6 +482,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3730579850347118724, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: dragon
+      value: 
+      objectReference: {fileID: 1874514029}
     - target: {fileID: 4698153775188925070, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1370,6 +1374,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1874514029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7291876131244710541, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+  m_PrefabInstance: {fileID: 382447039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b8b8c6ebb2b5d4f839af4d72acf7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1908964063
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,6 +45,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] bool canDoubleJump;
 
     [SerializeField] private int jumpCount;
+
+    [SerializeField] bool canRoar;
     private bool toggleGlide;
     public bool toggleHold;
     //public bool holdBush; //remove
@@ -238,15 +240,35 @@ public class Dragon : MonoBehaviour
     }
 
 
+    // Disables the detection zone of the guard
     public void RoarDragon() {
-        if (this.gameObject.name.Contains("LARGE") && Input.GetKeyDown(KeyCode.Z)) {
-                Debug.Log("ROOOOOAAAAAARRRRR");
-                foreach(GameObject guardObject in guardObjectsInScene) {
-                    if ((this.gameObject.transform.position - guardObject.transform.position).magnitude < 10) {
-                        Debug.Log("Hello");
-                    }
+        if (canRoar) {
+            Debug.Log("ROOOOOAAAAAARRRRR");
+            foreach(GameObject guardObject in guardObjectsInScene) {
+                if (Vector3.Distance(this.gameObject.transform.position, guardObject.transform.position) < 10) {
+                    Debug.Log("Hello");
+                    StartCoroutine(DisableGuardDetectionForATime(guardObject));
                 }
-            }
+            }    
+        }
+              
+    }
+
+
+    // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
+    // indicator on the ground meanwhile.
+    IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
+    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+    Renderer renderer = guardObject.GetComponent<Renderer>();
+    Color tempColor = renderer.material.color;
+    colliderCapsule.enabled = false;
+    //Changes the colour  to white (RBA 0(black - 255 (white))).
+    renderer.material.color = new Color(255,255,255);
+
+    yield return new WaitForSeconds(5);
+    //Changes the colour back.
+    renderer.material.color = tempColor;
+    colliderCapsule.enabled = true;
     }
 
     //Should move this into the coin, and from there update the global coinscore.
