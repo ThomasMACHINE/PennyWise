@@ -31,6 +31,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Guard guard;
+    //Creates a list of gameObjects in scene.
+    private GameObject[] guardObjectsInScene;
 
     public PickUpCrate pickUpController;
 
@@ -53,6 +55,7 @@ public class Dragon : MonoBehaviour
 
     private void Awake() {
 
+        guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
         if (pickUpController) { pickUpController.heldObj = null; }
        // DontDestroyOnLoad(this.gameObject);
         //DontDestroyOnLoad(NextDragon);
@@ -234,6 +237,18 @@ public class Dragon : MonoBehaviour
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
+
+    public void RoarDragon() {
+        if (this.gameObject.name.Contains("LARGE") && Input.GetKeyDown(KeyCode.Z)) {
+                Debug.Log("ROOOOOAAAAAARRRRR");
+                foreach(GameObject guardObject in guardObjectsInScene) {
+                    if ((this.gameObject.transform.position - guardObject.transform.position).magnitude < 10) {
+                        Debug.Log("Hello");
+                    }
+                }
+            }
+    }
+
     //Should move this into the coin, and from there update the global coinscore.
     /*private void OnCollisionEnter(Collision collision)
     {
@@ -253,14 +268,16 @@ public class Dragon : MonoBehaviour
     {
         if (this.gameObject.CompareTag("Holder")) {}
         else {
-        if (other.gameObject.CompareTag("Guard"))
+        if (other.gameObject.CompareTag("Guard")) {
+            GameObject guardObjectField = other.gameObject;
             if(!hidden) {
                 //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
-                bool canSeePlayerFlag = guard.CheckForLineOfSight(Model);
+                bool canSeePlayerFlag = guard.CheckForLineOfSight(Model, guardObjectField);
                 if (canSeePlayerFlag) {
                     IsCaught = true;
                 }
             }
+        }
 
         if (other.gameObject.CompareTag("Coin"))
         {
