@@ -31,8 +31,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Guard guard;
-    private int concheck;
-   // private PickUpCrate pickUpCrate;
+
+    public PickUpCrate pickUpController;
 
     //Bush
     private GameObject insideBush;
@@ -52,7 +52,8 @@ public class Dragon : MonoBehaviour
     //public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
 
     private void Awake() {
-    
+
+        if (pickUpController) { pickUpController.heldObj = null; }
        // DontDestroyOnLoad(this.gameObject);
         //DontDestroyOnLoad(NextDragon);
         modelCollider = GetComponent<Collider>();
@@ -109,6 +110,10 @@ public class Dragon : MonoBehaviour
 
     //Function for making the dragon drop held items
     public void DropHeldItem () {
+        if (pickUpController) 
+        { 
+            pickUpController.DropObject(); 
+        }
         //Dropping crates
         if(holder){
             //pickUpCrate.DropObject();

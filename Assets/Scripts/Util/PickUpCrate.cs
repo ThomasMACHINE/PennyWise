@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PickUpCrate : MonoBehaviour
 {
-    private GameObject spottedObj;
+    [SerializeField] private GameObject spottedObj;
     [SerializeField] public GameObject heldObj;
     public Vector3 PrevPos;
     public Vector3 NewPos;
     public Vector3 ObjVelocity;
-    
-    
-   void Start(){
+
+
+    private void Awake()
+    {
+        heldObj = null;
+    }
+    void Start(){
         PrevPos = transform.position;
    }
 
@@ -74,13 +78,15 @@ public class PickUpCrate : MonoBehaviour
 
     //Dropping crate
     public void DropObject(){
+        if (!heldObj) { return; }
+
         Rigidbody objRig = heldObj.GetComponent<Rigidbody>();
         objRig.useGravity = true;
         objRig.drag = 1;
-
+        
         heldObj.transform.parent = null;
         heldObj = null;
-
+        spottedObj = null;
     }
 
     //Updating the object each turn
