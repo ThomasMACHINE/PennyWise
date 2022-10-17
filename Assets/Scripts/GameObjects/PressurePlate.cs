@@ -15,6 +15,7 @@ public class PressurePlate : MonoBehaviour
             }
             else if (other.gameObject.name.Contains("MEDIUM")) {
                 Debug.Log("Medium dragon");
+                
             }
             else if (other.gameObject.name.Contains("LARGE")) {
                 Debug.Log("Large dragon");
@@ -24,6 +25,10 @@ public class PressurePlate : MonoBehaviour
                 Debug.Log("No valid dragon model entered the pressure plate");
             }
 		}
+    }
+    private void OnTriggerExit(Collider other) {
+        //other.gameObject
+
     }
 
 
