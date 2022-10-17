@@ -31,6 +31,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Guard guard;
+    //Creates a list of gameObjects in scene.
+    private GameObject[] guardObjectsInScene;
 
     public PickUpCrate pickUpController;
 
@@ -43,6 +45,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] bool canDoubleJump;
 
     [SerializeField] private int jumpCount;
+
+    [SerializeField] bool canRoar;
     private bool toggleGlide;
     public bool toggleHold;
     //public bool holdBush; //remove
@@ -53,6 +57,7 @@ public class Dragon : MonoBehaviour
 
     private void Awake() {
 
+        guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
         if (pickUpController) { pickUpController.heldObj = null; }
        // DontDestroyOnLoad(this.gameObject);
         //DontDestroyOnLoad(NextDragon);
@@ -234,6 +239,38 @@ public class Dragon : MonoBehaviour
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
+
+    // Disables the detection zone of the guard
+    public void RoarDragon() {
+        if (canRoar) {
+            Debug.Log("ROOOOOAAAAAARRRRR");
+            foreach(GameObject guardObject in guardObjectsInScene) {
+                if (Vector3.Distance(this.gameObject.transform.position, guardObject.transform.position) < 10) {
+                    Debug.Log("Hello");
+                    StartCoroutine(DisableGuardDetectionForATime(guardObject));
+                }
+            }    
+        }
+              
+    }
+
+
+    // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
+    // indicator on the ground meanwhile.
+    IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
+    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+    Renderer renderer = guardObject.GetComponent<Renderer>();
+    Color tempColor = renderer.material.color;
+    colliderCapsule.enabled = false;
+    //Changes the colour  to white (RBA 0(black - 255 (white))).
+    renderer.material.color = new Color(255,255,255);
+
+    yield return new WaitForSeconds(5);
+    //Changes the colour back.
+    renderer.material.color = tempColor;
+    colliderCapsule.enabled = true;
+    }
+
     //Should move this into the coin, and from there update the global coinscore.
     /*private void OnCollisionEnter(Collision collision)
     {
@@ -253,14 +290,16 @@ public class Dragon : MonoBehaviour
     {
         if (this.gameObject.CompareTag("Holder")) {}
         else {
-        if (other.gameObject.CompareTag("Guard"))
+        if (other.gameObject.CompareTag("Guard")) {
+            GameObject guardObjectField = other.gameObject;
             if(!hidden) {
                 //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
-                bool canSeePlayerFlag = guard.CheckForLineOfSight(Model);
+                bool canSeePlayerFlag = guard.CheckForLineOfSight(Model, guardObjectField);
                 if (canSeePlayerFlag) {
                     IsCaught = true;
                 }
             }
+        }
 
         if (other.gameObject.CompareTag("Coin"))
         {

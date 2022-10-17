@@ -20,7 +20,6 @@ public class Guard : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] LayerMask playerMask;
     [SerializeField] LayerMask obstructionMask;
-    [SerializeField] Transform guardObject;
 
     [SerializeField] PathWalker walkController;
     
@@ -55,8 +54,10 @@ public class Guard : MonoBehaviour
     }
 
     // Checks for LOS from the guard object to the player. Obstuction layer objects block view.
-    public bool CheckForLineOfSight(GameObject dragonModel) {
-        if (Physics.Linecast(guardObject.transform.position, dragonModel.transform.position, obstructionMask)) {
+    public bool CheckForLineOfSight(GameObject dragonModel, GameObject guardObjectField) {
+        int index = guardObjectField.transform.GetSiblingIndex();
+        GameObject guardObjectBox = guardObjectField.gameObject.transform.parent.GetChild(index - 1).gameObject;
+        if (Physics.Linecast(guardObjectBox.transform.position, dragonModel.transform.position, obstructionMask)) {
             Debug.Log("No line of sight to the player");
             return false;
         }
