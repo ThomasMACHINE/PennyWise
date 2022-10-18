@@ -12,22 +12,32 @@ public class PlatformMovement : MonoBehaviour
     [SerializeField] float speed = 1;
     private Vector3 pointA;
 
+    [SerializeField] bool active = true;
+    [SerializeField] bool loop = true;
+
     void Start() {
         pointA = this.gameObject.transform.position;
     }
     void Update() {
-         //Makes the pkatform move back and forth
-        t += Time.deltaTime * speed;
-        // Moves the object to target position
-        transform.position = Vector3.Lerp(pointA, pointB, t);
-        // Flip the points once it has reached the target
-        if (t >= 1)
-        {
-        var b = pointB;
-        var a = pointA;
-        pointA = b;
-        pointB = a;
-        t = 0;
-        }   
+        if(active) {
+            //Makes the pkatform move back and forth
+            t += Time.deltaTime * speed;
+            // Moves the object to target position
+            transform.position = Vector3.Lerp(pointA, pointB, t);
+            // Flip the points once it has reached the target
+            if (t >= 1 && loop)
+            {
+            var b = pointB;
+            var a = pointA;
+            pointA = b;
+            pointB = a;
+            t = 0;
+            }   
+        }
+    }
+
+    // primarily intended to be invoked as an event, see PressurePlate.cs and EventInvokeOnRightClick.cs
+    public void setActive(bool newState){
+        active = newState;
     }
 }
