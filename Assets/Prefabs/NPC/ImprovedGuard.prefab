@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa13a114e829db142a85c3d00ac82e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usesPathWalker: 0
   pointA: {x: 3, y: 0, z: 0}
   pointB: {x: 0, y: 0, z: 0}
   speed: 0.4
@@ -55,7 +56,8 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 256
-  guardObject: {fileID: 364382486709750040}
+  guardObjectBox: {fileID: 364382486709750040}
+  walkController: {fileID: 0}
 --- !u!1 &2936722275916058295
 GameObject:
   m_ObjectHideFlags: 0

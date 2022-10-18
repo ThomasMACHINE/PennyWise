@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {   
     [SerializeField] PlayerStatController statController;
+    [SerializeField] Dragon dragon;
     public Vector2 turn;
     public Vector3 deltaMovement;
     public GameObject movement;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         MoveCharacter();
         CheckEvolve();
         CheckCollision();
+        CheckRoar();
         ReloadLevelOnCommand();
     }
 
@@ -89,6 +91,13 @@ public class PlayerController : MonoBehaviour
             ReloadLevel();
         }
     }
+
+
+    private void CheckRoar() {
+        if (Input.GetKeyDown(KeyCode.L) && statController.activeDragon.name.Contains("LARGE")) {
+            dragon.RoarDragon();
+            }
+        }
     
     public void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

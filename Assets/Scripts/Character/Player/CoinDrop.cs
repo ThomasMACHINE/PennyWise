@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CoinDrop : MonoBehaviour
 {
-    [SerializeField] GameObject coin;
+    [SerializeField] GameObject coinUnPickAble;
+   // [SerializeField] GameObject coinPickAble;
     private void Awake()
     {
-        if (coin.tag != "Coin")
+        if (coinUnPickAble.tag != "Coin")
             Debug.LogError("The coin Prefab does not have the coin tag!");
     }
 
@@ -19,7 +20,7 @@ public class CoinDrop : MonoBehaviour
     public void DropCoins(int amount, Vector3 position) 
     {
         for (int i = 0; i < amount; i++) {
-            GameObject newCoin = GameObject.Instantiate(coin);
+            GameObject newCoin = GameObject.Instantiate(coinUnPickAble);
 
             newCoin.transform.position = position + new Vector3(0,3,0);
             newCoin.gameObject.SetActive(true);

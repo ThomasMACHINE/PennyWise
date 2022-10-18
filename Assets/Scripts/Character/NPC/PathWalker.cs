@@ -20,7 +20,6 @@ public class PathWalker : MonoBehaviour
     [SerializeField] private float speed;
     void Start()
     {
-        isBusy = false;
         GoalDestination = PathObjects[counter];
     }
 

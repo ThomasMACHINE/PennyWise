@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-   // [SerializeField] float detectionRange;
-
+    // [SerializeField] float detectionRange;
+    [SerializeField] bool usesPathWalker = false;
     //Needed to move the object
     [SerializeField] Vector3 pointA = new Vector3(3,0,0); 
     [SerializeField] Vector3 pointB = new Vector3(0,0,0);
@@ -20,8 +20,8 @@ public class Guard : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] LayerMask playerMask;
     [SerializeField] LayerMask obstructionMask;
-    [SerializeField] Transform guardObject;
 
+    [SerializeField] PathWalker walkController;
     
     // Start is called before the first frame update
     void Start()
@@ -35,13 +35,8 @@ public class Guard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Locks the guard so it cannot rotate in the z-axis
-        
-        
-        //Rotering
-        //transform.Rotate(new Vector3(0, degreesPerSecond, 0) * Time.deltaTime);
-
-        
+        // If you dont want to use this, just set this field to false in the inspector on Unity.
+        if (usesPathWalker == true) { return; }
 
         //Makes the guard move back and forth
         t += Time.deltaTime * speed;
@@ -59,8 +54,10 @@ public class Guard : MonoBehaviour
     }
 
     // Checks for LOS from the guard object to the player. Obstuction layer objects block view.
-    public bool CheckForLineOfSight(GameObject dragonModel) {
-        if (Physics.Linecast(guardObject.transform.position, dragonModel.transform.position, obstructionMask)) {
+    public bool CheckForLineOfSight(GameObject dragonModel, GameObject guardObjectField) {
+        int index = guardObjectField.transform.GetSiblingIndex();
+        GameObject guardObjectBox = guardObjectField.gameObject.transform.parent.GetChild(index - 1).gameObject;
+        if (Physics.Linecast(guardObjectBox.transform.position, dragonModel.transform.position, obstructionMask)) {
             Debug.Log("No line of sight to the player");
             return false;
         }

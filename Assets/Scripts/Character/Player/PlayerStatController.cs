@@ -93,10 +93,7 @@ public class PlayerStatController : MonoBehaviour
 
     public void DoEvolve()
     {
-        //GameObject newDragon = activeDragon.NextDragon;
-        Debug.Log(CoinScore.globalCoinScore + "gg");
         CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
-        Debug.Log(CoinScore.globalCoinScore + "gt");
         if(activeDragon.NextDragon == null)
         {
             Debug.Log("There is no higher tier dragon!");
