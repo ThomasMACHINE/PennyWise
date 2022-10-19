@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test/OA/3OAscene.unity
     guid: aad190c7ac2312a49853e709cb4f7a8e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_1.unity
+    guid: c9ab54980ab720f4d830691ca832996f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_2.unity
+    guid: b72908996ce715d4999da2d03d857d68
   m_configObjects: {}
