@@ -43,8 +43,9 @@ public class PressurePlate : MonoBehaviour
     }
     private void OnTriggerExit(Collider other) {
         collidedObjects.Remove(other.gameObject);
-        if(collidedObjects.Count == 0)
+        if(collidedObjects.Count == 0) {
             disableEvent.Invoke();
+        }
     }
 
 

@@ -108,6 +108,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8157c5ed77126a045b5e71cecaf95942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smallEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  mediumEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  largeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  disableEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &251328712090846252
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +132,6 @@ GameObject:
   - component: {fileID: 251328712090846248}
   - component: {fileID: 251328712090846255}
   - component: {fileID: 251328712090846254}
-  - component: {fileID: 251328712090846253}
   m_Layer: 0
   m_Name: PressurePlate
   m_TagString: Untagged
@@ -206,15 +217,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &251328712090846253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251328712090846252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8157c5ed77126a045b5e71cecaf95942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
