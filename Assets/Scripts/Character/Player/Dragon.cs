@@ -76,10 +76,13 @@ public class Dragon : MonoBehaviour
     {
         float xSpeed = xInput * characterSpeed;
         float zSpeed = zInput * characterSpeed;
-
-        //rigBody.velocity = new Vector3(xSpeed, rigBody.velocity.y, zSpeed);
-        Vector3 deltaMovement = new Vector3(xSpeed, 0, zSpeed) * Time.deltaTime;
-        Model.transform.Translate(deltaMovement);
+        
+        Vector3 movement = new Vector3(xSpeed, rigBody.velocity.y, zSpeed);
+        // Since rigidbody is based on world coordinates, you need to multiply the movement by rotation to get relative movement.
+        rigBody.velocity = rigBody.rotation * movement;
+        
+        //Vector3 deltaMovement = new Vector3(xSpeed, 0, zSpeed) * Time.deltaTime;
+        //Model.transform.Translate(deltaMovement);
     }
 
     /// <summary>
@@ -87,7 +90,8 @@ public class Dragon : MonoBehaviour
     /// </summary>
     /// <param name="newQuaternion"></param>
     public void DoRotate(Quaternion newQuaternion) {
-        Model.transform.localRotation = newQuaternion;
+        rigBody.MoveRotation(newQuaternion);
+        
     }
 
 

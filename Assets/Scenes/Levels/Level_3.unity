@@ -811,6 +811,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 208772842085115293, guid: a8280d8fcc511044c8016da6c26d2d0c, type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 208772842085115293, guid: a8280d8fcc511044c8016da6c26d2d0c, type: 3}
       propertyPath: pointB.x
       value: -25
       objectReference: {fileID: 0}
