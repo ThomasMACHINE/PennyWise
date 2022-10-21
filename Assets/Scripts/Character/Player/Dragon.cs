@@ -70,14 +70,15 @@ public class Dragon : MonoBehaviour
     /// <summary>
     /// Moves Character by giving it velocity in given axis
     /// </summary>
-    /// <param name="horizontalInput"></param>
-    /// <param name="verticalInput"></param>
-    public void DoMove(float horizontalInput, float verticalInput) 
+    /// <param name="xInput"></param>
+    /// <param name="zInput"></param>
+    public void DoMove(float xInput, float zInput) 
     {
-        float horizontalSpeed = horizontalInput * characterSpeed;
-        float verticalSpeed = verticalInput * characterSpeed;
+        float xSpeed = xInput * characterSpeed;
+        float zSpeed = zInput * characterSpeed;
 
-        Vector3 deltaMovement = new Vector3(horizontalSpeed, 0, verticalSpeed) * Time.deltaTime;
+        //rigBody.velocity = new Vector3(xSpeed, rigBody.velocity.y, zSpeed);
+        Vector3 deltaMovement = new Vector3(xSpeed, 0, zSpeed) * Time.deltaTime;
         Model.transform.Translate(deltaMovement);
     }
 
