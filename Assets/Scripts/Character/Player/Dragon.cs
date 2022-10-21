@@ -77,7 +77,7 @@ public class Dragon : MonoBehaviour
         float horizontalSpeed = horizontalInput * characterSpeed;
         float verticalSpeed = verticalInput * characterSpeed;
 
-        Vector3 deltaMovement = new Vector3(horizontalSpeed, rigBody.velocity.y, verticalSpeed) * Time.deltaTime;
+        Vector3 deltaMovement = new Vector3(horizontalSpeed, 0, verticalSpeed) * Time.deltaTime;
         Model.transform.Translate(deltaMovement);
     }
 
@@ -161,8 +161,7 @@ public class Dragon : MonoBehaviour
         if(IsGrounded()) {
             jumpCount = 1;
             toggleGlide = false;
-            rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
-        }
+            rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);        }
         else {
             // Dragon can glide if it is small size, here it checks to toggle or untoggle it
             if (this.gameObject.name.Contains("SMALL") && Input.GetKeyDown(KeyCode.Space)) {
