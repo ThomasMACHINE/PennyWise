@@ -71,6 +71,11 @@ public class PlayerStatController : MonoBehaviour
             evolveBar.UpdateSlider((float)coinScore / activeDragon.CoinToEvolve);
             activeDragon.UnAccountedCoins = 0;    
         }*/
+        
+        //Checks if the dragon has picked up enough coins to grow in size
+        if (CanEvolve()){
+            DoEvolve();
+        }
     }
 
     //Test fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.

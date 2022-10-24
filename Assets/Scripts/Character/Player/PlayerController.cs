@@ -71,12 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckEvolve()
     {
-        if (Input.GetKeyDown(KeyCode.E) && statController.CanEvolve())
-        {
-            
-            statController.DoEvolve();
-        }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             
             statController.DoDevolve();
