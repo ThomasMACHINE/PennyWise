@@ -11,6 +11,8 @@ public class Slime : MonoBehaviour, AggressiveEnemy
     [SerializeField] private PlayerStatController playerController;
     [SerializeField] private float searchRadius;
     [SerializeField] private LayerMask playerMask;
+    [SerializeField] private PathWalker pathWalker;
+
     [SerializeField] private int speed, jumpPower;
     public bool isHunting { get; private set; }
     
@@ -32,11 +34,13 @@ public class Slime : MonoBehaviour, AggressiveEnemy
             if (Physics.Raycast(eyes.transform.position, direction, out hit, searchRadius, ~playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
             {
                 isHunting = true;
+                pathWalker.isBusy = true;
             }
         } // If player is outside searchRadius
         else
         {
             isHunting = false;
+            pathWalker.isBusy = false;
         }
     }
 
@@ -67,7 +71,6 @@ public class Slime : MonoBehaviour, AggressiveEnemy
             direction = direction.normalized;
 
             rigidBody.velocity += new Vector3(direction.x * speed, jumpPower, direction.z * speed);
-            
         }
     }
 

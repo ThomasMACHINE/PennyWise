@@ -64,4 +64,11 @@ public class PathWalker : MonoBehaviour
         character.transform.LookAt(GoalDestination.transform.position);
     }
 
+    private void OnDrawGizmos()
+    {
+        foreach (GameObject point in PathObjects) 
+        {
+            Gizmos.DrawSphere(point.transform.position, 0.5f);   
+        }
+    }
 }
