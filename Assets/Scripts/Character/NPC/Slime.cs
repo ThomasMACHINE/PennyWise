@@ -12,7 +12,7 @@ public class Slime : MonoBehaviour, AggressiveEnemy
     [SerializeField] private float searchRadius;
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private PathWalker pathWalker;
-
+    [SerializeField] private AnimationClip jumpAnimation; 
     [SerializeField] private int speed, jumpPower;
     public bool isHunting { get; private set; }
     
@@ -67,6 +67,7 @@ public class Slime : MonoBehaviour, AggressiveEnemy
     {
         if (isHunting) 
         {
+            jumpAnimation.
             Vector3 direction = playerController.activeDragon.transform.position - model.transform.position;
             direction = direction.normalized;
 
