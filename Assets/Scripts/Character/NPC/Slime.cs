@@ -67,7 +67,7 @@ public class Slime : MonoBehaviour, AggressiveEnemy
     {
         if (isHunting) 
         {
-            jumpAnimation.
+            
             Vector3 direction = playerController.activeDragon.transform.position - model.transform.position;
             direction = direction.normalized;
 
