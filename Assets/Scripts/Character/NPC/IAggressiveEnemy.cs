@@ -6,7 +6,7 @@ using UnityEngine;
 /// AggressiveEnemy is an interface derived from WalkingCharacter
 /// that also implements a search for player
 /// </summary>
-public interface AggressiveEnemy : WalkingCharacter
+public interface IAggressiveEnemy : IWalkingCharacter
 {
     /// <summary>
     /// Searches for player

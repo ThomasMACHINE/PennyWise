@@ -67,5 +67,7 @@ public class PathWalker : MonoBehaviour
         {
             Gizmos.DrawSphere(point.transform.position, 0.5f);   
         }
+
+        Gizmos.DrawLine(character.transform.position, GoalDestination.transform.position);
     }
 }

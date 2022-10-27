@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour, AggressiveEnemy
+public class Slime : MonoBehaviour, IAggressiveEnemy
 {
     [SerializeField] private MeshRenderer modelRenderer;
     [SerializeField] private Transform model;
@@ -20,8 +20,8 @@ public class Slime : MonoBehaviour, AggressiveEnemy
     public bool isHunting { get; private set; }
     
     //Later we can put this in a larger controller that can act as a hive mind for all AI
-    [SerializeField] private float moveCooldown = 0;
-    [SerializeField] private float searchCooldown = 0;
+    [SerializeField] private float moveCooldown = 1;
+    [SerializeField] private float searchCooldown = 1;
 
     private float moveTimer = 0;
     private float searchTimer = 0;
