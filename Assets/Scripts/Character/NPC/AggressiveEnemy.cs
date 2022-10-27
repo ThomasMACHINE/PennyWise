@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface AggressiveEnemy
+/// <summary>
+/// AggressiveEnemy is an interface derived from WalkingCharacter
+/// that also implements a search for player
+/// </summary>
+public interface AggressiveEnemy : WalkingCharacter
 {
-    public void searchForPlayer();
-    
+    /// <summary>
+    /// Searches for player
+    /// </summary>
+    public void SearchForPlayer();
 }

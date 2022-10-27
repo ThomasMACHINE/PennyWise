@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour, AggressiveEnemy
 {
-    [SerializeField] private GameObject model;
-    [SerializeField] private GameObject eyes;
+    [SerializeField] private MeshRenderer modelRenderer;
+    [SerializeField] private Transform model;
+    [SerializeField] private Transform eyes;
     [SerializeField] private Rigidbody rigidBody;
     [SerializeField] private PlayerStatController playerController;
     [SerializeField] private float searchRadius;
     [SerializeField] private LayerMask playerMask;
-    [SerializeField] private PathWalker pathWalker;
-    [SerializeField] private AnimationClip jumpAnimation; 
     [SerializeField] private int speed, jumpPower;
+    [SerializeField] private CharacterGPS gps;
+
+    [SerializeField] private Material idleSkin, aggressiveSkin;
+
     public bool isHunting { get; private set; }
     
     //Later we can put this in a larger controller that can act as a hive mind for all AI
@@ -22,62 +25,58 @@ public class Slime : MonoBehaviour, AggressiveEnemy
 
     private float moveTimer = 0;
     private float searchTimer = 0;
-    public void searchForPlayer()
-    {
-        if (Physics.CheckSphere(model.transform.position, searchRadius, playerMask))
-        {
-            // Check for line of sight
-            Vector3 direction =  playerController.activeDragon.transform.position - eyes.transform.position;
-            RaycastHit hit;
-            Debug.DrawRay(eyes.transform.position, direction * searchRadius, Color.yellow, searchTimer);
 
-            if (Physics.Raycast(eyes.transform.position, direction, out hit, searchRadius, ~playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
-            {
-                isHunting = true;
-                pathWalker.isBusy = true;
-            }
-        } // If player is outside searchRadius
-        else
-        {
-            isHunting = false;
-            pathWalker.isBusy = false;
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
         moveTimer += Time.deltaTime;
         searchTimer += Time.deltaTime;
 
-        if(moveTimer > moveCooldown)
+        if (moveTimer > moveCooldown)
         {
             DoMove();
             moveTimer = 0;
         }
 
-        if(searchTimer > searchCooldown) 
+        if (searchTimer > searchCooldown)
         {
-            searchForPlayer();
+            SearchForPlayer();
             searchTimer = 0;
+        }
+    }
+
+    public void SearchForPlayer()
+    {
+        if (Physics.CheckSphere(model.position, searchRadius, playerMask))
+        {
+            // Check for line of sight
+            Vector3 direction =  playerController.activeDragon.transform.position - eyes.position;
+            RaycastHit hit;
+            Debug.DrawRay(eyes.position, direction * searchRadius, Color.yellow, searchTimer);
+
+            if (Physics.Raycast(eyes.position, direction, out hit, searchRadius, ~playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
+            {
+                isHunting = true;
+                modelRenderer.material = aggressiveSkin;
+            }
+        } // If player is outside searchRadius
+        else
+        {
+            isHunting = false;
+            modelRenderer.material = idleSkin;
         }
     }
 
     public void DoMove()
     {
-        if (isHunting) 
-        {
-            
-            Vector3 direction = playerController.activeDragon.transform.position - model.transform.position;
-            direction = direction.normalized;
+        Vector3 targetPosition = isHunting == true ? playerController.activeDragon.transform.position : gps.GetCoordinate(model.position);
+        Vector3 direction = (targetPosition - model.position).normalized; 
+        rigidBody.velocity += new Vector3(direction.x * speed, jumpPower, direction.z * speed);
 
-            rigidBody.velocity += new Vector3(direction.x * speed, jumpPower, direction.z * speed);
-        }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(model.transform.position, searchRadius);
+        Gizmos.DrawSphere(model.position, searchRadius);
     }
 }
 

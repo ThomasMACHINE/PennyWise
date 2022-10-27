@@ -43,12 +43,10 @@ public class PathWalker : MonoBehaviour
     private void getNextDestination() {
         // Counter keeps track of which object in the PathObjects is being targeted
         counter = positiveDirection == true ? counter + 1 : counter - 1;
-        Debug.Log(counter + " This is counter value!");
 
         // Check if last Point has been reached
         if (counter == PathObjects.Count)
         {
-            Debug.Log("Going the other way!");
             // Set the goal to the 2nd last object
             counter = PathObjects.Count - 1;
             positiveDirection = false;
@@ -56,7 +54,6 @@ public class PathWalker : MonoBehaviour
         } // Check if first object has been reached
         else if (counter == -1) 
         {
-            Debug.Log("Going the POSITIVE WAY!");
             counter = 1;
             positiveDirection = true;
         }
