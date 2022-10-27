@@ -21,6 +21,7 @@ public class PressurePlate : MonoBehaviour
 			Debug.Log("Pressure plate!");
 			if (other.gameObject.name.Contains("SMALL")) {
                 Debug.Log("Small dragon");
+                
                 smallEvent.Invoke();
             }
             else if (other.gameObject.name.Contains("MEDIUM")) {

@@ -32,12 +32,12 @@ public class PlatformMovement : MonoBehaviour
             pointA = b;
             pointB = a;
             t = 0;
-            }   
+            }           
         }
     }
 
     // primarily intended to be invoked as an event, see PressurePlate.cs and EventInvokeOnRightClick.cs
-    public void setActive(bool newState){
+    public void setActiveVariable(bool newState){
         active = newState;
     }
 }

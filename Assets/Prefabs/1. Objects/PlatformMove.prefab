@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformMove: {fileID: 208772842085115280}
-  pointA: {x: 0, y: 0, z: 0}
   pointB: {x: 0, y: 1, z: 0}
   speed: 0.5
+  active: 0
+  loop: 1
+  triggerAble: 1
