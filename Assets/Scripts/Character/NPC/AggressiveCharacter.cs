@@ -12,7 +12,6 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     [SerializeField] protected LayerMask playerMask;
     public bool IsHunting { get; protected set; }
 
-
     public override void DoMove()
     {
         Vector3 targetPosition = IsHunting == true ? playerController.activeDragon.transform.position : gps.GetCoordinate(model.position);
@@ -39,4 +38,8 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
             IsHunting = false;
         }
     }
+
+    public abstract void CheckPlayerCaught();
+
+    public abstract void OnPlayerCaught();
 }

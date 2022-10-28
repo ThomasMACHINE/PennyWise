@@ -43,6 +43,7 @@ public class NpcHiveMind : MonoBehaviour
             foreach (IAggressiveEnemy character in aggressiveCharacters) 
             {
                 character.SearchForPlayer();
+                character.CheckPlayerCaught();
             }
         }
     }

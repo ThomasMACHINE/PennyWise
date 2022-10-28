@@ -12,4 +12,6 @@ public interface IAggressiveEnemy : IWalkingCharacter
     /// Searches for player
     /// </summary>
     public void SearchForPlayer();
+    public abstract void CheckPlayerCaught();
+    public abstract void OnPlayerCaught();
 }

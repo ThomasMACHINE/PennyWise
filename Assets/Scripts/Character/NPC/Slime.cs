@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour, IAggressiveEnemy
+public class Slime : MonoBehaviour
 {
     [SerializeField] private MeshRenderer modelRenderer;
     [SerializeField] private Transform model;

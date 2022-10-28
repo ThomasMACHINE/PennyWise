@@ -147,4 +147,14 @@ public class PlayerStatController : MonoBehaviour
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
         }
     }
+
+    /// <summary>
+    /// Removes a certain amount of coins from player
+    /// </summary>
+    /// <param name="amount"></param>
+    public void RemoveCoin(int amount)
+    {
+        CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 :  CoinScore.globalCoinScore - amount;
+        Debug.Log("Gold has been removed from player! Curr score: " + CoinScore.globalCoinScore);
+    }
 }
