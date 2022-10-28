@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcHiveMind : MonoBehaviour
 {
-    [SerializeField] public List<AggressiveCharacter> walkingCharacters = new List<AggressiveCharacter>();
+    [SerializeField] public List<Character> walkingCharacters = new List<Character>();
     [SerializeField] public List<AggressiveCharacter> aggressiveCharacters = new List<AggressiveCharacter>();
     
     [SerializeField] private float moveCooldown = 1;

@@ -7,21 +7,13 @@ using UnityEngine;
 /// Contains Implementations for search and movement
 /// These can be overridden for custom search/movement
 /// </summary>
-public abstract class AggressiveCharacter : MonoBehaviour, IAggressiveEnemy
+public abstract class AggressiveCharacter : Character, IAggressiveEnemy
 {
-    [SerializeField] protected Transform model;
-    [SerializeField] protected Transform eyes;
-    [SerializeField] protected Rigidbody rigidBody;
-    [SerializeField] protected PlayerStatController playerController;
-    [SerializeField] protected float searchRadius;
-    [SerializeField] protected int speed;
     [SerializeField] protected LayerMask playerMask;
-    [SerializeField] protected CharacterGPS gps;
-
-    public bool IsHunting { get; private set; }
+    public bool IsHunting { get; protected set; }
 
 
-    public virtual void DoMove()
+    public override void DoMove()
     {
         Vector3 targetPosition = IsHunting == true ? playerController.activeDragon.transform.position : gps.GetCoordinate(model.position);
         Vector3 direction = (targetPosition - model.position).normalized;
