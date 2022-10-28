@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 2959486467106577279}
   m_Layer: 5
   m_Name: Hide
-  m_TagString: Untagged
+  m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 5612622964335843463}
   m_Layer: 5
   m_Name: Roar
-  m_TagString: Untagged
+  m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 7540794664850247139}
   m_Layer: 5
   m_Name: Carry
-  m_TagString: Untagged
+  m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 6752888359772965601}
   m_Layer: 5
   m_Name: Glide
-  m_TagString: Untagged
+  m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 1377705231579073482}
   m_Layer: 5
   m_Name: DoubleJump
-  m_TagString: Untagged
+  m_TagString: icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
