@@ -11,6 +11,7 @@ TagManager:
   - Bush
   - Ground
   - Holder
+  - icon
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
     [SerializeField] EvolveBar evolveBar;
+    [SerializeField] Abilities icons;
     [SerializeField] Guard guard;
     //Creates a list of gameObjects in scene.
     private GameObject[] guardObjectsInScene;
