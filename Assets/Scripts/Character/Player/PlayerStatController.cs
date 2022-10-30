@@ -10,6 +10,7 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] CameraController cameraController;
     [SerializeField] public Dragon activeDragon;
     [SerializeField] EvolveBar evolveBar;
+    [SerializeField] Abilities icons;
     [SerializeField] int coinScore;
 
     
@@ -26,6 +27,8 @@ public class PlayerStatController : MonoBehaviour
 
     // Need to change the dragon model from here.
     void Start() {
+        //Updates icons
+        icons.UpdateIcons(activeDragon.name);
         
         CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
 
@@ -143,9 +146,11 @@ public class PlayerStatController : MonoBehaviour
 
         // Set fill bar to appropriate level
         if (activeDragon.CoinToEvolve != 0) {
-            //evolveBar.UpdateSlider(coinScore / activeDragon.CoinToEvolve);
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
         }
+        
+        //Updating icons
+        icons.UpdateIcons(activeDragon.name);
     }
 
     /// <summary>
