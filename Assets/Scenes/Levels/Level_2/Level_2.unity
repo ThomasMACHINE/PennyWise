@@ -2643,13 +2643,13 @@ MonoBehaviour:
   eyes: {fileID: 673872559}
   rigidBody: {fileID: 673872560}
   playerController: {fileID: 41404703}
-  searchRadius: 5.01
+  searchRadius: 20
   speed: 4
   gps: {fileID: 673872561}
   playerMask:
     serializedVersion: 2
     m_Bits: 8
-  size: 1.92
+  size: 4
   playerMessage: {fileID: 649652743}
 --- !u!1001 &680681159
 PrefabInstance:

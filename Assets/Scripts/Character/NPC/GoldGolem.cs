@@ -30,7 +30,7 @@ public class GoldGolem : AggressiveCharacter
         if (!firstCatch)
         {
             firstCatch = true;
-            playerMessage.NotifyPlayer("This is the slime monster!", "The slime monster removes a gold piece from the player when caught. So make sure to avoid it!");
+            playerMessage.NotifyPlayer("Slime Monster", "The slime monster removes a gold piece from the player when caught. So make sure to avoid it!");
         }
     }
 
