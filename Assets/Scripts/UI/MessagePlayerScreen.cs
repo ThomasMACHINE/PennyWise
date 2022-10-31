@@ -28,6 +28,10 @@ public class MessagePlayerScreen : MonoBehaviour
     public void NotifyPlayer(string newTitle, string newBody) 
     {
         MessageBody mb = new MessageBody(newTitle, newBody);
+
+        if (isDuplicate(mb))
+            return;
+
         if (isDisplaying)
         {
             pendingMessages.Add(mb);
@@ -63,11 +67,21 @@ public class MessagePlayerScreen : MonoBehaviour
             }
         }
         Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 20);
-
-
     }
 
+    private bool isDuplicate(MessageBody newMessageBody)
+    {
+        if (pendingMessages.Count == 0)
+            return false;
 
+        bool foundDuplicate = false;
+        foreach(MessageBody mb in pendingMessages)
+        {
+            if (newMessageBody.title.Equals(mb.title) && newMessageBody.body.Equals(mb.body))
+                foundDuplicate = true;
+        }
+        return foundDuplicate;
+    }
     public struct MessageBody 
     {
         public
