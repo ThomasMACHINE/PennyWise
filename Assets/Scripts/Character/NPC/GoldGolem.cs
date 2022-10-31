@@ -5,6 +5,8 @@ using UnityEngine;
 public class GoldGolem : AggressiveCharacter
 {
     [SerializeField] private float size;
+    [SerializeField] private MessagePlayerScreen playerMessage;
+    private bool firstCatch = false;
     public override void CheckPlayerCaught()
     {
         if (Physics.CheckSphere(model.position, size, playerMask))
@@ -24,6 +26,11 @@ public class GoldGolem : AggressiveCharacter
         if (Physics.CheckSphere(model.position, 3))
         {
             playerController.RemoveCoin(1);
+        }
+        if (!firstCatch)
+        {
+            firstCatch = true;
+            playerMessage.NotifyPlayer("This is the slime monster!", "The slime monster removes a gold piece from the player when caught. So make sure to avoid it!");
         }
     }
 

@@ -28,6 +28,7 @@ public class MessagePlayerScreen : MonoBehaviour
         Panel.SetActive(true);
         Title.text = newTitle;
         Body.text = newBody;
+        Debug.Log(Panel.activeSelf);
     }
 
     private void Update()
