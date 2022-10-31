@@ -9,6 +9,9 @@ public class MessagePlayerScreen : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Title;
     [SerializeField] public TextMeshProUGUI Body;
 
+    private bool isDisplaying = false;
+    private List<MessageBody> pendingMessages = new List<MessageBody>();
+
     private void Awake()
     {
         Debug.Log(Panel.transform.position);
@@ -24,20 +27,56 @@ public class MessagePlayerScreen : MonoBehaviour
     }
     public void NotifyPlayer(string newTitle, string newBody) 
     {
+        MessageBody mb = new MessageBody(newTitle, newBody);
+        if (isDisplaying)
+        {
+            pendingMessages.Add(mb);
+        }
+
+        if (!isDisplaying)
+        {
+            sendMessage(mb);
+        }
+    }
+
+    private void sendMessage(MessageBody mb) {
         Panel.transform.position = new Vector3(960, 1200, 0);
         Panel.SetActive(true);
-        Title.text = newTitle;
-        Body.text = newBody;
-        Debug.Log(Panel.activeSelf);
+        Title.text = mb.title;
+        Body.text = mb.body;
+        isDisplaying = true;
     }
-
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pendingMessages.Clear();
+        }
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
-            Panel.SetActive(false);
-
-        Panel.transform.position += new Vector3(0, 5, 0);
-
+        {
+            if (pendingMessages.Count != 0)
+            {
+                sendMessage(pendingMessages[0]);
+            }
+            else {
+                Panel.SetActive(false);
+            }
+        }
         Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 20);
+
+
+    }
+
+
+    public struct MessageBody 
+    {
+        public
+        string title, body;
+        public MessageBody(string title, string body)
+        {
+            this.title = title;
+            this.body = body;
+        }
     }
 }
+
