@@ -54,8 +54,13 @@ public class Dragon : MonoBehaviour
     public bool hidden;
 
     public bool IsCaught;
-    //public int UnAccountedCoins; // This is very sad, but checking for collision is much easier within the object
 
+    public enum DragonSize
+    {
+        none, SMALL, MEDIUM, LARGE
+    }
+
+    [SerializeField] public DragonSize size;
     private void Awake() {
 
         guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
@@ -306,7 +311,7 @@ public class Dragon : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag("Coin") && size != DragonSize.LARGE)
         {
             //Updates the global variable
             CoinScore.globalCoinScore += 1;
