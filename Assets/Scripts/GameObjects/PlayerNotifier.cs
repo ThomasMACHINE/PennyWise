@@ -8,7 +8,10 @@ public class PlayerNotifier : MonoBehaviour
 
     [SerializeField] string TitleText;
     [SerializeField] string BodyText;
+    [SerializeField] MessagePlayerScreen.Messenger messenger;
     public void MessagePlayer() {
-        ui.NotifyPlayer(TitleText, BodyText);
+        ui.NotifyPlayer(TitleText, BodyText, messenger);
     }
+
+
 }

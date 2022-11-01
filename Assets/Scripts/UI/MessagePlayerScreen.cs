@@ -10,7 +10,14 @@ public class MessagePlayerScreen : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Body;
 
     private bool isDisplaying = false;
-    [SerializeField] private List<MessageBody> pendingMessages = new List<MessageBody>();
+    private List<MessageBody> pendingMessages = new List<MessageBody>();
+    [SerializeField] Image MessengerIcon;
+
+    [SerializeField]
+    private Sprite
+        none,
+        dragon,
+        golem;
 
     private void Awake()
     {
@@ -24,9 +31,15 @@ public class MessagePlayerScreen : MonoBehaviour
         if (!Title)
             Debug.LogError("Message Player system is missing Title text-box");
     }
+
     public void NotifyPlayer(string newTitle, string newBody) 
     {
-        MessageBody mb = new MessageBody(newTitle, newBody);
+        NotifyPlayer(newTitle, newBody, Messenger.none);
+    }
+
+    public void NotifyPlayer(string newTitle, string newBody, Messenger messenger)
+    {
+        MessageBody mb = new MessageBody(newTitle, newBody, messenger);
 
         if (isDuplicate(mb))
             return;
@@ -48,7 +61,29 @@ public class MessagePlayerScreen : MonoBehaviour
         Title.text = mb.title;
         Body.text = mb.body;
         isDisplaying = true;
+
+        setMessengerIcon(mb.messenger);
     }
+
+    private void setMessengerIcon(Messenger messenger)
+    {
+        MessengerIcon.color = new Vector4(MessengerIcon.color.r, MessengerIcon.color.g, MessengerIcon.color.b, 1);
+        switch (messenger)
+        {
+            case Messenger.Dragon:
+                MessengerIcon.sprite = dragon;
+                break;
+
+            case Messenger.GoldGolem:
+                MessengerIcon.sprite = golem;
+                break;
+
+            default:
+                MessengerIcon.color = new Vector4(MessengerIcon.color.r, MessengerIcon.color.g, MessengerIcon.color.b, 0); 
+                break;
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -59,8 +94,12 @@ public class MessagePlayerScreen : MonoBehaviour
         {
             if (pendingMessages.Count != 0)
             {
+                Debug.Log(pendingMessages.Count);
+
                 sendMessage(pendingMessages[0]);
                 pendingMessages.RemoveAt(0);
+                Debug.Log(pendingMessages.Count);
+
             }
             else {
                 Panel.SetActive(false);
@@ -76,6 +115,15 @@ public class MessagePlayerScreen : MonoBehaviour
             return false;
 
         bool foundDuplicate = false;
+
+        if (isDisplaying)
+        {
+            if (newMessageBody.title.Equals(Title.text) && newMessageBody.body.Equals(Body.text))
+            {
+                foundDuplicate = true;
+            }
+        }
+        
         foreach(MessageBody mb in pendingMessages)
         {
             if (newMessageBody.title.Equals(mb.title) && newMessageBody.body.Equals(mb.body))
@@ -85,14 +133,25 @@ public class MessagePlayerScreen : MonoBehaviour
         }
         return foundDuplicate;
     }
+
+    public enum Messenger 
+    {
+        none, 
+        Dragon, 
+        GoldGolem
+    };
+
     public struct MessageBody 
     {
         public
         string title, body;
-        public MessageBody(string title, string body)
+        public Messenger messenger;
+
+        public MessageBody(string title, string body, Messenger messenger)
         {
             this.title = title;
             this.body = body;
+            this.messenger = messenger;
         }
     }
 }
