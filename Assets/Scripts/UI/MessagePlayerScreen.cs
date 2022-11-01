@@ -10,11 +10,10 @@ public class MessagePlayerScreen : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Body;
 
     private bool isDisplaying = false;
-    private List<MessageBody> pendingMessages = new List<MessageBody>();
+    [SerializeField] private List<MessageBody> pendingMessages = new List<MessageBody>();
 
     private void Awake()
     {
-        Debug.Log(Panel.transform.position);
         if (!Panel)
             Debug.LogError("Message Player system is missing Panel game-object");
 
@@ -44,8 +43,8 @@ public class MessagePlayerScreen : MonoBehaviour
     }
 
     private void sendMessage(MessageBody mb) {
-        Panel.transform.position = new Vector3(960, 1200, 0);
         Panel.SetActive(true);
+        Panel.transform.position = new Vector3(960, 1200, 0);
         Title.text = mb.title;
         Body.text = mb.body;
         isDisplaying = true;
@@ -61,9 +60,11 @@ public class MessagePlayerScreen : MonoBehaviour
             if (pendingMessages.Count != 0)
             {
                 sendMessage(pendingMessages[0]);
+                pendingMessages.RemoveAt(0);
             }
             else {
                 Panel.SetActive(false);
+                isDisplaying = false;
             }
         }
         Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 20);
@@ -78,7 +79,9 @@ public class MessagePlayerScreen : MonoBehaviour
         foreach(MessageBody mb in pendingMessages)
         {
             if (newMessageBody.title.Equals(mb.title) && newMessageBody.body.Equals(mb.body))
+            {
                 foundDuplicate = true;
+            }
         }
         return foundDuplicate;
     }

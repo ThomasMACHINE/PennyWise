@@ -176,7 +176,6 @@ public class Dragon : MonoBehaviour
         else {
             // Dragon can glide if it is small size, here it checks to toggle or untoggle it
             if (this.gameObject.name.Contains("SMALL") && Input.GetKeyDown(KeyCode.Space)) {
-                Debug.Log("I am gliding!");
                 if (toggleGlide) {
                     toggleGlide = false;
                 } else {
@@ -189,10 +188,8 @@ public class Dragon : MonoBehaviour
                 rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
             }
             else if (jumpCount != 1) {
-                Debug.Log("Can't jump more in the air");
             }
             else {
-                Debug.Log("Not on the ground layer! Can not jump!");
             }
             
         }

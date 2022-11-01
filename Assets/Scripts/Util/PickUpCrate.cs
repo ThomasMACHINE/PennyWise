@@ -23,7 +23,6 @@ public class PickUpCrate : MonoBehaviour
         
         //can only pick up crate within distance
         if (Input.GetKeyDown(KeyCode.C) && spottedObj != null){
-            Debug.Log("Picked crate");
             PickupObject(spottedObj);
         }
 
@@ -36,7 +35,6 @@ public class PickUpCrate : MonoBehaviour
 
             //Dropping the crate
             if (Input.GetKeyDown(KeyCode.V)){
-                Debug.Log("Dropped crate");
                 DropObject();
             }
         }
@@ -48,17 +46,14 @@ public class PickUpCrate : MonoBehaviour
     void OnTriggerEnter(Collider hit){
         if (hit.gameObject.CompareTag("Crate"))
         {   
-            Debug.Log("Seeing crate");
             spottedObj = hit.gameObject;
         } 
-        Debug.Log("Seeing");
     }
 
    //Triggers if the holder exits the overlap with a crate, setting interactables to null
     void OnTriggerExit(Collider hit){
         if (hit.gameObject.CompareTag("Crate"))
         {
-            Debug.Log("Not seeing crate");
             spottedObj = null;
         } 
     }

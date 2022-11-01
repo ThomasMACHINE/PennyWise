@@ -133,11 +133,9 @@ public class PlayerStatController : MonoBehaviour
         //Dropping items 
         activeDragon.DropHeldItem();
 
-        Debug.Log(activeDragon + ":::ACTIVE DRAGON");
-        Debug.Log(newDragon + ":::: NEW DRAGON");
+
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        Debug.Log(newDragon.name + "was turned on");
         newDragon.transform.position = new Vector3(activeDragon.transform.position.x, activeDragon.transform.position.y + 0.5f, activeDragon.transform.position.z);
        
         // Make the camera target the new model
