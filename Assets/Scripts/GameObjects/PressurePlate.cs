@@ -36,11 +36,11 @@ public class PressurePlate : MonoBehaviour
         }
         else if (mediumImage && !(smallImage || largeImage)) {
             Debug.Log("Not implemented medium sprite img...yet;");
-            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSpirit;
+            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSprite;
         }
         else if (largeImage && !(smallImage || mediumImage)) {
             Debug.Log("Not implemented large sprite img...yet;");
-            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSpirit;
+            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSprite;
         }
         else {
             Debug.Log("ERROR! Either no image was choosen for the PressurePlate or more than one was set to true");
