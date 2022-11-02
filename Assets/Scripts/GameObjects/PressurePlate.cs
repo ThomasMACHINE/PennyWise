@@ -28,18 +28,15 @@ public class PressurePlate : MonoBehaviour
 
 
     void Start() {
-        //Checks if only one image state has been set to true in the inspector
+        //Checks if only one image state has been set to true in the inspector. Changes the image to correct image for size it true
         if (smallImage && !(mediumImage || largeImage)) {
-        
             imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSprite;
 
         }
         else if (mediumImage && !(smallImage || largeImage)) {
-            Debug.Log("Not implemented medium sprite img...yet;");
             imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = mediumImageSprite;
         }
         else if (largeImage && !(smallImage || mediumImage)) {
-            Debug.Log("Not implemented large sprite img...yet;");
             imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = largeImageSprite;
         }
         else {

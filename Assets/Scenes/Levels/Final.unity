@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CHASE_GUARD
       objectReference: {fileID: 0}
+    - target: {fileID: 7571484942864890051, guid: be03c48ba484c5946b1dc14fe789bdd5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57346f673f308b9a2a1208439a84235c, type: 2}
     - target: {fileID: 8087396529530986033, guid: be03c48ba484c5946b1dc14fe789bdd5, type: 3}
       propertyPath: speed
       value: 0.01

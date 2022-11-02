@@ -56,7 +56,6 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 256
-  guardObjectBox: {fileID: 364382486709750040}
   walkController: {fileID: 0}
 --- !u!1 &2936722275916058295
 GameObject:

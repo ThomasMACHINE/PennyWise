@@ -113,8 +113,8 @@ MonoBehaviour:
   largeImage: 0
   imageGameObject: {fileID: 2698246011311134813}
   smallImageSprite: {fileID: 21300000, guid: 08d68f28bae9c9e45bdd080523bddb97, type: 3}
-  mediumImageSprite: {fileID: 21300000, guid: 72965179d4c9c2447a754927082141ab, type: 3}
-  largeImageSprite: {fileID: 21300000, guid: 72965179d4c9c2447a754927082141ab, type: 3}
+  mediumImageSprite: {fileID: 21300000, guid: 1563f49308ef720419e5f0e3ded3465a, type: 3}
+  largeImageSprite: {fileID: 21300000, guid: 1b9205d668e155c4f88b6e65ac2b3a6e, type: 3}
   smallEvent:
     m_PersistentCalls:
       m_Calls: []
