@@ -11,4 +11,10 @@ public class FallingRock : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+    void Update() {
+        if (this.transform.position.y < -40) {
+            Destroy(this.gameObject);
+        }
+    }
 }

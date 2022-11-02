@@ -13,7 +13,7 @@ public class FallingRockSpawner : MonoBehaviour
     void Start()
     {
 
-        coroutine = WaitAndSpawnRock(2.0f);
+        coroutine = WaitAndSpawnRock(0.5f);
         StartCoroutine(coroutine);        
     }
 
@@ -23,15 +23,17 @@ public class FallingRockSpawner : MonoBehaviour
         
     }
 
-
      // every 2 seconds spawn a falling rock
     private IEnumerator WaitAndSpawnRock(float waitTime)
     {
-        Vector3 location = new Vector3(-1.2f,178.4f,69.6f);
+
+        //x, -24 -> 25, y, 0 -> 284
+       // Vector3 location = new Vector3(Random.Range(-24f, 25f),178.4f,Random.Range(0f, 284f));
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
             //Instantiate(fallingRock, location, Quaternion.identity);
+            Vector3 location = new Vector3(Random.Range(-24f, 25f),178.4f,Random.Range(0f, 284f));
             Instantiate(fallingRock, location, transform.rotation *  Quaternion.Euler(180, 0, 0));
         }
     }

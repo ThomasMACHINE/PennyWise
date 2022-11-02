@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4427402920435012154}
   - component: {fileID: 3503330222763000213}
   - component: {fileID: 669087385175104962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FallingRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
