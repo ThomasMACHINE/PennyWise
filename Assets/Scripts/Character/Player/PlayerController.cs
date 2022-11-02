@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         CheckCollision();
         CheckRoar();
         ReloadLevelOnCommand();
+        CheckBelowLevel();
     }
 
     private void CheckCollision()
@@ -83,6 +84,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("You reloaded the level!");
+            ReloadLevel();
+        }
+    }
+
+    private void CheckBelowLevel() {
+        if (statController.activeDragon.transform.position.y < -15) {
             ReloadLevel();
         }
     }
