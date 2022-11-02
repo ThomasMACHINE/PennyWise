@@ -2255,6 +2255,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 251328711861091240, guid: a7c1d6949f2796d46974a7f28cd651b5, type: 3}
       propertyPath: smallImage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 251328711861091240, guid: a7c1d6949f2796d46974a7f28cd651b5, type: 3}
+      propertyPath: mediumImage
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 251328711861091240, guid: a7c1d6949f2796d46974a7f28cd651b5, type: 3}
