@@ -13,12 +13,7 @@ public class MessagePlayerScreen : MonoBehaviour
     private List<MessageBody> pendingMessages = new List<MessageBody>();
     [SerializeField] Image MessengerIcon;
 
-    [SerializeField]
-    private Sprite
-        none,
-        dragon,
-        golem;
-
+    [SerializeField] NotificationMessenger messengerStorage;
     private void Awake()
     {
         if (!Panel)
@@ -34,10 +29,10 @@ public class MessagePlayerScreen : MonoBehaviour
 
     public void NotifyPlayer(string newTitle, string newBody) 
     {
-        NotifyPlayer(newTitle, newBody, Messenger.none);
+        NotifyPlayer(newTitle, newBody, NotificationMessenger.Messenger.none);
     }
 
-    public void NotifyPlayer(string newTitle, string newBody, Messenger messenger)
+    public void NotifyPlayer(string newTitle, string newBody, NotificationMessenger.Messenger messenger)
     {
         MessageBody mb = new MessageBody(newTitle, newBody, messenger);
 
@@ -57,7 +52,7 @@ public class MessagePlayerScreen : MonoBehaviour
 
     private void sendMessage(MessageBody mb) {
         Panel.SetActive(true);
-        Panel.transform.position = new Vector3(960, 1200, 0);
+        Panel.transform.position = new Vector3(960, 1350, 0);
         Title.text = mb.title;
         Body.text = mb.body;
         isDisplaying = true;
@@ -65,23 +60,9 @@ public class MessagePlayerScreen : MonoBehaviour
         setMessengerIcon(mb.messenger);
     }
 
-    private void setMessengerIcon(Messenger messenger)
+    private void setMessengerIcon(NotificationMessenger.Messenger messenger)
     {
-        MessengerIcon.color = new Vector4(MessengerIcon.color.r, MessengerIcon.color.g, MessengerIcon.color.b, 1);
-        switch (messenger)
-        {
-            case Messenger.Dragon:
-                MessengerIcon.sprite = dragon;
-                break;
-
-            case Messenger.GoldGolem:
-                MessengerIcon.sprite = golem;
-                break;
-
-            default:
-                MessengerIcon.color = new Vector4(MessengerIcon.color.r, MessengerIcon.color.g, MessengerIcon.color.b, 0); 
-                break;
-        }
+        MessengerIcon.sprite = messengerStorage.GetMessenger(messenger);
     }
 
     private void Update()
@@ -106,7 +87,7 @@ public class MessagePlayerScreen : MonoBehaviour
                 isDisplaying = false;
             }
         }
-        Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 20);
+        Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 15);
     }
 
     private bool isDuplicate(MessageBody newMessageBody)
@@ -134,20 +115,14 @@ public class MessagePlayerScreen : MonoBehaviour
         return foundDuplicate;
     }
 
-    public enum Messenger 
-    {
-        none, 
-        Dragon, 
-        GoldGolem
-    };
 
     public struct MessageBody 
     {
         public
         string title, body;
-        public Messenger messenger;
+        public NotificationMessenger.Messenger messenger;
 
-        public MessageBody(string title, string body, Messenger messenger)
+        public MessageBody(string title, string body, NotificationMessenger.Messenger messenger)
         {
             this.title = title;
             this.body = body;
