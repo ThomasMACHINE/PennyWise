@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         MoveCharacter();
+        stepClimb();
         CheckEvolve();
         CheckCollision();
         CheckRoar();
@@ -69,6 +70,11 @@ public class PlayerController : MonoBehaviour
         //Bush
         statController.activeDragon.UpdateBush();
     }
+
+    void stepClimb() {
+        statController.activeDragon.CanClimb();        
+    }
+
 
     private void CheckEvolve()
     {

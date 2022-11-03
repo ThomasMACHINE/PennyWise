@@ -32,6 +32,16 @@ public class Dragon : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Abilities icons;
     [SerializeField] Guard guard;
+
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] GameObject stepRayHigher;
+
+    [SerializeField] LayerMask obstructionMask;
+
+
+    // How smooth is the tranition when stepping up.
+    [SerializeField] float stepSmooth = 0.5f;
+
     //Creates a list of gameObjects in scene.
     private GameObject[] guardObjectsInScene;
 
@@ -244,6 +254,20 @@ public class Dragon : MonoBehaviour
         bool isGrounded = Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
         if (isGrounded) { jumpCount = 1; }
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
+    }
+
+    //WIP. NOTE: does only work when moving forward. 
+    public void CanClimb() {
+        RaycastHit hitLower;
+        // Colliding with an object at the feet
+        if (Physics.Raycast(stepRayLower.transform.position, this.transform.TransformDirection(Vector3.forward), out hitLower, 0.3f, LayerMask.GetMask("Ground"))) {
+           RaycastHit hitHigher;
+           // If the same object is not blocking the knees (or whatever the height is set to)
+            if (!Physics.Raycast(stepRayHigher.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.3f)) {
+                rigBody.position -= new Vector3(0f, -stepSmooth, 0f);
+                return;
+            }
+        }
     }
 
 
