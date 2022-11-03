@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StartMenuController : MonoBehaviour
 {
+    [SerializeField] public static string currentLevel;
     [SerializeField] private GameObject MainPanel;
     [SerializeField] private GameObject LevelSelectionPanel;
-    
+
+    [SerializeField] GameObject loadFromSaveButton;
+    [SerializeField] public TextMeshProUGUI saveButtonText;
+
     public void OpenLevelSelection()
     {
         MainPanel.SetActive(false);
-
+        CheckSaved();
         LevelSelectionPanel.SetActive(true);
     }
 
@@ -30,13 +35,26 @@ public class StartMenuController : MonoBehaviour
     }
 
 
-    public void LoadTutorial() 
+    public void LoadNew() 
     {
         SceneManager.LoadScene("Tutorial_", LoadSceneMode.Single);
     }
 
-    public void LoadFirstLevel()
+    public void LoadFromSave()
     {
-        SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
+        SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
+    }
+
+    private void CheckSaved()
+    {
+        if(currentLevel != null)
+        {
+            loadFromSaveButton.SetActive(true);
+            saveButtonText.text = currentLevel;
+        }
+        else
+        {
+            loadFromSaveButton.SetActive(false);
+        }
     }
 }
