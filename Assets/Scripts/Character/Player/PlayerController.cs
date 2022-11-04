@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public float rotationSensitivity = 1f;
     public float speed = 1;
 
+    // World height before restarting the level (falling of the edge of the world)
+    private int deathZone = -15;
+
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void CheckBelowLevel() {
-        if (statController.activeDragon.transform.position.y < -15) {
+        if (statController.activeDragon.transform.position.y < deathZone) {
             ReloadLevel();
         }
     }

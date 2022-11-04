@@ -256,11 +256,11 @@ public class Dragon : MonoBehaviour
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
-    //WIP. NOTE: does only work when moving forward. 
+    //WIP. NOTE: does only work when moving forward. Could be performance issue due to calling in update loop
     public void CanClimb() {
         RaycastHit hitLower;
         // Colliding with an object at the feet
-        if (Physics.Raycast(stepRayLower.transform.position, this.transform.TransformDirection(Vector3.forward), out hitLower, 0.3f, LayerMask.GetMask("Ground"))) {
+        if (Physics.Raycast(stepRayLower.transform.position, this.transform.TransformDirection(Vector3.forward), out hitLower, 0.3f, LayerMask.GetMask("Stairs"))) {
            RaycastHit hitHigher;
            // If the same object is not blocking the knees (or whatever the height is set to)
             if (!Physics.Raycast(stepRayHigher.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.3f)) {
