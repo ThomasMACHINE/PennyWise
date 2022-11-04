@@ -5,9 +5,9 @@ using UnityEngine;
 public class Abilities : MonoBehaviour
 {
 
-    GameObject[] objects;
+    static GameObject[] objects;
 
-    void Start() {
+    void Awake() {
         objects = GameObject.FindGameObjectsWithTag("icon");
     }
 

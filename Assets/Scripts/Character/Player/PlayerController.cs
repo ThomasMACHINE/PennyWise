@@ -103,6 +103,5 @@ public class PlayerController : MonoBehaviour
     
     public void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
     }
 }

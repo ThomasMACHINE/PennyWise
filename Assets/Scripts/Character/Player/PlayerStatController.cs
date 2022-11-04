@@ -146,8 +146,11 @@ public class PlayerStatController : MonoBehaviour
         if (activeDragon.CoinToEvolve != 0) {
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
         }
-        
-        //Updating icons
+        UpdateAbilityIcons();        
+    }
+
+    public void UpdateAbilityIcons()
+    {
         icons.UpdateIcons(activeDragon.name);
     }
 

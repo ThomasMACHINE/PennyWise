@@ -62,7 +62,6 @@ public class Dragon : MonoBehaviour
 
     [SerializeField] public DragonSize size;
     private void Awake() {
-
         guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
         if (pickUpController) { pickUpController.heldObj = null; }
        // DontDestroyOnLoad(this.gameObject);

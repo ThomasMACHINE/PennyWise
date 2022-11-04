@@ -6,7 +6,9 @@ public class GoldGolem : AggressiveCharacter
 {
     [SerializeField] private float size;
     [SerializeField] private MessagePlayerScreen playerMessage;
-    private bool firstCatch = false;
+    private bool firstTimePlayerCatch = false;
+
+    [SerializeField] GameObject TransformationOfModel;
     public override void CheckPlayerCaught()
     {
         if (Physics.CheckSphere(model.position, size, playerMask))
@@ -19,17 +21,17 @@ public class GoldGolem : AggressiveCharacter
     {
         base.DoMove();
         rigidBody.velocity += new Vector3(0, 2, 0);
+        TransformationOfModel.transform.position = model.transform.position;
+        TransformationOfModel.transform.LookAt(playerController.activeDragon.transform.position);
     }
 
     public override void OnPlayerCaught()
     {
-        if (Physics.CheckSphere(model.position, 3))
+        playerController.RemoveCoin(1);
+       
+        if (!firstTimePlayerCatch)
         {
-            playerController.RemoveCoin(1);
-        }
-        if (!firstCatch)
-        {
-            firstCatch = false;
+            firstTimePlayerCatch = false;
             playerMessage.NotifyPlayer("Slime Monster", "The slime monster removes a gold piece from the player when caught. So make sure to avoid it!");
         }
     }

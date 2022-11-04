@@ -38,11 +38,13 @@ public class StartMenuController : MonoBehaviour
     public void LoadNew() 
     {
         SceneManager.LoadScene("Tutorial_", LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     public void LoadFromSave()
     {
         SceneManager.LoadScene(currentLevel, LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     private void CheckSaved()
