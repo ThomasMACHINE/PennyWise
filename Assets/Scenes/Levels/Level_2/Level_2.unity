@@ -2640,7 +2640,7 @@ MonoBehaviour:
     m_Bits: 8
   size: 4
   playerMessage: {fileID: 946922836}
-  EmptyModel: {fileID: 1385515736}
+  TransformationOfModel: {fileID: 1385515736}
 --- !u!1001 &680681159
 PrefabInstance:
   m_ObjectHideFlags: 0

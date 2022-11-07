@@ -37,7 +37,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] GameObject stepRayHigher;
 
     [SerializeField] LayerMask obstructionMask;
-
+    [SerializeField] DragonAnimator characterAnimator;
 
     // How smooth is the tranition when stepping up.
     [SerializeField] float stepSmooth = 0.5f;
@@ -92,12 +92,15 @@ public class Dragon : MonoBehaviour
         float xSpeed = xInput * characterSpeed;
         float zSpeed = zInput * characterSpeed;
         
+        if(xSpeed == 0 && zSpeed == 0)
+        {
+            characterAnimator.StopWalkAnimation();
+            return;
+        }
+
+        characterAnimator.ActivateWalkAnimation();
         Vector3 movement = new Vector3(xSpeed, rigBody.velocity.y, zSpeed);
-        // Since rigidbody is based on world coordinates, you need to multiply the movement by rotation to get relative movement.
         rigBody.velocity = rigBody.rotation * movement;
-        
-        //Vector3 deltaMovement = new Vector3(xSpeed, 0, zSpeed) * Time.deltaTime;
-        //Model.transform.Translate(deltaMovement);
     }
 
     /// <summary>
@@ -208,7 +211,12 @@ public class Dragon : MonoBehaviour
     public void DoGlide()
     {
         if (IsGrounded() == false && toggleGlide){
+            characterAnimator.ActivateGlideAnimation();
             rigBody.velocity = new Vector3(rigBody.velocity.x, -1, rigBody.velocity.z);
+        }
+        else
+        {
+            characterAnimator.StopGlideAnimation();
         }
     }
 

@@ -51,11 +51,8 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        // Check for movement
-        if(horizontalInput != 0 || verticalInput != 0)
-        {
-            statController.activeDragon.DoMove(horizontalInput, verticalInput);
-        }
+        statController.activeDragon.DoMove(horizontalInput, verticalInput);
+        
         // Check for rotation. NOTE: add time component
         if (Input.GetAxis("Mouse X") != 0)
         {
