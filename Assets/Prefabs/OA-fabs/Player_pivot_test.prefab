@@ -725,6 +725,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2595876403814645962}
     - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 5424856425657805204}
+    - target: {fileID: 2976422550912789107, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: playerStatController
       value: 
       objectReference: {fileID: 3294565692627792305}
