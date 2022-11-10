@@ -17,22 +17,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test/OA/3OAscene.unity
     guid: aad190c7ac2312a49853e709cb4f7a8e
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_1.unity
-    guid: c9ab54980ab720f4d830691ca832996f
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_2/Level_2.unity
+  - enabled: 0
+    path: Assets/Scenes/Test/Sanbox/Sandbox.unity
     guid: b72908996ce715d4999da2d03d857d68
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_3.unity
-    guid: 669fa7cb0caac2f4a84b0a441717d70e
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level_4.unity
-    guid: 4ce21e99fbeec944cb45f9fa2152585b
   - enabled: 1
     path: Assets/Scenes/Levels/StartMenu.unity
     guid: d9a7ad8e8bd7a974daca7f2319c5e507
   - enabled: 1
     path: Assets/Scenes/Levels/Tutorial_.unity
     guid: 3106aec713562f94ebd504a3d585e767
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_1.unity
+    guid: c9ab54980ab720f4d830691ca832996f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_2.unity
+    guid: 24f5e5a44e4783e4d95050003b8cf04b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_3.unity
+    guid: 669fa7cb0caac2f4a84b0a441717d70e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_4.unity
+    guid: 4ce21e99fbeec944cb45f9fa2152585b
   m_configObjects: {}

@@ -231,6 +231,7 @@ public class Dragon : MonoBehaviour
             hidden = true;
             insideBush = seenBush;
         }
+        //Large
         if (this.gameObject.name.Contains("LARGE")){
             insideBush = seenBush;
         }
@@ -298,16 +299,16 @@ public class Dragon : MonoBehaviour
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
         if (guardObject.GetComponent<CapsuleCollider>()){
             CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
-        Renderer renderer = guardObject.GetComponent<Renderer>();
-        Color tempColor = renderer.material.color;
-        colliderCapsule.enabled = false;
-        //Changes the colour  to white (RBA 0(black - 255 (white))).
-        renderer.material.color = new Color(255,255,255);
+            Renderer renderer = guardObject.GetComponent<Renderer>();
+            Color tempColor = renderer.material.color;
+            colliderCapsule.enabled = false;
+            //Changes the colour  to white (RBA 0(black - 255 (white))).
+            renderer.material.color = new Color(255,255,255);
 
-        yield return new WaitForSeconds(5);
-        //Changes the colour back.
-        renderer.material.color = tempColor;
-        colliderCapsule.enabled = true;
+            yield return new WaitForSeconds(5);
+            //Changes the colour back.
+            renderer.material.color = tempColor;
+            colliderCapsule.enabled = true;
         }
     
     }
@@ -352,6 +353,7 @@ public class Dragon : MonoBehaviour
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         }
         if (other.gameObject.CompareTag("Bush")){
+            Debug.Log("Bush was spotted");
             InteractBushEnter(other.gameObject);
         }
         }
