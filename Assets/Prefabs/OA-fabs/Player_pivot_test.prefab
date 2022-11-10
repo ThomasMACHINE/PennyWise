@@ -681,6 +681,14 @@ PrefabInstance:
       value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 2351877594678456811, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351877594678456811, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351877594678456811, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
@@ -732,6 +740,14 @@ PrefabInstance:
       propertyPath: playerStatController
       value: 
       objectReference: {fileID: 3294565692627792305}
+    - target: {fileID: 3818634100614437935, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818634100614437935, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3818634100614437935, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -841,8 +857,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8330061219965018914}
     - target: {fileID: 7486841970039839053, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486841970039839053, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486841970039839053, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_Interpolate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7566829089942951198, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7566829089942951198, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7566829089942951198, guid: 23c3d021fb1204a419fe9760722ec32c, type: 3}
       propertyPath: m_Constraints
