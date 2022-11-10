@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpointSingle : MonoBehaviour {
+public class TeleportInSameLevel : MonoBehaviour {
 
 	// The object that a player should teleport to
 	public Transform targetToTeleportTo;
