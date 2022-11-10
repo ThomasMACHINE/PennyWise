@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test/OA/OAscene.unity
     guid: 6c0fc154b5ffd2e4ea84f36548481b48
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/OA/3OAscene.unity
     guid: aad190c7ac2312a49853e709cb4f7a8e
   - enabled: 0
