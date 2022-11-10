@@ -296,17 +296,20 @@ public class Dragon : MonoBehaviour
     // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
     // indicator on the ground meanwhile.
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
-    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
-    Renderer renderer = guardObject.GetComponent<Renderer>();
-    Color tempColor = renderer.material.color;
-    colliderCapsule.enabled = false;
-    //Changes the colour  to white (RBA 0(black - 255 (white))).
-    renderer.material.color = new Color(255,255,255);
+        if (guardObject.GetComponent<CapsuleCollider>()){
+            CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+        Renderer renderer = guardObject.GetComponent<Renderer>();
+        Color tempColor = renderer.material.color;
+        colliderCapsule.enabled = false;
+        //Changes the colour  to white (RBA 0(black - 255 (white))).
+        renderer.material.color = new Color(255,255,255);
 
-    yield return new WaitForSeconds(5);
-    //Changes the colour back.
-    renderer.material.color = tempColor;
-    colliderCapsule.enabled = true;
+        yield return new WaitForSeconds(5);
+        //Changes the colour back.
+        renderer.material.color = tempColor;
+        colliderCapsule.enabled = true;
+        }
+    
     }
 
     //Should move this into the coin, and from there update the global coinscore.
