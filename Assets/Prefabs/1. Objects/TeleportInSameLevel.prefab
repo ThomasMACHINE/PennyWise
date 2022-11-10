@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3427477299577207489}
   - component: {fileID: 3427477299577207501}
   m_Layer: 0
-  m_Name: CheckpointSingle
+  m_Name: TeleportInSameLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
