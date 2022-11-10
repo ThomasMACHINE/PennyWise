@@ -58,6 +58,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
 
     [SerializeField] bool canRoar;
+
+    private Color originalColorOfGuardField;
     private bool toggleGlide;
     public bool toggleHold;
     //public bool holdBush; //remove
@@ -80,6 +82,13 @@ public class Dragon : MonoBehaviour
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
         hidden = false;
+    }
+    void Start() {
+        if (guardObjectsInScene.Length > 0) {
+            Renderer renderer = guardObjectsInScene[0].GetComponent<Renderer>();
+            originalColorOfGuardField = renderer.material.color;
+        }
+        
     }
 
     /// <summary>
@@ -297,20 +306,22 @@ public class Dragon : MonoBehaviour
     // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
     // indicator on the ground meanwhile.
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
-        if (guardObject.GetComponent<CapsuleCollider>()){
-            CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
-            Renderer renderer = guardObject.GetComponent<Renderer>();
-            Color tempColor = renderer.material.color;
-            colliderCapsule.enabled = false;
-            //Changes the colour  to white (RBA 0(black - 255 (white))).
-            renderer.material.color = new Color(255,255,255);
+    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+    Renderer renderer = guardObject.GetComponent<Renderer>();
+    colliderCapsule.enabled = false;
+    //Changes the colour  to white (RBA 0(black - 255 (white))).
+    Color tempColor = new Color(255,255,255);
+    renderer.material.color = tempColor;
 
-            yield return new WaitForSeconds(5);
-            //Changes the colour back.
-            renderer.material.color = tempColor;
-            colliderCapsule.enabled = true;
-        }
+    yield return new WaitForSeconds(5);
+    //Changes the colour back.
+    colliderCapsule.enabled = true;
+
+    renderer.material.color = originalColorOfGuardField;
     
+    if (renderer.material.color == tempColor) {
+        Debug.Log("NOO to 5");
+    }
     }
 
     //Should move this into the coin, and from there update the global coinscore.
