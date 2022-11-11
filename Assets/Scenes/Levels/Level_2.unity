@@ -5368,7 +5368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936690586577208819, guid: be03c48ba484c5946b1dc14fe789bdd5, type: 3}
       propertyPath: m_Name
-      value: ImprovedGuard
+      value: ImprovedGuard(2)
       objectReference: {fileID: 0}
     - target: {fileID: 8087396529530986033, guid: be03c48ba484c5946b1dc14fe789bdd5, type: 3}
       propertyPath: speed
