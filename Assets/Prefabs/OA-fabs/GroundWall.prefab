@@ -121,6 +121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 6009029925281089565, guid: 1207927f9bfaf8e4aa4f90235c66b4ba, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6009029925281089566, guid: 1207927f9bfaf8e4aa4f90235c66b4ba, type: 3}
       propertyPath: m_RootOrder
       value: 0
