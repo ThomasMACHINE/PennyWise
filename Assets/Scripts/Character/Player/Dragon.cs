@@ -43,7 +43,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] float stepSmooth = 0.5f;
 
     //Creates a list of gameObjects in scene.
-    private GameObject[] guardObjectsInScene;
+    [SerializeField] private GameObject[] guardObjectsInScene;
 
     public PickUpCrate pickUpController;
 
@@ -292,8 +292,10 @@ public class Dragon : MonoBehaviour
     public void RoarDragon() {
         if (canRoar) {
             Debug.Log("ROOOOOAAAAAARRRRR");
-            foreach(GameObject guardObject in guardObjectsInScene) {
-                if (Vector3.Distance(this.gameObject.transform.position, guardObject.transform.position) < 10) {
+            Debug.Log(guardObjectsInScene.Length);
+            foreach (GameObject guardObject in guardObjectsInScene) {
+                Debug.Log(Model.transform.position + " " + guardObject.transform.position);
+                if (Vector3.Distance(Model.transform.position, guardObject.transform.position) < 10) {
                     Debug.Log("Hello");
                     StartCoroutine(DisableGuardDetectionForATime(guardObject));
                 }

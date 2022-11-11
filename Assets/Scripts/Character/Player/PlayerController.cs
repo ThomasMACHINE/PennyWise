@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckRoar() { //Should change this button to be E since E no longer evolves the dragon
         if (Input.GetKeyDown(KeyCode.L) && statController.activeDragon.name.Contains("LARGE")) {
-            dragon.RoarDragon();
+            statController.activeDragon.RoarDragon();
             }
         }
     
