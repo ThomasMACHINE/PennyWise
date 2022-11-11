@@ -764,6 +764,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 366034838988595479, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: guard
+      value: 
+      objectReference: {fileID: 1148325352}
     - target: {fileID: 4698153775188925070, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -816,6 +820,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_pivot_test
       objectReference: {fileID: 0}
+    - target: {fileID: 4842998226813114459, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: guard
+      value: 
+      objectReference: {fileID: 1148325352}
     - target: {fileID: 5535751074603327815, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: guard
       value: 
