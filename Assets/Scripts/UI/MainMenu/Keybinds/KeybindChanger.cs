@@ -11,8 +11,8 @@ public class KeybindChanger : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     private void Awake()
     {
-        text = GetComponentInChildren<TextMeshProUGUI>();
-        text.text = controller.Get(keybindType);
+        //text = GetComponentInChildren<TextMeshProUGUI>();
+        //text.text = controller.Get(keybindType);
     }
     /// <summary>
     /// 

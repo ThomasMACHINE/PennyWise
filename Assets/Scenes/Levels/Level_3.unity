@@ -794,6 +794,14 @@ PrefabInstance:
       propertyPath: guard
       value: 
       objectReference: {fileID: 1146283723}
+    - target: {fileID: 3563492992144187751, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563492992569777048, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3730579850347118724, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: dragon
       value: 
@@ -870,6 +878,10 @@ PrefabInstance:
       propertyPath: guard
       value: 
       objectReference: {fileID: 1146283723}
+    - target: {fileID: 7310769817041483817, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8330061219965018914, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: guard
       value: 

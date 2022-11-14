@@ -13,16 +13,24 @@ public class MainMenuController : MonoBehaviour
     /// Disables all other windows
     /// </summary>
     public void GoToStart() {
-        KeybindsMenu.gameObject.SetActive(false);
-        InstructionsMenu.gameObject.SetActive(false);
+        DisableAll();
+        MainMenuSelection.SetActive(true);
     }
     public void OpenKeybindsMenu() {
+        DisableAll();
         KeybindsMenu.gameObject.SetActive(true);
     }
     public void GoToInstructions() {
+        DisableAll();
         InstructionsMenu.gameObject.SetActive(true);
     }
     
+    public void DisableAll()
+    {
+        InstructionsMenu.SetActive(false);
+        KeybindsMenu.SetActive(false);
+        MainMenuSelection.SetActive(false);
+    }
     public void GoToStartUpMenu()
     {
         SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
