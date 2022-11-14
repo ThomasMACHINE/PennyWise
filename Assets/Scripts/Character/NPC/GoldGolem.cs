@@ -8,10 +8,10 @@ public class GoldGolem : AggressiveCharacter
     [SerializeField] private MessagePlayerScreen playerMessage;
     private bool firstTimePlayerCatch = false;
 
-    [SerializeField] GameObject TransformationOfModel;
+    [SerializeField] Vector3 HitBoxOffSet;
     public override void CheckPlayerCaught()
     {
-        if (Physics.CheckSphere(model.position, size, playerMask))
+        if (Physics.CheckSphere(model.position + HitBoxOffSet, size, playerMask))
         {
             OnPlayerCaught();
         }
@@ -21,8 +21,6 @@ public class GoldGolem : AggressiveCharacter
     {
         base.DoMove();
         rigidBody.velocity += new Vector3(0, 2, 0);
-        TransformationOfModel.transform.position = model.transform.position;
-        TransformationOfModel.transform.LookAt(playerController.activeDragon.transform.position);
     }
 
     public override void OnPlayerCaught()
@@ -38,6 +36,6 @@ public class GoldGolem : AggressiveCharacter
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(model.position, size);
+        Gizmos.DrawSphere(model.position + HitBoxOffSet, size);
     }
 }

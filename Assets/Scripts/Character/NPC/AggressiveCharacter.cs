@@ -16,6 +16,7 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     {
         Vector3 targetPosition = IsHunting == true ? playerController.activeDragon.transform.position : gps.GetCoordinate(model.position);
         Vector3 direction = (targetPosition - model.position).normalized;
+        model.LookAt(targetPosition);
         rigidBody.velocity += new Vector3(direction.x * speed, 0, direction.z * speed);
     }
 
