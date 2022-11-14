@@ -12,12 +12,13 @@ public class Bush : MonoBehaviour
 
     public bool PlayerIsUsing;
 
+    [SerializeField] private Vector3 positionOffSet = new Vector3(0, 1, 0); 
     private void Update()
     {
         if (PlayerIsUsing)
             return;
 
-        if(Physics.CheckSphere(self.transform.position, size, colliderMask))
+        if(Physics.CheckSphere(self.transform.position + positionOffSet, size, colliderMask))
         {
             rb.useGravity = false;
             rb.velocity = new Vector3(0, 0, 0);
@@ -42,6 +43,6 @@ public class Bush : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(self.transform.position, size);
+        Gizmos.DrawSphere(self.transform.position + positionOffSet, size);
     }
 }

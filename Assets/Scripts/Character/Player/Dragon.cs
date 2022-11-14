@@ -41,7 +41,6 @@ public class Dragon : MonoBehaviour
 
     // How smooth is the tranition when stepping up.
     [SerializeField] float stepSmooth = 0.5f;
-
     //Creates a list of gameObjects in scene.
     [SerializeField] private GameObject[] guardObjectsInScene;
 
@@ -52,11 +51,8 @@ public class Dragon : MonoBehaviour
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
-    
     [SerializeField] bool canDoubleJump;
-
     [SerializeField] private int jumpCount;
-
     [SerializeField] bool canRoar;
 
     private Color originalColorOfGuardField;
@@ -64,6 +60,8 @@ public class Dragon : MonoBehaviour
     public bool toggleHold;
     //public bool holdBush; //remove
     public bool hidden;
+    private bool isCarryingBush;
+    private Bush heldBush;
 
     public bool IsCaught;
 
@@ -179,19 +177,24 @@ public class Dragon : MonoBehaviour
 
     // Function for picking up bush
     public void UpdateBush(){
-        //Picking up bush
-        if(insideBush && Input.GetKeyDown(KeyCode.C)){
-            Bush bushScript = insideBush.GetComponent<Bush>();
-            bushScript.enabled = true;
-            bushScript.PickUp();
-            
-            insideBush.transform.parent = this.transform;
+        // If Dragon is holding a bush and Player wants to drop the bush
+        if (heldBush && Input.GetKeyDown(KeyCode.V))
+        {
+            heldBush.Drop();
+            isCarryingBush = false;
+            heldBush.gameObject.transform.parent = null;
+            return;
         }
-        //Dropping bush
-        if(insideBush && Input.GetKeyDown(KeyCode.V)){
-            Bush bushScript = insideBush.GetComponent<Bush>();
-            bushScript.Drop();
-            insideBush.transform.parent = null;
+        //Picking up bush
+        if (insideBush && Input.GetKeyDown(KeyCode.C)){
+            if (isCarryingBush)
+                return;
+
+            heldBush = insideBush.GetComponent<Bush>();
+            heldBush.enabled = true;
+            heldBush.PickUp();
+            isCarryingBush = true;
+            insideBush.transform.parent = this.transform;
         }
     }
 
@@ -240,6 +243,12 @@ public class Dragon : MonoBehaviour
 
     //Function handles entering a bush
     public void InteractBushEnter(GameObject seenBush, DragonSize size){
+        // Return if player is already inside another bush
+        if (insideBush)
+        {
+            return;
+        }
+
         switch (size)
         {
             case DragonSize.SMALL:
