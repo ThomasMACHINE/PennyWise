@@ -824,6 +824,10 @@ PrefabInstance:
       propertyPath: guard
       value: 
       objectReference: {fileID: 1148325352}
+    - target: {fileID: 5144173165281258793, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 425a6f84f9b2ea042a2679d0cab05a2c, type: 3}
     - target: {fileID: 5535751074603327815, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: guard
       value: 
