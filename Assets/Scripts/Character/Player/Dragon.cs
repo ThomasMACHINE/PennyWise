@@ -43,11 +43,15 @@ public class Dragon : MonoBehaviour
     [SerializeField] float stepSmooth = 0.5f;
     //Creates a list of gameObjects in scene.
     [SerializeField] private GameObject[] guardObjectsInScene;
+    private bool roarUsedRecently;
+
 
     public PickUpCrate pickUpController;
-
     //Bush
     private GameObject insideBush;
+    public bool hidden;
+    private bool isCarryingBush;
+    private Bush heldBush;
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
@@ -58,10 +62,6 @@ public class Dragon : MonoBehaviour
     private Color originalColorOfGuardField;
     private bool toggleGlide;
     public bool toggleHold;
-    //public bool holdBush; //remove
-    public bool hidden;
-    private bool isCarryingBush;
-    private Bush heldBush;
 
     public bool IsCaught;
 
@@ -313,13 +313,16 @@ public class Dragon : MonoBehaviour
 
     // Disables the detection zone of the guard
     public void RoarDragon() {
+        // Do not allow consecutive roars
+        if (roarUsedRecently)
+        {
+            return;
+        }
+
         if (canRoar) {
-            Debug.Log("ROOOOOAAAAAARRRRR");
-            Debug.Log(guardObjectsInScene.Length);
             foreach (GameObject guardObject in guardObjectsInScene) {
-                Debug.Log(Model.transform.position + " " + guardObject.transform.position);
                 if (Vector3.Distance(Model.transform.position, guardObject.transform.position) < 10) {
-                    Debug.Log("Hello");
+                    roarUsedRecently = true;
                     StartCoroutine(DisableGuardDetectionForATime(guardObject));
                 }
             }    
@@ -331,22 +334,24 @@ public class Dragon : MonoBehaviour
     // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
     // indicator on the ground meanwhile.
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
-    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
-    Renderer renderer = guardObject.GetComponent<Renderer>();
-    colliderCapsule.enabled = false;
-    //Changes the colour  to white (RBA 0(black - 255 (white))).
-    Color tempColor = new Color(255,255,255);
-    renderer.material.color = tempColor;
+        CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+        Renderer renderer = guardObject.GetComponent<Renderer>();
+        colliderCapsule.enabled = false;
+        //Changes the colour  to white (RBA 0(black - 255 (white))).
+        Color tempColor = new Color(255,255,255);
+        renderer.material.color = tempColor;
 
-    yield return new WaitForSeconds(5);
-    //Changes the colour back.
-    colliderCapsule.enabled = true;
+        yield return new WaitForSeconds(5);
+        //Changes the colour back.
+        colliderCapsule.enabled = true;
 
-    renderer.material.color = originalColorOfGuardField;
+        renderer.material.color = originalColorOfGuardField;
     
-    if (renderer.material.color == tempColor) {
-        Debug.Log("NOO to 5");
-    }
+        if (renderer.material.color == tempColor) {
+            Debug.Log("NOO to 5");
+        }
+        // Allow user to roar again
+        roarUsedRecently = false;
     }
 
     private bool IsDragonVisible()
@@ -380,13 +385,11 @@ public class Dragon : MonoBehaviour
         {
             //Updates the global variable
             CoinScore.globalCoinScore += 1;
-            Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
             Destroy(other.gameObject);
                        
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         }
         if (other.gameObject.CompareTag("Bush")){
-            Debug.Log("Bush was spotted");
             InteractBushEnter(other.gameObject, this.size);
         }
         }
