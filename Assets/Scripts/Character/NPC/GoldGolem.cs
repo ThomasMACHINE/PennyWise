@@ -6,9 +6,9 @@ public class GoldGolem : AggressiveCharacter
 {
     [SerializeField] private float size;
     [SerializeField] private MessagePlayerScreen playerMessage;
-    private bool firstTimePlayerCatch = false;
 
     [SerializeField] Vector3 HitBoxOffSet;
+    [SerializeField] Animator eatCoinAnimation;
     public override void CheckPlayerCaught()
     {
         if (Physics.CheckSphere(model.position + HitBoxOffSet, size, playerMask))
@@ -20,18 +20,13 @@ public class GoldGolem : AggressiveCharacter
     public override void DoMove()
     {
         base.DoMove();
-        rigidBody.velocity += new Vector3(0, 2, 0);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 
     public override void OnPlayerCaught()
     {
+        eatCoinAnimation.Play("EatCoin", 0, 0f);
         playerController.RemoveCoin(1);
-       
-        if (!firstTimePlayerCatch)
-        {
-            firstTimePlayerCatch = false;
-            playerMessage.NotifyPlayer("Slime Monster", "The slime monster removes a gold piece from the player when caught. So make sure to avoid it!");
-        }
     }
 
     private void OnDrawGizmos()
