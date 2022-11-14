@@ -230,19 +230,24 @@ public class Dragon : MonoBehaviour
     }
 
     //Function handles entering a bush
-    public void InteractBushEnter(GameObject seenBush){
-        //Small
-        if (this.gameObject.name.Contains("SMALL")){
-            hidden = true;
-        }
-        //Medium
-        if (this.gameObject.name.Contains("MEDIUM")){
-            hidden = true;
-            insideBush = seenBush;
-        }
-        //Large
-        if (this.gameObject.name.Contains("LARGE")){
-            insideBush = seenBush;
+    public void InteractBushEnter(GameObject seenBush, DragonSize size){
+        switch (size)
+        {
+            case DragonSize.SMALL:
+                hidden = true;
+                break;
+
+            case DragonSize.MEDIUM:
+                hidden = true;
+                insideBush = seenBush;
+                break;
+
+            case DragonSize.LARGE:
+                break;
+
+            default:
+                Debug.LogWarning("Dragon Does not have a Size set");
+                break;
         }
     }
 
@@ -367,7 +372,7 @@ public class Dragon : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Bush")){
             Debug.Log("Bush was spotted");
-            InteractBushEnter(other.gameObject);
+            InteractBushEnter(other.gameObject, this.size);
         }
         }
     }
