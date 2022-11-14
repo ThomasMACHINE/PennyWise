@@ -13,6 +13,12 @@ public class GoldGolem : AggressiveCharacter
     bool CaughtPlayerOnPreviousSearch;
     public override void CheckPlayerCaught()
     {
+        if (CaughtPlayerOnPreviousSearch)
+        {
+            CaughtPlayerOnPreviousSearch = false;
+            return;
+        }
+
         if (Physics.CheckSphere(model.position + HitBoxOffSet, size, playerMask))
         {
             OnPlayerCaught();
@@ -27,11 +33,6 @@ public class GoldGolem : AggressiveCharacter
 
     public override void OnPlayerCaught()
     {
-        if (CaughtPlayerOnPreviousSearch)
-        {
-            CaughtPlayerOnPreviousSearch = false;
-            return;
-        }
         eatCoinAnimation.Play("EatCoin", 0, 0f);
         playerController.RemoveCoin(1);
         CaughtPlayerOnPreviousSearch = true;
