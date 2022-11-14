@@ -18,7 +18,7 @@ public class Dragon : MonoBehaviour
 {
     [SerializeField] GameObject Model;
     [SerializeField] GameObject Bottom;
-    private Rigidbody rigBody;
+    public Rigidbody rigBody { private set; get; }
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] public GameObject holder;
@@ -71,6 +71,9 @@ public class Dragon : MonoBehaviour
     {
         none, SMALL, MEDIUM, LARGE
     }
+
+    // Threshold for Guard finding dragon
+    private float VelocityHidingThreshold = 0.5f;
 
     [SerializeField] public DragonSize size;
     private void Awake() {
@@ -178,10 +181,16 @@ public class Dragon : MonoBehaviour
     public void UpdateBush(){
         //Picking up bush
         if(insideBush && Input.GetKeyDown(KeyCode.C)){
+            Bush bushScript = insideBush.GetComponent<Bush>();
+            bushScript.enabled = true;
+            bushScript.PickUp();
+            
             insideBush.transform.parent = this.transform;
         }
         //Dropping bush
         if(insideBush && Input.GetKeyDown(KeyCode.V)){
+            Bush bushScript = insideBush.GetComponent<Bush>();
+            bushScript.Drop();
             insideBush.transform.parent = null;
         }
     }
@@ -331,28 +340,25 @@ public class Dragon : MonoBehaviour
     }
     }
 
-    //Should move this into the coin, and from there update the global coinscore.
-    /*private void OnCollisionEnter(Collision collision)
+    private bool IsDragonVisible()
     {
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            Coin coin = collision.gameObject.GetComponent<Coin>();
-            if (coin.CanBePicked) {
-                Destroy(collision.gameObject);
-                UnAccountedCoins += 1;
-            }
-            
-        }
-    }*/
+        if (!hidden)
+            return true;
+        
+        if (hidden && rigBody.velocity.magnitude > VelocityHidingThreshold)
+            return true;
 
-    // ... Look at the comment above.
+        return false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (this.gameObject.CompareTag("Holder")) {}
         else {
         if (other.gameObject.CompareTag("Guard")) {
             GameObject guardObjectField = other.gameObject;
-            if(!hidden) {
+            
+            if(IsDragonVisible()) {
                 //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
                 bool canSeePlayerFlag = guard.CheckForLineOfSight(Model, guardObjectField);
                 if (canSeePlayerFlag) {
