@@ -24,6 +24,7 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     {
         if (Physics.CheckSphere(model.position, searchRadius, playerMask))
         {
+            Debug.Log("Within Search Radius");
             // Check for line of sight
             Vector3 direction = playerController.activeDragon.transform.position - eyes.position;
             Debug.DrawRay(eyes.position, direction * searchRadius, Color.yellow, 1);
