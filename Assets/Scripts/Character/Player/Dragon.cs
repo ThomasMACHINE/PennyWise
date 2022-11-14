@@ -385,6 +385,7 @@ public class Dragon : MonoBehaviour
         {
             //Updates the global variable
             CoinScore.globalCoinScore += 1;
+                Debug.Log(CoinScore.globalCoinScore);
             Destroy(other.gameObject);
                        
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);

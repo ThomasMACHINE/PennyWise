@@ -9,6 +9,8 @@ public class GoldGolem : AggressiveCharacter
 
     [SerializeField] Vector3 HitBoxOffSet;
     [SerializeField] Animator eatCoinAnimation;
+
+    bool CaughtPlayerOnPreviousSearch;
     public override void CheckPlayerCaught()
     {
         if (Physics.CheckSphere(model.position + HitBoxOffSet, size, playerMask))
@@ -25,8 +27,14 @@ public class GoldGolem : AggressiveCharacter
 
     public override void OnPlayerCaught()
     {
+        if (CaughtPlayerOnPreviousSearch)
+        {
+            CaughtPlayerOnPreviousSearch = false;
+            return;
+        }
         eatCoinAnimation.Play("EatCoin", 0, 0f);
         playerController.RemoveCoin(1);
+        CaughtPlayerOnPreviousSearch = true;
     }
 
     private void OnDrawGizmos()

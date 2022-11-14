@@ -160,7 +160,21 @@ public class PlayerStatController : MonoBehaviour
     /// <param name="amount"></param>
     public void RemoveCoin(int amount)
     {
-        CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 :  CoinScore.globalCoinScore - amount;
-        Debug.Log("Gold has been removed from player! Curr score: " + CoinScore.globalCoinScore);
+        if(CoinScore.globalCoinScore == 0)
+        {
+            if (activeDragon.size == Dragon.DragonSize.SMALL)
+            {
+                PlayerController.ReloadLevel();
+            }
+            else
+            {
+                DoDevolve();
+            }
+        }
+        else
+        {
+            CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 : CoinScore.globalCoinScore - amount;
+        }
+        evolveBar.UpdateSlider(CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
     }
 }
