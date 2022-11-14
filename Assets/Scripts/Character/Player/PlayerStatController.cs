@@ -136,8 +136,8 @@ public class PlayerStatController : MonoBehaviour
 
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        newDragon.transform.position = new Vector3(activeDragon.transform.position.x, activeDragon.transform.position.y + 0.5f, activeDragon.transform.position.z);
-       
+        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a wee bit of height so that player does not get stuck in ground
+        newDragon.transform.rotation = activeDragon.transform.rotation;
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
         activeDragon = newDragon.GetComponent<Dragon>();
