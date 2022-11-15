@@ -16,6 +16,7 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     {
         Vector3 targetPosition = IsHunting == true ? playerController.activeDragon.transform.position : gps.GetCoordinate(model.position);
         Vector3 direction = (targetPosition - model.position).normalized;
+        model.LookAt(targetPosition);
         rigidBody.velocity += new Vector3(direction.x * speed, 0, direction.z * speed);
     }
 
@@ -23,6 +24,7 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     {
         if (Physics.CheckSphere(model.position, searchRadius, playerMask))
         {
+            Debug.Log("Within Search Radius");
             // Check for line of sight
             Vector3 direction = playerController.activeDragon.transform.position - eyes.position;
             Debug.DrawRay(eyes.position, direction * searchRadius, Color.yellow, 1);

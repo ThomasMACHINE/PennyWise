@@ -136,8 +136,8 @@ public class PlayerStatController : MonoBehaviour
 
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        newDragon.transform.position = new Vector3(activeDragon.transform.position.x, activeDragon.transform.position.y + 0.5f, activeDragon.transform.position.z);
-       
+        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a wee bit of height so that player does not get stuck in ground
+        newDragon.transform.rotation = activeDragon.transform.rotation;
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
         activeDragon = newDragon.GetComponent<Dragon>();
@@ -160,7 +160,21 @@ public class PlayerStatController : MonoBehaviour
     /// <param name="amount"></param>
     public void RemoveCoin(int amount)
     {
-        CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 :  CoinScore.globalCoinScore - amount;
-        Debug.Log("Gold has been removed from player! Curr score: " + CoinScore.globalCoinScore);
+        if(CoinScore.globalCoinScore == 0)
+        {
+            if (activeDragon.size == Dragon.DragonSize.SMALL)
+            {
+                PlayerController.ReloadLevel();
+            }
+            else
+            {
+                DoDevolve();
+            }
+        }
+        else
+        {
+            CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 : CoinScore.globalCoinScore - amount;
+        }
+        evolveBar.UpdateSlider(CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
     }
 }

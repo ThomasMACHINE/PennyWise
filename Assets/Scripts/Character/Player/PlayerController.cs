@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     
-    public void ReloadLevel() {     
+    public static void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

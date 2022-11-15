@@ -18,7 +18,7 @@ public class Dragon : MonoBehaviour
 {
     [SerializeField] GameObject Model;
     [SerializeField] GameObject Bottom;
-    private Rigidbody rigBody;
+    public Rigidbody rigBody { private set; get; }
     private Collider modelCollider;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] public GameObject holder;
@@ -41,29 +41,27 @@ public class Dragon : MonoBehaviour
 
     // How smooth is the tranition when stepping up.
     [SerializeField] float stepSmooth = 0.5f;
-
     //Creates a list of gameObjects in scene.
     [SerializeField] private GameObject[] guardObjectsInScene;
+    private bool roarUsedRecently;
+
 
     public PickUpCrate pickUpController;
-
     //Bush
     private GameObject insideBush;
+    public bool hidden;
+    private bool isCarryingBush;
+    private Bush heldBush;
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
-    
     [SerializeField] bool canDoubleJump;
-
     [SerializeField] private int jumpCount;
-
     [SerializeField] bool canRoar;
 
     private Color originalColorOfGuardField;
     private bool toggleGlide;
     public bool toggleHold;
-    //public bool holdBush; //remove
-    public bool hidden;
 
     public bool IsCaught;
 
@@ -71,6 +69,9 @@ public class Dragon : MonoBehaviour
     {
         none, SMALL, MEDIUM, LARGE
     }
+
+    // Threshold for Guard finding dragon
+    private float VelocityHidingThreshold = 0.5f;
 
     [SerializeField] public DragonSize size;
     private void Awake() {
@@ -176,13 +177,24 @@ public class Dragon : MonoBehaviour
 
     // Function for picking up bush
     public void UpdateBush(){
-        //Picking up bush
-        if(insideBush && Input.GetKeyDown(KeyCode.C)){
-            insideBush.transform.parent = this.transform;
+        // If Dragon is holding a bush and Player wants to drop the bush
+        if (heldBush && Input.GetKeyDown(KeyCode.V))
+        {
+            heldBush.Drop();
+            isCarryingBush = false;
+            heldBush.gameObject.transform.parent = null;
+            return;
         }
-        //Dropping bush
-        if(insideBush && Input.GetKeyDown(KeyCode.V)){
-            insideBush.transform.parent = null;
+        //Picking up bush
+        if (insideBush && Input.GetKeyDown(KeyCode.C)){
+            if (isCarryingBush)
+                return;
+
+            heldBush = insideBush.GetComponent<Bush>();
+            heldBush.enabled = true;
+            heldBush.PickUp();
+            isCarryingBush = true;
+            insideBush.transform.parent = this.transform;
         }
     }
 
@@ -230,19 +242,30 @@ public class Dragon : MonoBehaviour
     }
 
     //Function handles entering a bush
-    public void InteractBushEnter(GameObject seenBush){
-        //Small
-        if (this.gameObject.name.Contains("SMALL")){
-            hidden = true;
+    public void InteractBushEnter(GameObject seenBush, DragonSize size){
+        // Return if player is already inside another bush
+        if (insideBush)
+        {
+            return;
         }
-        //Medium
-        if (this.gameObject.name.Contains("MEDIUM")){
-            hidden = true;
-            insideBush = seenBush;
-        }
-        //Large
-        if (this.gameObject.name.Contains("LARGE")){
-            insideBush = seenBush;
+
+        switch (size)
+        {
+            case DragonSize.SMALL:
+                hidden = true;
+                break;
+
+            case DragonSize.MEDIUM:
+                hidden = true;
+                insideBush = seenBush;
+                break;
+
+            case DragonSize.LARGE:
+                break;
+
+            default:
+                Debug.LogWarning("Dragon Does not have a Size set");
+                break;
         }
     }
 
@@ -290,13 +313,16 @@ public class Dragon : MonoBehaviour
 
     // Disables the detection zone of the guard
     public void RoarDragon() {
+        // Do not allow consecutive roars
+        if (roarUsedRecently)
+        {
+            return;
+        }
+
         if (canRoar) {
-            Debug.Log("ROOOOOAAAAAARRRRR");
-            Debug.Log(guardObjectsInScene.Length);
             foreach (GameObject guardObject in guardObjectsInScene) {
-                Debug.Log(Model.transform.position + " " + guardObject.transform.position);
                 if (Vector3.Distance(Model.transform.position, guardObject.transform.position) < 10) {
-                    Debug.Log("Hello");
+                    roarUsedRecently = true;
                     StartCoroutine(DisableGuardDetectionForATime(guardObject));
                 }
             }    
@@ -308,46 +334,45 @@ public class Dragon : MonoBehaviour
     // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
     // indicator on the ground meanwhile.
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
-    CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
-    Renderer renderer = guardObject.GetComponent<Renderer>();
-    colliderCapsule.enabled = false;
-    //Changes the colour  to white (RBA 0(black - 255 (white))).
-    Color tempColor = new Color(255,255,255);
-    renderer.material.color = tempColor;
+        CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
+        Renderer renderer = guardObject.GetComponent<Renderer>();
+        colliderCapsule.enabled = false;
+        //Changes the colour  to white (RBA 0(black - 255 (white))).
+        Color tempColor = new Color(255,255,255);
+        renderer.material.color = tempColor;
 
-    yield return new WaitForSeconds(5);
-    //Changes the colour back.
-    colliderCapsule.enabled = true;
+        yield return new WaitForSeconds(5);
+        //Changes the colour back.
+        colliderCapsule.enabled = true;
 
-    renderer.material.color = originalColorOfGuardField;
+        renderer.material.color = originalColorOfGuardField;
     
-    if (renderer.material.color == tempColor) {
-        Debug.Log("NOO to 5");
-    }
-    }
-
-    //Should move this into the coin, and from there update the global coinscore.
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            Coin coin = collision.gameObject.GetComponent<Coin>();
-            if (coin.CanBePicked) {
-                Destroy(collision.gameObject);
-                UnAccountedCoins += 1;
-            }
-            
+        if (renderer.material.color == tempColor) {
+            Debug.Log("NOO to 5");
         }
-    }*/
+        // Allow user to roar again
+        roarUsedRecently = false;
+    }
 
-    // ... Look at the comment above.
+    private bool IsDragonVisible()
+    {
+        if (!hidden)
+            return true;
+        
+        if (hidden && rigBody.velocity.magnitude > VelocityHidingThreshold)
+            return true;
+
+        return false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (this.gameObject.CompareTag("Holder")) {}
         else {
         if (other.gameObject.CompareTag("Guard")) {
             GameObject guardObjectField = other.gameObject;
-            if(!hidden) {
+            
+            if(IsDragonVisible()) {
                 //Checks if the guard object can spot got LOS on the player (obstruction layer blocks view)
                 bool canSeePlayerFlag = guard.CheckForLineOfSight(Model, guardObjectField);
                 if (canSeePlayerFlag) {
@@ -360,14 +385,13 @@ public class Dragon : MonoBehaviour
         {
             //Updates the global variable
             CoinScore.globalCoinScore += 1;
-            Debug.Log(CoinScore.globalCoinScore + " The global score being updated after picking up a coin");
+                Debug.Log(CoinScore.globalCoinScore);
             Destroy(other.gameObject);
                        
             evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
         }
         if (other.gameObject.CompareTag("Bush")){
-            Debug.Log("Bush was spotted");
-            InteractBushEnter(other.gameObject);
+            InteractBushEnter(other.gameObject, this.size);
         }
         }
     }

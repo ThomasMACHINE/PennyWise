@@ -12,7 +12,7 @@ public class Abilities : MonoBehaviour
     }
 
 
-//Doesnt work
+
     public void UpdateIcons(string size) {
         //var objects = GameObject.FindGameObjectsWithTag("icon");
         foreach (var obj in objects){
@@ -51,6 +51,30 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Roar":
+                    if (size == "Dragon_LARGE"){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Small":
+                    if (size == "Dragon_SMALL"){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Medium":
+                    if (size == "Dragon_MEDIUM"){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+                
+                case "Large":
                     if (size == "Dragon_LARGE"){
                         obj.SetActive(true);
                     } else {
