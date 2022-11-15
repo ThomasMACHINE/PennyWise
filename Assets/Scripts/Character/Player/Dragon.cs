@@ -29,7 +29,8 @@ public class Dragon : MonoBehaviour
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
-    [SerializeField] EvolveBar evolveBar;
+    [SerializeField] EvolveBar evolveBar; //Refactor this
+    //[SerializeField] ScoreAndEvolveDisplay display;
     [SerializeField] Abilities icons;
     [SerializeField] Guard guard;
 
@@ -365,6 +366,16 @@ public class Dragon : MonoBehaviour
         return false;
     }
 
+    public int calculateTotalMoneyDragon(int score, string name){
+        if (name.Contains("SMALL")){
+            return score;
+        } else if (name.Contains("MEDIUM")){
+            return score + 2; //Hardcoded should be avoided
+        } else {
+            return score + 5; //Hardcoded should be avoided
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (this.gameObject.CompareTag("Holder")) {}
@@ -388,7 +399,7 @@ public class Dragon : MonoBehaviour
                 Debug.Log(CoinScore.globalCoinScore);
             Destroy(other.gameObject);
                        
-            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / CoinToEvolve);
+            evolveBar.UpdateEvolveScore(calculateTotalMoneyDragon(CoinScore.globalCoinScore, name));
         }
         if (other.gameObject.CompareTag("Bush")){
             InteractBushEnter(other.gameObject, this.size);
@@ -401,4 +412,6 @@ public class Dragon : MonoBehaviour
             InteractBushLeave();
         }
     }
+
+
 }

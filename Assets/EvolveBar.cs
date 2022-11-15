@@ -15,6 +15,11 @@ public class EvolveBar : MonoBehaviour
     public Gradient gradient;
     public Text text;
     private string evolveMessage = "Press E to evolve!";
+    static GameObject[] objects;
+
+    void Awake() {
+        objects = GameObject.FindGameObjectsWithTag("icon");
+    }
     
 
     public void UpdateSlider(float fillPercentage) {
@@ -41,5 +46,65 @@ public class EvolveBar : MonoBehaviour
     private void DisableEvolveText()
     {
         text.text = "";
+    }
+
+    public void UpdateEvolveScore(int coinScore) {
+        foreach (var obj in objects){
+            Debug.Log(obj.name + coinScore);
+            switch(obj.name){
+                
+                case "Zero":
+                    if (coinScore == 0){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "One":
+                    if (coinScore == 1){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Two":
+                    if (coinScore == 2){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Three":
+                    if (coinScore == 3){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Four":
+                    if (coinScore == 4){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                case "Five":
+                    if (coinScore == 5){
+                        obj.SetActive(true);
+                    } else {
+                        obj.SetActive(false);
+                    }
+                    break;
+
+                default:
+                    Debug.Log("Logical Mistake Made");
+                break;
+            }
+        }  
     }
 }

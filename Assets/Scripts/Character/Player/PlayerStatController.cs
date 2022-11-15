@@ -27,16 +27,20 @@ public class PlayerStatController : MonoBehaviour
 
     // Need to change the dragon model from here.
     void Start() {
-        //Updates icons
-        icons.UpdateIcons(activeDragon.name);
         
         CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
+        
+        //Updates icons
+        icons.UpdateIcons(activeDragon.name);
+        //Updates evolvebar/scorebar
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+
 
         Debug.Log(globalModel);
           // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
           // NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
-            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
+            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
          // The dragon initilizes with the small model active.
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
@@ -144,7 +148,7 @@ public class PlayerStatController : MonoBehaviour
 
         // Set fill bar to appropriate level
         if (activeDragon.CoinToEvolve != 0) {
-            evolveBar.UpdateSlider((float)CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
+            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
         }
         UpdateAbilityIcons();        
     }
@@ -175,6 +179,6 @@ public class PlayerStatController : MonoBehaviour
         {
             CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 : CoinScore.globalCoinScore - amount;
         }
-        evolveBar.UpdateSlider(CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
     }
 }
