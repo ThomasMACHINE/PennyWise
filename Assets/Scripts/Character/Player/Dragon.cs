@@ -336,7 +336,7 @@ public class Dragon : MonoBehaviour
     }
 
 
-    // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it gain. Also changes colour of the
+    // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it again. Also changes colour of the
     // indicator on the ground meanwhile.
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
         CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
@@ -351,10 +351,6 @@ public class Dragon : MonoBehaviour
         colliderCapsule.enabled = true;
 
         renderer.material.color = originalColorOfGuardField;
-    
-        if (renderer.material.color == tempColor) {
-            Debug.Log("NOO to 5");
-        }
         // Allow user to roar again
         roarUsedRecently = false;
     }

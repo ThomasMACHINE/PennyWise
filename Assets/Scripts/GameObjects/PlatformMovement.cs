@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformMovement : MonoBehaviour
 {
     [SerializeField] GameObject platformMove;
+    [SerializeField] Transform platformMoveParent;
     
     [SerializeField] Vector3 pointB = new Vector3(0,1,0);
     //time factor
@@ -14,6 +15,7 @@ public class PlatformMovement : MonoBehaviour
 
     [SerializeField] bool active = true;
     [SerializeField] bool loop = true;
+    [SerializeField] bool playerCanRidePlatform = false;
 
     void Start() {
         pointA = this.gameObject.transform.position;
@@ -40,4 +42,17 @@ public class PlatformMovement : MonoBehaviour
     public void setActiveVariable(bool newState){
         active = newState;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag.Equals("Player") && playerCanRidePlatform) {
+            other.transform.SetParent(platformMoveParent);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+         if (other.tag.Equals("Player") && playerCanRidePlatform) {
+            other.transform.SetParent(null);
+        }
+    }
+    
 }
