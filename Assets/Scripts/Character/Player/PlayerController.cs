@@ -51,7 +51,11 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        statController.activeDragon.DoMove(horizontalInput, verticalInput);
+        // If the dragon is not gliding, allow input from WASD
+        if (statController.activeDragon.toggleGlide != true){
+            statController.activeDragon.DoMove(horizontalInput, verticalInput);
+        }
+        
         
         // Check for rotation. NOTE: add time component
         if (Input.GetAxis("Mouse X") != 0)

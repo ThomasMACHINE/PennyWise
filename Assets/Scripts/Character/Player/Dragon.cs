@@ -61,7 +61,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] bool canRoar;
 
     private Color originalColorOfGuardField;
-    private bool toggleGlide;
+    public bool toggleGlide;
     public bool toggleHold;
 
     public bool IsCaught;
@@ -234,10 +234,13 @@ public class Dragon : MonoBehaviour
     {
         if (IsGrounded() == false && toggleGlide){
             characterAnimator.ActivateGlideAnimation();
+            rigBody.velocity = transform.forward * characterSpeed;
             rigBody.velocity = new Vector3(rigBody.velocity.x, -1, rigBody.velocity.z);
+            
         }
         else
         {
+            toggleGlide = false;
             characterAnimator.StopGlideAnimation();
         }
     }
