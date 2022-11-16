@@ -13,14 +13,11 @@ public class NpcHiveMind : MonoBehaviour
     private float moveTimer = 0;
     private float searchTimer = 0;
 
-    // If you are lazy, (In a good way) implement this start function
-    [SerializeField] private bool iAmLazy = false;
+
     void Start()
     {
-        if (iAmLazy) 
-        { 
-            //Loop through all gameobjects in the scene and find Charachters
-        }
+        walkingCharacters.AddRange(FindObjectsOfType<Character>());
+        aggressiveCharacters.AddRange(FindObjectsOfType<AggressiveCharacter>());
     }
 
 
