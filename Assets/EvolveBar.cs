@@ -48,6 +48,11 @@ public class EvolveBar : MonoBehaviour
         text.text = "";
     }
 
+    public void UpdateScore(int score)
+    {
+        text.text = score.ToString();
+    }
+
     public void UpdateEvolveScore(int coinScore) {
         foreach (var obj in objects){
             switch(obj.name){
@@ -93,7 +98,7 @@ public class EvolveBar : MonoBehaviour
                     break;
 
                 case "Five":
-                    if (coinScore == 5){
+                    if (coinScore > 4){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -101,7 +106,6 @@ public class EvolveBar : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("Logical Mistake Made");
                 break;
             }
         }  

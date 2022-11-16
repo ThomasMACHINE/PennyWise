@@ -40,6 +40,7 @@ public class TeleportToNextLevel : MonoBehaviour
             StartCoroutine(LoadYourAsyncScene());
             UpdateGlobalModelCheck(other);
             CoinScore.tempGlobalCoinScore = CoinScore.globalCoinScore;
+            CoinScore.tempglobalTotalCoinScore = CoinScore.globalTotalCoinScore;
             StartMenuController.currentLevel = nextLevelScene; 
     	}
     }

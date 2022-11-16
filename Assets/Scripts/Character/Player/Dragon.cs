@@ -86,6 +86,7 @@ public class Dragon : MonoBehaviour
         hidden = false;
     }
     void Start() {
+        evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
         if (guardObjectsInScene.Length > 0) {
             Renderer renderer = guardObjectsInScene[0].GetComponent<Renderer>();
             originalColorOfGuardField = renderer.material.color;
@@ -395,14 +396,19 @@ public class Dragon : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Coin") && size != DragonSize.LARGE)
+        if (other.gameObject.CompareTag("Coin"))
         {
-            //Updates the global variable
-            CoinScore.globalCoinScore += 1;
-                Debug.Log(CoinScore.globalCoinScore);
             Destroy(other.gameObject);
-                       
-            evolveBar.UpdateEvolveScore(calculateTotalMoneyDragon(CoinScore.globalCoinScore, name));
+            //Dragonsize determines if the evolvebar increases or if the score increases
+            if (size != DragonSize.LARGE){
+                //Updates the global variable
+                CoinScore.globalCoinScore += 1;
+                evolveBar.UpdateEvolveScore(calculateTotalMoneyDragon(CoinScore.globalCoinScore, name));
+            } else {
+                CoinScore.globalTotalCoinScore += 1;
+                evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
+            }
+            
         }
         if (other.gameObject.CompareTag("Bush")){
             InteractBushEnter(other.gameObject, this.size);

@@ -29,11 +29,9 @@ public class PlayerStatController : MonoBehaviour
     void Start() {
         
         CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
+        CoinScore.globalTotalCoinScore = CoinScore.tempglobalTotalCoinScore;
         
-        //Updates icons
-        icons.UpdateIcons(activeDragon.name);
-        //Updates evolvebar/scorebar
-        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+        
 
 
         Debug.Log(globalModel);
@@ -62,10 +60,13 @@ public class PlayerStatController : MonoBehaviour
         // Need to add a graceful exit here. (should not be able to trigger unless an inspector value is missing or naming convention is wrong)
         else {
             Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
-        }  
-        //Debug.Log("TEST::: " + CoinScore.globalCoinScore / activeDragon.CoinToEvolve);
+        }
+        
+        //Updates icons
+        icons.UpdateIcons(activeDragon.name);
+        //Updates evolvebar/scorebar
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));  
 
-        //Restarting the scene (caught by guard before evolving causes issues)
         
     }
     public void Update()

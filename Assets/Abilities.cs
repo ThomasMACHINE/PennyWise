@@ -83,7 +83,6 @@ public class Abilities : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("Logical Mistake Made");
                 break;
             }
         }  
