@@ -50,7 +50,6 @@ public class EvolveBar : MonoBehaviour
 
     public void UpdateEvolveScore(int coinScore) {
         foreach (var obj in objects){
-            Debug.Log(obj.name + coinScore);
             switch(obj.name){
                 
                 case "Zero":
