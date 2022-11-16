@@ -69,16 +69,20 @@ public class PressurePlate : MonoBehaviour
                 Debug.Log("No valid dragon model entered the pressure plate");
             }
 		}
+    
         if(other.tag.Equals("Crate")) {
             smallEvent.Invoke();
         }
         collidedObjects.Add(other.gameObject);
     }
+    // Clean up. Can't see what the intent is here.
+    // If the player leaves the platform, disable the invoke. (Crate not counting here)
     private void OnTriggerExit(Collider other) {
         collidedObjects.Remove(other.gameObject);
-        if(collidedObjects.Count == 0) {
+        if(collidedObjects.Count == 0 || other.tag.Equals("Player")) {
             disableEvent.Invoke();
         }
+        
     }
 
 
