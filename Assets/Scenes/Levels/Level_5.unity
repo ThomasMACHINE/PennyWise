@@ -2069,6 +2069,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1290733428}
     m_Modifications:
+    - target: {fileID: 581121144032287570, guid: 178ec197c7df40d45ad5f26f15599f00, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2552456381944534659, guid: 178ec197c7df40d45ad5f26f15599f00, type: 3}
       propertyPath: m_Name
       value: Stone002
@@ -11210,7 +11214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingCharacters: []
   aggressiveCharacters: []
-  moveCooldown: 1
+  moveCooldown: 0.5
   searchCooldown: 1
 --- !u!4 &1803085228
 Transform:
@@ -12813,6 +12817,10 @@ PrefabInstance:
       propertyPath: PathObjects.Array.data[5]
       value: 
       objectReference: {fileID: 1312777552}
+    - target: {fileID: 5508022720890751797, guid: 09ad2b18a8ae8b542ae4a3fd98199670, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5508022720890751797, guid: 09ad2b18a8ae8b542ae4a3fd98199670, type: 3}
       propertyPath: searchRadius
       value: 15
