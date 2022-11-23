@@ -24,14 +24,15 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
     {
         if (Physics.CheckSphere(model.position, searchRadius, playerMask))
         {
-            Debug.Log("Within Search Radius");
             // Check for line of sight
             Vector3 direction = playerController.activeDragon.transform.position - eyes.position;
             Debug.DrawRay(eyes.position, direction * searchRadius, Color.yellow, 1);
 
             RaycastHit hit;
-            if (Physics.Raycast(eyes.position, direction, out hit, searchRadius, ~playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
+            if (Physics.Raycast(eyes.position, direction, out hit, searchRadius, playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
             {
+                Debug.Log("Hello I can see u");
+                Debug.Log(hit.collider.gameObject.name);
                 IsHunting = true;
             }
         } // If player is outside searchRadius
