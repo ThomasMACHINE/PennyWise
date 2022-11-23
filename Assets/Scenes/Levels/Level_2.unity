@@ -9347,8 +9347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6624784797922060011, guid: 2b3af57807c8af246a39227846dc5317, type: 3}
       propertyPath: bodyText
-      value: The medium and large dragon can pick up the bush with C and drop it
-        with V
+      value: The medium dragon can pick up the bush with C and drop it with V
       objectReference: {fileID: 0}
     - target: {fileID: 6624784797922060011, guid: 2b3af57807c8af246a39227846dc5317, type: 3}
       propertyPath: titleText

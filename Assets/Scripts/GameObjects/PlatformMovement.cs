@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlatformMovement : MonoBehaviour
 {
+    [SerializeField] GameObject topmostPlayerObject;
+
     [SerializeField] GameObject platformMove;
     [SerializeField] Transform platformMoveParent;
-    
+
     [SerializeField] Vector3 pointB = new Vector3(0,1,0);
     //time factor
     private float t;
@@ -42,17 +44,20 @@ public class PlatformMovement : MonoBehaviour
     public void setActiveVariable(bool newState){
         active = newState;
     }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag.Equals("Player") && playerCanRidePlatform) {
-            other.transform.SetParent(platformMoveParent);
-        }
+    // Checks if the player is touching the platform.
+    private void OnCollisionEnter(Collision collision) {       
+       if (collision.gameObject.tag.Equals("Player") && playerCanRidePlatform) {
+            collision.transform.SetParent(platformMoveParent);
+     }
+    }
+    // Checks if the player is not touching the platform (left)
+    private void OnCollisionExit(Collision collision) {       
+    
+       if (collision.gameObject.tag.Equals("Player") && playerCanRidePlatform) {
+            collision.transform.SetParent(null);
+     }
     }
 
-    private void OnTriggerExit(Collider other) {
-         if (other.tag.Equals("Player") && playerCanRidePlatform) {
-            other.transform.SetParent(null);
-        }
-    }
+    
     
 }
