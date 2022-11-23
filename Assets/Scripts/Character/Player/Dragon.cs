@@ -47,6 +47,7 @@ public class Dragon : MonoBehaviour
     private bool roarUsedRecently;
 
 
+
     public PickUpCrate pickUpController;
     //Bush
     private GameObject insideBush;
@@ -173,8 +174,7 @@ public class Dragon : MonoBehaviour
             if (insideBush.transform.parent != null){
                 insideBush.transform.parent = null;
             }
-        }
-        
+        }        
     }
 
     // Function for picking up bush
