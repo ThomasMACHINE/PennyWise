@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class FallingRockSpawner : MonoBehaviour
 {
+    
 
     [SerializeField] GameObject fallingRock;
+    // area to spawn
+    [SerializeField] float x_coord1;
+    [SerializeField] float x_coord2;
+    [SerializeField] float y_coord1;
+    [SerializeField] float y_coord2;
+    [SerializeField] float z_coord1;
+    [SerializeField] float z_coord2;
+
+    [SerializeField] float waitTime;
+
 
     private IEnumerator coroutine;
 
@@ -13,7 +24,7 @@ public class FallingRockSpawner : MonoBehaviour
     void Start()
     {
 
-        coroutine = WaitAndSpawnRock(0.5f);
+        coroutine = WaitAndSpawnRock(waitTime);
         StartCoroutine(coroutine);        
     }
 
@@ -33,7 +44,7 @@ public class FallingRockSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(waitTime);
             //Instantiate(fallingRock, location, Quaternion.identity);
-            Vector3 location = new Vector3(Random.Range(-24f, 25f),178.4f,Random.Range(0f, 284f));
+            Vector3 location = new Vector3(Random.Range(x_coord1, x_coord2),Random.Range(y_coord1, y_coord2),Random.Range(z_coord1, z_coord2));
             Instantiate(fallingRock, location, transform.rotation *  Quaternion.Euler(180, 0, 0));
         }
     }
