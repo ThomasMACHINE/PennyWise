@@ -12,6 +12,7 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] EvolveBar evolveBar;
     [SerializeField] Abilities icons;
     [SerializeField] int coinScore;
+    [SerializeField] Dragon dragon;
 
     
     //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
@@ -119,6 +120,11 @@ public class PlayerStatController : MonoBehaviour
     /// Replaces current Player Character by the Next Character
     /// </summary>
     public void DoDevolve() {
+        // Checks if the player should be able to deevolve (that the are not allready the smallest).
+        if (activeDragon.name.Contains("SMALL")) {
+            return;
+        }
+        activeDragon.ResetGuardsAfterDeevolving();
         GameObject newDragon = activeDragon.LastDragon;
 
         if (newDragon == null)

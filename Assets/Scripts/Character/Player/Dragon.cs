@@ -61,11 +61,12 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
     [SerializeField] bool canRoar;
 
-    private Color originalColorOfGuardField;
     public bool toggleGlide;
     public bool toggleHold;
 
     public bool IsCaught;
+    private Color guardRedColor = new Color(0.840f, 0.000f, 0.043f);
+    private Color guardWhiteColor = new Color(255,255,255);
 
     public enum DragonSize
     {
@@ -74,13 +75,12 @@ public class Dragon : MonoBehaviour
 
     // Threshold for Guard finding dragon
     private float VelocityHidingThreshold = 0.5f;
-
     [SerializeField] public DragonSize size;
+    
+    
     private void Awake() {
         guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
         if (pickUpController) { pickUpController.heldObj = null; }
-       // DontDestroyOnLoad(this.gameObject);
-        //DontDestroyOnLoad(NextDragon);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
@@ -88,11 +88,22 @@ public class Dragon : MonoBehaviour
     }
     void Start() {
         evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
+    }
+
+    public void ResetGuardsAfterDeevolving() {
+         // if a player deevolves, it should terminate the guard scared state.
         if (guardObjectsInScene.Length > 0) {
-            Renderer renderer = guardObjectsInScene[0].GetComponent<Renderer>();
-            originalColorOfGuardField = renderer.material.color;
+            foreach (GameObject guard in guardObjectsInScene) {
+                //Renderer renderer = guard.GetComponent<Renderer>();
+                if (guard.GetComponent<Renderer>().material.color != guardRedColor) {
+                    guard.GetComponent<Renderer>().material.color = guardRedColor;
+                }
+                if (!guard.GetComponent<CapsuleCollider>().enabled) {
+                    guard.GetComponent<CapsuleCollider>().enabled = true;
+                }
+            }
         }
-        
+        roarUsedRecently = false;
     }
 
     /// <summary>
@@ -343,14 +354,13 @@ public class Dragon : MonoBehaviour
         Renderer renderer = guardObject.GetComponent<Renderer>();
         colliderCapsule.enabled = false;
         //Changes the colour  to white (RBA 0(black - 255 (white))).
-        Color tempColor = new Color(255,255,255);
-        renderer.material.color = tempColor;
+        renderer.material.color = guardWhiteColor;
 
         yield return new WaitForSeconds(5);
         //Changes the colour back.
         colliderCapsule.enabled = true;
 
-        renderer.material.color = originalColorOfGuardField;
+        renderer.material.color = guardRedColor;
         // Allow user to roar again
         roarUsedRecently = false;
     }
