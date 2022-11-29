@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,4 +35,4 @@ public class mouseController : MonoBehaviour
         deltaMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
         movement.transform.Translate(deltaMovement);
     }
-}
+}*/

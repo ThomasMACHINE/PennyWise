@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
     private MeshRenderer _renderer;
     public float hideDistance = 1.5f;
     private int factorOfScaling = 8;
+    private float offset = 0;
 
     void Start()
     {
@@ -24,9 +25,11 @@ public class CameraController : MonoBehaviour
     /*
         Most of this code is authored by Unity found at: https://learn.unity.com/tutorial/controlling-unity-camera-behaviour 
     */    
+
     void LateUpdate()
     {
-        ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
+        GetAheadPosition();
+       // ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
         currentDistance += Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed * Time.deltaTime * factorOfScaling;
         currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
         
@@ -59,9 +62,22 @@ public class CameraController : MonoBehaviour
         else {
             Debug.Log("CameraController could not get name of model in use");
         }
-
         trackedObject = target.transform;
         _renderer = trackedObject.gameObject.GetComponent<MeshRenderer>();
 
+    }
+
+    // Gets the position of the player character. Note that the Y position can be changed. This causes the LookAt to look above the player
+    private void GetAheadPosition() {
+        if (offset > -1.0f && offset < 3.5f) {
+            offset += Input.GetAxis("Mouse Y") * 0.01f;
+            // Makes sure that the player can't lock the camera by moving the mouse too fast (causing the offset to surpass the initial limit)
+            if (offset <= -1.0f) {
+                offset = -0.99f;
+            } else if (offset >= 3.5f) {
+                offset = 3.49f;
+            }
+        }
+        ahead.transform.position = new Vector3(trackedObject.position.x, trackedObject.position.y + offset, trackedObject.position.z) + trackedObject.forward * (maxDistance * 0.25f);
     }
 }
