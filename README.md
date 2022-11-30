@@ -6,7 +6,7 @@ This is a game where you play as a dragon who is on a mission to kidnap the prin
  - Susanne Skjold Edvardsen
  - Thomas
  - Fredrik
- - Olav
+ - Ole
 
 ## Resources:
  - Background materials such as mountains and trees were fetched from:
