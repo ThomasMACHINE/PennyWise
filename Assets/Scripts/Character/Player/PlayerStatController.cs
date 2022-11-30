@@ -71,16 +71,7 @@ public class PlayerStatController : MonoBehaviour
         
     }
     public void Update()
-    {
-       /* // Possible to move out of update?
-        // TODO This can lead to bugs if evolve is called on the same frame as a coin is picked up and it is called before this Update
-        if (activeDragon.UnAccountedCoins != 0)
-        {
-            coinScore += activeDragon.UnAccountedCoins;
-            evolveBar.UpdateSlider((float)coinScore / activeDragon.CoinToEvolve);
-            activeDragon.UnAccountedCoins = 0;    
-        }*/
-        
+    {        
         //Checks if the dragon has picked up enough coins to grow in size
         if (CanEvolve()){
             DoEvolve();
@@ -91,10 +82,6 @@ public class PlayerStatController : MonoBehaviour
     //NullReferenceException: Object reference not set to an instance of an object
     public bool IsCaught() {
         throw new NotImplementedException();
-        /*
-        activeDragon.IsCaught = false;
-        return activeDragon.IsCaught;
-        */
     }
 
     /// <summary>
