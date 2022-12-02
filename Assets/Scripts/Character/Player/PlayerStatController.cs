@@ -127,14 +127,34 @@ public class PlayerStatController : MonoBehaviour
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
+    private void DoDevolveFromDamage() {
+        // Checks if the player should be able to deevolve (that the are not allready the smallest).
+        if (activeDragon.name.Contains("SMALL"))
+        {
+            return;
+        }
+        activeDragon.ResetGuardsAfterDeevolving();
+        GameObject newDragon = activeDragon.LastDragon;
+
+        if (newDragon == null)
+        {
+            Debug.Log("There is no lower tier dragon!");
+            return;
+        }
+        // Set the new dragon and drop the coins used to evolve
+        SetNewDragon(newDragon);
+
+        CoinScore.globalCoinScore = activeDragon.CoinToEvolve - 1;
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+    }
+
     private void SetNewDragon(GameObject newDragon) {
         //Dropping items 
         activeDragon.DropHeldItem();
-
-
+        // Set States and Orientation of the new dragon
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a wee bit of height so that player does not get stuck in ground
+        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a bit of height so that player does not get stuck in ground
         newDragon.transform.rotation = activeDragon.transform.rotation;
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
@@ -166,7 +186,7 @@ public class PlayerStatController : MonoBehaviour
             }
             else
             {
-                DoDevolve();
+                DoDevolveFromDamage();
             }
         }
         else
