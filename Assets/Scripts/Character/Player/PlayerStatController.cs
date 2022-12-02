@@ -42,7 +42,7 @@ public class PlayerStatController : MonoBehaviour
           // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
           // NOTE, reworking to be caluculated from coinscore could be better.
         if(globalModel == GlobalModelENUM.SMALL) {
-            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
          // The dragon initilizes with the small model active.
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
@@ -69,7 +69,7 @@ public class PlayerStatController : MonoBehaviour
         //Updates icons
         icons.UpdateIcons(activeDragon.name);
         //Updates evolvebar/scorebar
-        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));  
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));  
 
         
     }
@@ -111,7 +111,7 @@ public class PlayerStatController : MonoBehaviour
     /// </summary>
     public void DoDevolve() {
         // Checks if the player should be able to deevolve (that the are not allready the smallest).
-        if (activeDragon.name.Contains("SMALL")) {
+        if (activeDragon.size == Dragon.DragonSize.SMALL) {
             return;
         }
         activeDragon.ResetGuardsAfterDeevolving();
@@ -132,14 +132,34 @@ public class PlayerStatController : MonoBehaviour
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
+    private void DoDevolveFromDamage() {
+        // Checks if the player should be able to deevolve (that the are not allready the smallest).
+        if (activeDragon.size == Dragon.DragonSize.SMALL)
+        {
+            return;
+        }
+        activeDragon.ResetGuardsAfterDeevolving();
+        GameObject newDragon = activeDragon.LastDragon;
+
+        if (newDragon == null)
+        {
+            Debug.Log("There is no lower tier dragon!");
+            return;
+        }
+        // Set the new dragon and drop the coins used to evolve
+        SetNewDragon(newDragon);
+
+        CoinScore.globalCoinScore = activeDragon.CoinToEvolve - 1;
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
+    }
+
     private void SetNewDragon(GameObject newDragon) {
         //Dropping items 
         activeDragon.DropHeldItem();
-
-
+        // Set States and Orientation of the new dragon
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a wee bit of height so that player does not get stuck in ground
+        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a bit of height so that player does not get stuck in ground
         newDragon.transform.rotation = activeDragon.transform.rotation;
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);
@@ -147,7 +167,7 @@ public class PlayerStatController : MonoBehaviour
 
         // Set fill bar to appropriate level
         if (activeDragon.CoinToEvolve != 0) {
-            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+            evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
         }
         UpdateAbilityIcons();        
     }
@@ -171,13 +191,13 @@ public class PlayerStatController : MonoBehaviour
             }
             else
             {
-                DoDevolve();
+                DoDevolveFromDamage();
             }
         }
         else
         {
             CoinScore.globalCoinScore = amount >= CoinScore.globalCoinScore ? 0 : CoinScore.globalCoinScore - amount;
         }
-        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore, activeDragon.name));
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
     }
 }

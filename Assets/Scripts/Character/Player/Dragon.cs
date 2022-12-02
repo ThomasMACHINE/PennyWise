@@ -297,7 +297,7 @@ public class Dragon : MonoBehaviour
             }
         else {
             // Dragon can glide if it is small size, here it checks to toggle or untoggle it
-            if (this.gameObject.name.Contains("SMALL") && Input.GetKeyDown(KeyCode.Space)) {
+            if (size == DragonSize.SMALL && Input.GetKeyDown(KeyCode.Space)) {
                 if (toggleGlide) {
                     toggleGlide = false;
                 } else {
@@ -366,16 +366,18 @@ public class Dragon : MonoBehaviour
     //Function handles leaving a bush
     public void InteractBushLeave(){
         //Small
-        if (this.gameObject.name.Contains("SMALL")){
+        if (size == DragonSize.SMALL){
             hidden = false;
         }
         //Medium
-        if (this.gameObject.name.Contains("MEDIUM")){
+        if (size == DragonSize.MEDIUM)
+        {
             hidden = false;
            insideBush = null;
         }
         //Large
-        if (this.gameObject.name.Contains("LARGE")){
+        if (size == DragonSize.LARGE)
+        {
             insideBush = null;
         }
     }
@@ -456,13 +458,17 @@ public class Dragon : MonoBehaviour
         return false;
     }
 
-    public int calculateTotalMoneyDragon(int score, string name){
-        if (name.Contains("SMALL")){
+    public int calculateTotalMoneyDragon(int score)
+    {
+        if (size == DragonSize.SMALL){
             return score;
-        } else if (name.Contains("MEDIUM")){
+        } else if (size == DragonSize.MEDIUM){
             return score + 2; //Hardcoded should be avoided
-        } else {
+        } else if (size == DragonSize.LARGE){
             return score + 5; //Hardcoded should be avoided
+        }else{
+            Debug.LogError("DragonSize could not be determined. Name: " + name);
+            return 0;
         }
     }
 
@@ -491,7 +497,7 @@ public class Dragon : MonoBehaviour
             if (size != DragonSize.LARGE){
                 //Updates the global variable
                 CoinScore.globalCoinScore += 1;
-                evolveBar.UpdateEvolveScore(calculateTotalMoneyDragon(CoinScore.globalCoinScore, name));
+                evolveBar.UpdateEvolveScore(calculateTotalMoneyDragon(CoinScore.globalCoinScore));
             } else {
                 CoinScore.globalTotalCoinScore += 1;
                 evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
