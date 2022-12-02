@@ -72,6 +72,13 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoJump();
         }
 
+        if (statController.activeDragon.jumpedRecently == true){
+            if (statController.activeDragon.IsGrounded()) {
+                statController.activeDragon.landSound.Play();
+                statController.activeDragon.jumpedRecently = false;
+            }
+        }
+
         //Bush
         statController.activeDragon.UpdateBush();
     }
