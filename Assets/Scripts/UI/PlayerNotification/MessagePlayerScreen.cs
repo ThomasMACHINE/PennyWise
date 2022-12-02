@@ -14,6 +14,11 @@ public class MessagePlayerScreen : MonoBehaviour
     [SerializeField] Image MessengerIcon;
 
     [SerializeField] NotificationMessenger messengerStorage;
+
+    [SerializeField] Vector3 screenInterpolationStartPoint;
+    [SerializeField] Vector3 screenInterpolationEndPoint;
+    [SerializeField] float interpolationSpeed;
+
     private void Awake()
     {
         if (!Panel)
@@ -52,7 +57,7 @@ public class MessagePlayerScreen : MonoBehaviour
 
     private void sendMessage(MessageBody mb) {
         Panel.SetActive(true);
-        Panel.transform.position = new Vector3(960, 1350, 0);
+        Panel.transform.position = screenInterpolationStartPoint;
         Title.text = mb.title;
         Body.text = mb.body;
         isDisplaying = true;
@@ -87,7 +92,7 @@ public class MessagePlayerScreen : MonoBehaviour
                 isDisplaying = false;
             }
         }
-        Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, new Vector3(960, 845, 0), 15);
+        Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, screenInterpolationEndPoint, interpolationSpeed);
     }
 
     private bool isDuplicate(MessageBody newMessageBody)

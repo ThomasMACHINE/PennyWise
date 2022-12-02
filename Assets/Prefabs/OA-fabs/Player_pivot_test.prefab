@@ -2041,6 +2041,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4755998660878765404}
     m_Modifications:
+    - target: {fileID: 3478445191976292375, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
+      propertyPath: interpolationSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478445191976292375, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
+      propertyPath: screenInterpolationEndPoint.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478445191976292375, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
+      propertyPath: screenInterpolationEndPoint.y
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478445191976292375, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
+      propertyPath: screenInterpolationStartPoint.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478445191976292375, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
+      propertyPath: screenInterpolationStartPoint.y
+      value: 1200
+      objectReference: {fileID: 0}
     - target: {fileID: 7130309876769500257, guid: 0a94c1da705ec07439326a112cc88fe4, type: 3}
       propertyPath: m_Name
       value: PlayerMessageUI
