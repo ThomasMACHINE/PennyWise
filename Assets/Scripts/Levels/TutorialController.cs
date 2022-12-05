@@ -8,7 +8,6 @@ public class TutorialController : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip introSoundClip;
 
-    [SerializeField] Sprite dragonSprite;
     [SerializeField] Image mainImage;
 
     IEnumerator Start()
@@ -16,14 +15,9 @@ public class TutorialController : MonoBehaviour
         audioSource.PlayOneShot(introSoundClip);
 
         yield return new WaitForSeconds(10);
-        ShowDragonIcon();
         yield return new WaitForSeconds(introSoundClip.length - 10);
 
         SceneManager.LoadScene("Level_1", LoadSceneMode.Single);
     }
 
-    void ShowDragonIcon()
-    {
-        mainImage.sprite = dragonSprite;
-    }
 }
