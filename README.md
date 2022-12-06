@@ -4,14 +4,14 @@ This is a game where you play as a dragon who is on a mission to kidnap the prin
 
 ## Members of the group:
  - Susanne Skjold Edvardsen
- - Thomas
- - Fredrik
- - Ole
+ - Thomas Vincent Lien
+ - Fredrik Lønnemo
+ - Ole Anders Hvalsmarken
 
 ## Resources:
  - Background materials such as mountains and trees were fetched from:
  - 2D Animations were made by: Susanne
- - 3D Models (Dragon and Npcs) were made by Susanne.
+ - 3D Models (Dragon and Npcs) were made by Susanne
  - 3D animations of models were made by Thomas
  - Music was created for the game by extern: Birger Wessel Audio (Link to their youtube channel: https://www.youtube.com/channel/UCgvNONj7uLkhVaEoIFIzDRQ) 
  
