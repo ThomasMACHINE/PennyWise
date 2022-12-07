@@ -14,6 +14,13 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] int coinScore;
     [SerializeField] Dragon dragon;
 
+    //Sounds
+    public AudioSource coinDropSound;
+
+    
+    //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
+    
+    //Name of model in use. Need to rework
     public enum GlobalModelENUM
     {
         SMALL, MEDIUM, LARGE
@@ -105,6 +112,8 @@ public class PlayerStatController : MonoBehaviour
 
         //CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
         //NOTE: drop coin amount equal to evolve req. (2 for medium -> small, 5 for large -> medium atm)
+        //Sound
+        coinDropSound.Play();
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 

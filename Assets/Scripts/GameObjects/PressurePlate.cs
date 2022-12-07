@@ -23,10 +23,6 @@ public class PressurePlate : MonoBehaviour
 
     public UnityEvent disableEvent;
 
-    // a list to store what is and is not on us
-    private List<GameObject> collidedObjects = new List<GameObject>();
-
-
     void Start() {
         //Checks if only one image state has been set to true in the inspector. Changes the image to correct image for size it true
         if (smallImage && !(mediumImage || largeImage)) {
@@ -50,39 +46,25 @@ public class PressurePlate : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
 		if(other.tag.Equals("Player")) {
             // Could possibly add a container platform so the player is in the middle. Will need the size of the models to effectivly implement.
-			Debug.Log("Pressure plate!");
 			if (other.gameObject.name.Contains("SMALL")) {
-                Debug.Log("Small dragon");
-                
                 smallEvent.Invoke();
             }
             else if (other.gameObject.name.Contains("MEDIUM")) {
-                Debug.Log("Medium dragon");
                 mediumEvent.Invoke();
             }
             else if (other.gameObject.name.Contains("LARGE")) {
-                Debug.Log("Large dragon");
                 largeEvent.Invoke();
             }
             //Should never be able to see this, but you should help with testing.
             else {
-                Debug.Log("No valid dragon model entered the pressure plate");
+                Debug.LogError("No valid dragon model entered the pressure plate");
             }
 		}
-    
-        if(other.tag.Equals("Crate")) {
-            smallEvent.Invoke();
-        }
-        collidedObjects.Add(other.gameObject);
     }
     // Clean up. Can't see what the intent is here.
     // If the player leaves the platform, disable the invoke. (Crate not counting here)
     private void OnTriggerExit(Collider other) {
-        collidedObjects.Remove(other.gameObject);
-        if(collidedObjects.Count == 0 || other.tag.Equals("Player")) {
-            disableEvent.Invoke();
-        }
-        
+        disableEvent.Invoke();
     }
 
 

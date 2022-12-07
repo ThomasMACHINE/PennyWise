@@ -45,6 +45,24 @@ public class Dragon : MonoBehaviour
     //Creates a list of gameObjects in scene.
     [SerializeField] private GameObject[] guardObjectsInScene;
     private bool roarUsedRecently;
+    public bool jumpedRecently;
+    private int stepID;
+
+    //Sounds
+    public AudioSource coinPickUpSound;
+    public AudioSource roarSound;
+    public AudioSource singleJumpSound;
+    public AudioSource doubleJumpSound;
+    public AudioSource landSound;
+    public AudioSource step1;
+    public AudioSource step2;
+    public AudioSource step3;
+    public AudioSource step4;
+    public AudioSource step5;
+    public AudioSource step6;
+    public AudioSource step7;
+    public AudioSource step8;
+
 
     public PickUpCrate pickUpController;
     //Bush
@@ -83,6 +101,8 @@ public class Dragon : MonoBehaviour
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
         hidden = false;
+        jumpedRecently = false;
+        stepID = 0;
     }
 
     void Start() {
@@ -124,6 +144,59 @@ public class Dragon : MonoBehaviour
         characterAnimator.ActivateWalkAnimation();
         Vector3 movement = new Vector3(xSpeed, rigBody.velocity.y, zSpeed);
         rigBody.velocity = rigBody.rotation * movement;
+        //Sounds for walking
+        if(IsGrounded()) { playSoundSteps(); }
+    }
+
+    public void playSoundSteps(){
+        
+        if (!step1.isPlaying && !step2.isPlaying && !step3.isPlaying && !step4.isPlaying &&!step5.isPlaying && !step6.isPlaying && !step6.isPlaying && !step8.isPlaying){
+            switch(stepID) 
+            {
+                case 1:
+                step1.Play();
+                break;
+
+                case 2:
+                step2.Play();
+                break;
+
+                case 3:
+                step3.Play();
+                break;
+
+                case 4:
+                step4.Play();
+                break;
+
+                case 5:
+                step5.Play();
+                break;
+
+                case 6:
+                step6.Play();
+                break;
+
+                case 7:
+                step7.Play();
+                break;
+
+                case 8:
+                step8.Play();
+                break;
+
+                default:
+                break;
+            }
+        //Update stepID
+            if (stepID >= 8){
+                stepID = 1;
+            } else {
+                stepID += 1;
+            }
+        }
+
+        
     }
 
     /// <summary>
@@ -191,9 +264,12 @@ public class Dragon : MonoBehaviour
     {
         
         if(IsGrounded()) {
+            //Sound
+            singleJumpSound.Play();
             jumpCount = 1;
             toggleGlide = false;
-            rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);        }
+            rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z); 
+            }
         else {
             // Dragon can glide if it is small size, here it checks to toggle or untoggle it
             if (size == DragonSize.SMALL && Input.GetKeyDown(KeyCode.Space)) {
@@ -205,6 +281,8 @@ public class Dragon : MonoBehaviour
             }
             // If the dragon can double jump AND the jump count is below 2
             if (canDoubleJump && jumpCount < 2) {
+                //Sound
+                doubleJumpSound.Play();
                 jumpCount += 1;
                 rigBody.velocity = new Vector3(rigBody.velocity.x, jumpSpeed, rigBody.velocity.z);
             }
@@ -285,6 +363,7 @@ public class Dragon : MonoBehaviour
     {
         bool isGrounded = Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
         if (isGrounded) { jumpCount = 1; }
+        else {jumpedRecently = true;}
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
@@ -311,6 +390,7 @@ public class Dragon : MonoBehaviour
         }
 
         if (canRoar) {
+            roarSound.Play();
             foreach (GameObject guardObject in guardObjectsInScene) {
                 if (Vector3.Distance(Model.transform.position, guardObject.transform.position) < 10) {
                     roarUsedRecently = true;
@@ -382,6 +462,8 @@ public class Dragon : MonoBehaviour
 
         if (other.gameObject.CompareTag("Coin"))
         {
+            //Sound
+            coinPickUpSound.Play();
             Destroy(other.gameObject);
             //Dragonsize determines if the evolvebar increases or if the score increases
             if (size != DragonSize.LARGE){
