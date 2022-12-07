@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     // World height before restarting the level (falling of the edge of the world)
     private int deathZone = -15;
 
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -56,7 +55,6 @@ public class PlayerController : MonoBehaviour
             statController.activeDragon.DoMove(horizontalInput, verticalInput);
         }
         
-        
         // Check for rotation. NOTE: add time component
         if (Input.GetAxis("Mouse X") != 0)
         {
@@ -71,7 +69,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             statController.activeDragon.DoJump();
         }
-
         //Bush
         statController.activeDragon.UpdateBush();
     }
@@ -79,7 +76,6 @@ public class PlayerController : MonoBehaviour
     void stepClimb() {
         statController.activeDragon.CanClimb();        
     }
-
 
     private void CheckEvolve()
     {
@@ -94,7 +90,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("You reloaded the level!");
             ReloadLevel();
         }
     }
@@ -104,7 +99,6 @@ public class PlayerController : MonoBehaviour
             ReloadLevel();
         }
     }
-
 
     private void CheckRoar() { //Should change this button to be E since E no longer evolves the dragon
         if (Input.GetKeyDown(KeyCode.L) && statController.activeDragon.size == Dragon.DragonSize.LARGE) {

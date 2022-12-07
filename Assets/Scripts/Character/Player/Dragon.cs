@@ -46,8 +46,6 @@ public class Dragon : MonoBehaviour
     [SerializeField] private GameObject[] guardObjectsInScene;
     private bool roarUsedRecently;
 
-
-
     public PickUpCrate pickUpController;
     //Bush
     private GameObject insideBush;
@@ -86,6 +84,7 @@ public class Dragon : MonoBehaviour
         toggleHold = false;
         hidden = false;
     }
+
     void Start() {
         evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
     }
@@ -135,30 +134,6 @@ public class Dragon : MonoBehaviour
         rigBody.MoveRotation(newQuaternion);
         
     }
-
-
-    // Function for making held objects move with the dragon
-    /*
-    public void DoMoveHolder(){
-        var distanceToPlayer = Vector3.Distance(holder.transform.position, this.transform.position);
-
-
-        //Make the holder move with the dragon
-        if(distanceToPlayer > 2.0){
-            holder.transform.position += (this.transform.position - holder.transform.position).normalized * characterSpeed * Time.deltaTime;
-        }
-        
-
-        //Make crate jump with the dragon
-        if (IsGrounded() == false){
-            float Direction = Bottom.transform.position.y - holder.transform.position.y;
-            Vector2 MovePos = new Vector2(
-            holder.transform.position.x, 
-            holder.transform.position.y + Direction);//MoveTowards on 1 axis
-            holder.transform.position = MovePos;
-        }
-    }*/
-
 
     //Function for making the dragon drop held items
     public void DropHeldItem () {
@@ -304,7 +279,6 @@ public class Dragon : MonoBehaviour
         }
     }
 
-
     // Checks if Character is in contact with a Ground tagged GameObject
     public bool IsGrounded()
     // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
@@ -328,7 +302,6 @@ public class Dragon : MonoBehaviour
         }
     }
 
-
     // Disables the detection zone of the guard
     public void RoarDragon() {
         // Do not allow consecutive roars
@@ -347,7 +320,6 @@ public class Dragon : MonoBehaviour
         }
               
     }
-
 
     // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it again. Also changes colour of the
     // indicator on the ground meanwhile.

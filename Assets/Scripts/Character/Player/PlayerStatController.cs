@@ -14,42 +14,27 @@ public class PlayerStatController : MonoBehaviour
     [SerializeField] int coinScore;
     [SerializeField] Dragon dragon;
 
-    
-    //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
-    
-    //Name of model in use. Need to rework
     public enum GlobalModelENUM
     {
         SMALL, MEDIUM, LARGE
     };
-
-    // Variable to initilize to.
     public static GlobalModelENUM globalModel = GlobalModelENUM.SMALL;
 
     // Need to change the dragon model from here.
     void Start() {
-        
         CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
         CoinScore.globalTotalCoinScore = CoinScore.tempglobalTotalCoinScore;
         
-        
-
-
-        Debug.Log(globalModel);
-          // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
-          // NOTE, reworking to be caluculated from coinscore could be better.
+        // Checks what kind of model went into the teleporter, and changes the new dragon GameObject to be the same model
         if(globalModel == GlobalModelENUM.SMALL) {
             evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
-         // The dragon initilizes with the small model active.
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
             // NOTE: THE NAMING CONVENTION USED  (ADDED IN PREFAB)
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
-            SetNewDragon(activeDragon.NextDragon);
-            // Work note: works so far.
-            
+            SetNewDragon(activeDragon.NextDragon);            
         }
         else if (globalModel == GlobalModelENUM.LARGE) {
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
@@ -62,17 +47,13 @@ public class PlayerStatController : MonoBehaviour
         else {
             Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
         }
-        
-        //Updates icons
+        //Update UI - AbilityIcons & EvolveBar
         icons.UpdateIcons(activeDragon.name);
-        //Updates evolvebar/scorebar
-        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));  
-
-        
+        evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
     }
+
     public void Update()
     {        
-        //Checks if the dragon has picked up enough coins to grow in size
         if (CanEvolve()){
             DoEvolve();
         }

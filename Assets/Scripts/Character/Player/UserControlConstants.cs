@@ -8,7 +8,6 @@ using UnityEngine;
 /// </summary>
 public class UserControlConstants : MonoBehaviour
 {
-
     // Keybinds
     public KeyCode 
     ReloadLevel,
@@ -19,7 +18,6 @@ public class UserControlConstants : MonoBehaviour
     Hold,
     Roar;
     
-
     public enum Keybinds {
         Null = 0,
         // Level Specific commands
@@ -31,8 +29,6 @@ public class UserControlConstants : MonoBehaviour
         Hold,
 
     }
-
-
 
     private void Awake()
     {
