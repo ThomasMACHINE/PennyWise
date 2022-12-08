@@ -3053,7 +3053,11 @@ PrefabInstance:
       propertyPath: guard
       value: 
       objectReference: {fileID: 515322827}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7101096372767871384, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+    - {fileID: 5846457965457886042, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+    - {fileID: 4274716688377450760, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+    - {fileID: 5431640747741725502, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
 --- !u!4 &737482125 stripped
 Transform:
