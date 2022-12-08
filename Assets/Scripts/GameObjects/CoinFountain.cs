@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CoinFountain : MonoBehaviour
 {
+    private static string coinTag = "Coin";
+    private static string notCoinTag = "NotCoin";
+
     [SerializeField] int maxDeployedCoins;
     // how many coins to spew out first, before aiming for enogh for a specific size
     [SerializeField] int initialCoinsDeployed;
@@ -102,7 +105,7 @@ public class CoinFountain : MonoBehaviour
         newCoin.transform.rotation = Quaternion.Euler(new Vector3(90, 0, Random.Range(0, 361)));
 
         // changing tag means the coin cant be picked up
-        newCoin.tag = "Untagged";
+        newCoin.tag = notCoinTag;
 
         totalCoins++;
     
@@ -119,7 +122,7 @@ public class CoinFountain : MonoBehaviour
         }
 
         // putting the tag back so it can be picked up
-        coinToFloat.tag = "Coin";
+        coinToFloat.tag = coinTag;
     }
     IEnumerator GetTotalCoins()
     {
@@ -130,7 +133,10 @@ public class CoinFountain : MonoBehaviour
         while(this.enabled) {
             totalCoins = CoinScore.globalCoinScore;
             if (!ignoreLevelCoins)
-                totalCoins += GameObject.FindGameObjectsWithTag("Coin").Length;
+            {
+                totalCoins += GameObject.FindGameObjectsWithTag(coinTag).Length;
+                totalCoins += GameObject.FindGameObjectsWithTag(notCoinTag).Length;
+            }
             yield return new WaitForSeconds(scanFrequency);
         }
     }
