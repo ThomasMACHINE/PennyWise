@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Do not use yet
+/// Function for allowing the player to set their own buttons for the control of the dragon
 /// </summary>
 public class UserControlConstants : MonoBehaviour
 {

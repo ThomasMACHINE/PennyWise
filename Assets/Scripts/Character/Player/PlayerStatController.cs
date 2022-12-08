@@ -6,29 +6,34 @@ using UnityEngine;
 
 public class PlayerStatController : MonoBehaviour
 {
+    //Managing the coindrops
     [SerializeField] CoinDrop coinDropper;
+    //Camera for the player
     [SerializeField] CameraController cameraController;
+    //Current active model
     [SerializeField] public Dragon activeDragon;
+    //UI for showing amount of coins collected
     [SerializeField] EvolveBar evolveBar;
+    //UI for showing abilities
     [SerializeField] Abilities icons;
+    //Int for number of coins collected
     [SerializeField] int coinScore;
+    //Dragon
     [SerializeField] Dragon dragon;
-
-    //Sounds
+    //Sound
     public AudioSource coinDropSound;
 
     
-    //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
-    
-    //Name of model in use. Need to rework
+    //Name of model in use
     public enum GlobalModelENUM
     {
         SMALL, MEDIUM, LARGE
     };
     public static GlobalModelENUM globalModel = GlobalModelENUM.SMALL;
 
-    // Need to change the dragon model from here.
+    // Function called at start
     void Start() {
+        //Updating coinscore from the globaly saved coinscore
         CoinScore.globalCoinScore = CoinScore.tempGlobalCoinScore;
         CoinScore.globalTotalCoinScore = CoinScore.tempglobalTotalCoinScore;
         
@@ -37,7 +42,6 @@ public class PlayerStatController : MonoBehaviour
             evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
-            // NOTE: THE NAMING CONVENTION USED  (ADDED IN PREFAB)
             activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
             activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
@@ -50,7 +54,6 @@ public class PlayerStatController : MonoBehaviour
             SetNewDragon(activeDragon.NextDragon);
             SetNewDragon(activeDragon.NextDragon);
         }
-        // Need to add a graceful exit here. (should not be able to trigger unless an inspector value is missing or naming convention is wrong)
         else {
             Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
         }
@@ -59,9 +62,11 @@ public class PlayerStatController : MonoBehaviour
         evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
     }
 
+    //Function running on update
     public void Update()
-    {        
-        if (CanEvolve()){
+    {       
+        //Checks if the dragon meets the requirement to grow in size, and if it does, updates the player. 
+        if (CanEvolve()){ 
             DoEvolve();
         }
     }
@@ -80,6 +85,9 @@ public class PlayerStatController : MonoBehaviour
         return CoinScore.globalCoinScore >= activeDragon.CoinToEvolve;
     }
 
+    /// <summary>
+    /// Replaces current Player Character by the Next Character
+    /// </summary>
     public void DoEvolve()
     {
         CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
@@ -92,7 +100,7 @@ public class PlayerStatController : MonoBehaviour
     }
 
     /// <summary>
-    /// Replaces current Player Character by the Next Character
+    /// Replaces current Player Character by the Last Character
     /// </summary>
     public void DoDevolve() {
         // Checks if the player should be able to deevolve (that the are not allready the smallest).
@@ -117,6 +125,9 @@ public class PlayerStatController : MonoBehaviour
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
 
+    /// <summary>
+    /// Replaces current Player Character by the Last Character when damage is the cause
+    /// </summary>
     private void DoDevolveFromDamage() {
         // Checks if the player should be able to deevolve (that the are not allready the smallest).
         if (activeDragon.size == Dragon.DragonSize.SMALL)
@@ -138,6 +149,9 @@ public class PlayerStatController : MonoBehaviour
         evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
     }
 
+    /// <summary>
+    /// Changes the model and stats when changing dragons
+    /// </summary>
     private void SetNewDragon(GameObject newDragon) {
         //Dropping items 
         activeDragon.DropHeldItem();

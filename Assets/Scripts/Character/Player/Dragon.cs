@@ -16,6 +16,7 @@ using UnityEngine;
 /// </summary>
 public class Dragon : MonoBehaviour
 {
+    //Model, rigidbodies and bottom:
     [SerializeField] GameObject Model;
     [SerializeField] GameObject Bottom;
     public Rigidbody rigBody { private set; get; }
@@ -23,30 +24,42 @@ public class Dragon : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] public GameObject holder;
 
+    //How many coins are needed to reach the next size
     [SerializeField] public int CoinToEvolve;
+
+    //Previous and next models
     [SerializeField] public GameObject LastDragon;
     [SerializeField] public GameObject NextDragon;
+
+    //Character variables for movement
     [SerializeField] float characterSpeed;
     [SerializeField] float jumpSpeed;
     [SerializeField] float diveSpeed;
-    [SerializeField] EvolveBar evolveBar; //Refactor this
-    //[SerializeField] ScoreAndEvolveDisplay display;
-    [SerializeField] Abilities icons;
-    [SerializeField] Guard guard;
 
+    //UI elements
+    [SerializeField] EvolveBar evolveBar; 
+    [SerializeField] Abilities icons;
+
+    //NPCs
+    [SerializeField] Guard guard;
+    private Color guardRedColor = new Color(0.840f, 0.000f, 0.043f);
+    private Color guardWhiteColor = new Color(255,255,255);
+    // Threshold for Guard finding dragon
+    private float VelocityHidingThreshold = 0.5f;
+    
+
+    //Vision
     [SerializeField] GameObject stepRayLower;
     [SerializeField] GameObject stepRayHigher;
-
     [SerializeField] LayerMask obstructionMask;
+
+    //Animator
     [SerializeField] DragonAnimator characterAnimator;
 
     // How smooth is the tranition when stepping up.
     [SerializeField] float stepSmooth = 0.5f;
     //Creates a list of gameObjects in scene.
     [SerializeField] private GameObject[] guardObjectsInScene;
-    private bool roarUsedRecently;
-    public bool jumpedRecently;
-    private int stepID;
 
     //Sounds
     public AudioSource coinPickUpSound;
@@ -61,15 +74,16 @@ public class Dragon : MonoBehaviour
     public AudioSource step5;
     public AudioSource step6;
     public AudioSource step7;
-    public AudioSource step8;
-
-
-    public PickUpCrate pickUpController;
-    //Bush
-    private GameObject insideBush;
-    public bool hidden;
-    private bool isCarryingBush;
-    private Bush heldBush;
+    public AudioSource step8; 
+    
+    //Variables to keep track of abilities used or sounds used
+    private bool roarUsedRecently;
+    public bool jumpedRecently;
+    private int stepID;
+    public bool toggleGlide;
+    public bool toggleHold;
+    public bool IsCaught;
+   
 
     // Bools for dragonabilities
     [SerializeField] bool canGlide;
@@ -77,26 +91,21 @@ public class Dragon : MonoBehaviour
     [SerializeField] private int jumpCount;
     [SerializeField] bool canRoar;
 
-    public bool toggleGlide;
-    public bool toggleHold;
+    //Variables related to the Bush object
+    private GameObject insideBush;
+    public bool hidden;
+    private bool isCarryingBush;
+    private Bush heldBush;
 
-    public bool IsCaught;
-    private Color guardRedColor = new Color(0.840f, 0.000f, 0.043f);
-    private Color guardWhiteColor = new Color(255,255,255);
-
+    //Possible dragonsizes
     public enum DragonSize
     {
         none, SMALL, MEDIUM, LARGE
     }
-
-    // Threshold for Guard finding dragon
-    private float VelocityHidingThreshold = 0.5f;
     [SerializeField] public DragonSize size;
-    
-    
+
     private void Awake() {
         guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
-        if (pickUpController) { pickUpController.heldObj = null; }
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
@@ -109,6 +118,9 @@ public class Dragon : MonoBehaviour
         evolveBar.UpdateScore(CoinScore.globalTotalCoinScore);
     }
 
+    /// <summary>
+    /// Resets guards after shrinking
+    /// </summary>
     public void ResetGuardsAfterDeevolving() {
          // if a player deevolves, it should terminate the guard scared state.
         if (guardObjectsInScene.Length > 0) {
@@ -148,6 +160,9 @@ public class Dragon : MonoBehaviour
         if(IsGrounded()) { playSoundSteps(); }
     }
 
+    /// <summary>
+    /// Plays the sound of the next footstep
+    /// </summary>
     public void playSoundSteps(){
         
         if (!step1.isPlaying && !step2.isPlaying && !step3.isPlaying && !step4.isPlaying &&!step5.isPlaying && !step6.isPlaying && !step6.isPlaying && !step8.isPlaying){
@@ -207,16 +222,11 @@ public class Dragon : MonoBehaviour
         rigBody.MoveRotation(newQuaternion);
         
     }
-
-    //Function for making the dragon drop held items
+    /// <summary>
+    /// Function for making the dragon drop held items
+    /// </summary>
     public void DropHeldItem () {
-        if (pickUpController) 
-        { 
-            pickUpController.DropObject(); 
-        }
-        //Dropping crates
         if(holder){
-            //pickUpCrate.DropObject();
             
             while (holder.transform.childCount > 0) {
                 foreach (Transform child in holder.transform) {
@@ -233,10 +243,17 @@ public class Dragon : MonoBehaviour
             if (insideBush.transform.parent != null){
                 insideBush.transform.parent = null;
             }
-        }        
+        }
+        if (heldBush){
+            heldBush.Drop();
+            isCarryingBush = false;
+            heldBush.gameObject.transform.parent = null;
+        }      
     }
 
-    // Function for picking up bush
+    /// <summary>
+    /// Makes it possible to pick up the bush
+    /// </summary>
     public void UpdateBush(){
         // If Dragon is holding a bush and Player wants to drop the bush
         if (heldBush && Input.GetKeyDown(KeyCode.V))
@@ -259,7 +276,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    //Function for making the dragon jump
+    /// <summary>
+    /// Controls the jump of the dragon
+    /// </summary>
     public void DoJump()
     {
         
@@ -294,7 +313,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    // Makes Character fall slower - Glide
+    /// <summary>
+    /// Function controlling the glide mechanic
+    /// </summary>
     public void DoGlide()
     {
         if (IsGrounded() == false && toggleGlide){
@@ -310,7 +331,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    //Function handles entering a bush
+    /// <summary>
+    /// Function handles entering bush
+    /// </summary>
     public void InteractBushEnter(GameObject seenBush, DragonSize size){
         // Return if player is already inside another bush
         if (insideBush)
@@ -338,7 +361,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    //Function handles leaving a bush
+    /// <summary>
+    /// Function handles leaving a bush
+    /// </summary>
     public void InteractBushLeave(){
         //Small
         if (size == DragonSize.SMALL){
@@ -357,7 +382,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    // Checks if Character is in contact with a Ground tagged GameObject
+    /// <summary>
+    /// Checks if Character is in contact with a Ground tagged GameObject
+    /// </summary>
     public bool IsGrounded()
     // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     {
@@ -367,7 +394,9 @@ public class Dragon : MonoBehaviour
         return Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
     }
 
-    //WIP. NOTE: does only work when moving forward. Could be performance issue due to calling in update loop
+    /// <summary>
+    /// WIP. NOTE: does only work when moving forward. Could be performance issue due to calling in update loop
+    /// </summary>
     public void CanClimb() {
         RaycastHit hitLower;
         // Colliding with an object at the feet
@@ -381,7 +410,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
-    // Disables the detection zone of the guard
+    /// <summary>
+    /// Disables the detection zone of the guard
+    /// </summary>
     public void RoarDragon() {
         // Do not allow consecutive roars
         if (roarUsedRecently)
@@ -401,8 +432,10 @@ public class Dragon : MonoBehaviour
               
     }
 
-    // A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it again. Also changes colour of the
-    // indicator on the ground meanwhile.
+    /// <summary>
+    /// A seperate thread. Disables the collider detection component of the guard, waits 5 sec, then enables it again. Also changes colour of the
+    /// indicator on the ground meanwhile.
+    /// </summary>
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
         CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
         Renderer renderer = guardObject.GetComponent<Renderer>();
@@ -419,6 +452,9 @@ public class Dragon : MonoBehaviour
         roarUsedRecently = false;
     }
 
+    /// <summary>
+    /// Checks if the dragon is inside a bush and standing stil, if it isnt, its not hidden
+    /// </summary>
     private bool IsDragonVisible()
     {
         if (!hidden)
@@ -430,6 +466,9 @@ public class Dragon : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Calculates the total amount of money the dragon has
+    /// </summary>
     public int calculateTotalMoneyDragon(int score)
     {
         if (size == DragonSize.SMALL){
@@ -444,6 +483,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// On trigger enter function
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (this.gameObject.CompareTag("Holder")) {}
@@ -482,6 +524,9 @@ public class Dragon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// On trigger exit function
+    /// </summary>
     void OnTriggerExit(Collider other){
         if (other.gameObject.CompareTag("Bush")){
             InteractBushLeave();

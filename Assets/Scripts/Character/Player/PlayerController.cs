@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {   
+    //Statcontroler
     [SerializeField] PlayerStatController statController;
+    //Dragon being used by player at this time
     [SerializeField] Dragon dragon;
+    //Variables for movement:
     public Vector2 turn;
     public Vector3 deltaMovement;
     public GameObject movement;
@@ -36,6 +39,9 @@ public class PlayerController : MonoBehaviour
         CheckBelowLevel();
     }
 
+    /// <summary>
+    /// Checks if the player is cought by a guard
+    /// </summary>
     private void CheckCollision()
     {
         if (statController.activeDragon.IsCaught) {
@@ -45,6 +51,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function for making the dragon move in by "WASD" input
+    /// </summary>
     private void MoveCharacter()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -81,10 +90,16 @@ public class PlayerController : MonoBehaviour
         statController.activeDragon.UpdateBush();
     }
 
+    /// <summary>
+    /// Function to handle walking on stairs
+    /// </summary>
     void stepClimb() {
         statController.activeDragon.CanClimb();        
     }
 
+    /// <summary>
+    /// Checks if the player wants to shrink the dragon, and if able to do so, performs the action
+    /// </summary>
     private void CheckEvolve()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -94,6 +109,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the player wants to reload the level, and performs the action
+    /// </summary>
     private void ReloadLevelOnCommand()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -102,18 +120,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the player is currently underneath the deathzone which means the player fell of the map
+    /// </summary>
     private void CheckBelowLevel() {
         if (statController.activeDragon.transform.position.y < deathZone) {
             ReloadLevel();
         }
     }
 
+    /// <summary>
+    /// Checks if the player wants to roar, and if able to do so, performs the action
+    /// </summary>
     private void CheckRoar() { //Should change this button to be E since E no longer evolves the dragon
         if (Input.GetKeyDown(KeyCode.L) && statController.activeDragon.size == Dragon.DragonSize.LARGE) {
             statController.activeDragon.RoarDragon();
             }
         }
     
+    /// <summary>
+    /// Reloads the level
+    /// </summary>
     public static void ReloadLevel() {     
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
