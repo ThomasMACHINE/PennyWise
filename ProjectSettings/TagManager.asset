@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - Holder
   - icon
+  - NotCoin
   layers:
   - Default
   - TransparentFX
