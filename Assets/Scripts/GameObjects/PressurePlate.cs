@@ -5,10 +5,8 @@ using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
-    // Which dragon size can interact with the PressurePlate (only one)
-    [SerializeField] bool smallImage;
-    [SerializeField] bool mediumImage;
-    [SerializeField] bool largeImage;
+    // Which dragon size can interact with the PressurePlate
+    [SerializeField] dragonType dragonSize;
     // The canvas image object.
     [SerializeField] GameObject imageGameObject;
 
@@ -24,19 +22,17 @@ public class PressurePlate : MonoBehaviour
     public UnityEvent disableEvent;
 
     void Start() {
-        //Checks if only one image state has been set to true in the inspector. Changes the image to correct image for size it true
-        if (smallImage && !(mediumImage || largeImage)) {
-            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSprite;
-
-        }
-        else if (mediumImage && !(smallImage || largeImage)) {
-            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = mediumImageSprite;
-        }
-        else if (largeImage && !(smallImage || mediumImage)) {
-            imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = largeImageSprite;
-        }
-        else {
-            Debug.Log("ERROR! Either no image was choosen for the PressurePlate or more than one was set to true");
+        switch (dragonSize)
+        {
+            case dragonType.small:
+                imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = smallImageSprite;
+                break;
+            case dragonType.medium:
+                imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = mediumImageSprite;
+                break;
+            case dragonType.large:
+                imageGameObject.GetComponent<UnityEngine.UI.Image>().sprite = largeImageSprite;
+                break;
         }
     }
 

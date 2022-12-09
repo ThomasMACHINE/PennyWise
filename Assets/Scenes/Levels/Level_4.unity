@@ -6035,6 +6035,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 251328711861091240, guid: a7c1d6949f2796d46974a7f28cd651b5, type: 3}
+      propertyPath: dragonSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 251328711861091240, guid: a7c1d6949f2796d46974a7f28cd651b5, type: 3}
       propertyPath: largeImage
       value: 1
       objectReference: {fileID: 0}

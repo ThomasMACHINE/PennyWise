@@ -14,14 +14,7 @@ public class CoinFountain : MonoBehaviour
     [SerializeField] float coinFrequency;
     private float timeTracker = 0;
 
-    // should have made this as a global enum for other scripts
-    // but this is written in the last week, so too late to implement a standard like this
-    enum dragonType
-    {
-        small,
-        medium,
-        large
-    }
+    // what size dragon do we want to allow the player to be
     [SerializeField] dragonType targetLevel;
     private int targetLevelValue;
     // toggle that makes us ignore the coins loaded in the level and only consider how many coins the player has
@@ -90,8 +83,6 @@ public class CoinFountain : MonoBehaviour
         }
     }
 
-    // a lot of this coin is taken from CoinDrop.cs
-    // might be smart to generalize the functions and have both scripts call the same ones
     GameObject DispenseCoin()
     {
         GameObject newCoin = GameObject.Instantiate(coin);
