@@ -2,6 +2,12 @@
 
 This is a game where you play as a dragon who is on a mission to kidnap the princess.
 
+Our gamedesign document: https://github.com/ThomasMACHINE/PennyWise/wiki/Game-Design
+Our Original gamedesign document: https://github.com/ThomasMACHINE/PennyWise/wiki/Original-Game-Design-and-Ideas
+Our 2D assets: https://github.com/ThomasMACHINE/PennyWise/wiki/2D-Assets
+
+Or you can go to the wiki and find these documents there.
+
 ## Members of the group:
  - Susanne Skjold Edvardsen
  - Thomas Vincent Lien
@@ -87,7 +93,9 @@ The labels we have for the project are as following:
 ![image](https://user-images.githubusercontent.com/60709685/205984900-1f34e469-7378-4d27-a97e-d5aaaf562c5b.png)
 
 Which are all easy to understand and add to issues as they are being worked on. 
- 
+
+
+TO BE REMOVED!!!
 ## You will include an individual discussion on
 
 - A link to, and discussion of, code you consider good.
