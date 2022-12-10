@@ -93,22 +93,3 @@ The labels we have for the project are as following:
 ![image](https://user-images.githubusercontent.com/60709685/205984900-1f34e469-7378-4d27-a97e-d5aaaf562c5b.png)
 
 Which are all easy to understand and add to issues as they are being worked on. 
-
-
-TO BE REMOVED!!!
-## You will include an individual discussion on
-
-- A link to, and discussion of, code you consider good.
-- A link to, and discussion of, code you consider bad.
-- A personal reflection about the key concepts you learnt during the course
-
-# Rubric
-
-|Description | min | def | max |
-|----|----|----|----|
-|Gameplay video | 5 | 10 | 20 |
-|Code video | 0 | 10 | 15 |
-|Good Code  | 10 | 20 | 30 |
-|Bad Code | 10 | 20 | 30 |
-|Development process | 10 | 20 | 30 |
-|Reflection | 10 | 20 | 30 |
