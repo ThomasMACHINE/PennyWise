@@ -29,7 +29,6 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         GetAheadPosition();
-       // ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
         currentDistance += Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed * Time.deltaTime * factorOfScaling;
         currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
         
