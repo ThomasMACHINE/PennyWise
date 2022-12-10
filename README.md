@@ -28,9 +28,9 @@ Or you can go to the wiki and find these documents there.
  
  ## Individual reports:
  
-[Susanne](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Susanne.md)
-[Thomas](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Thomas.md)
-[Fredrik](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Fredrik.md)
+[Susanne](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Susanne.md)
+[Thomas](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Thomas.md)
+[Fredrik](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Fredrik.md)
 [Ole](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Ole.md)
 
 ### Work Distribution Matrix
