@@ -28,11 +28,9 @@ public class TeleportToNextLevel : MonoBehaviour
         if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.SMALL))) {
             PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.SMALL;
         }
-        //else if (other.gameObject.name.Contains(Dragon.GlobalModelENUM.MEDIUM)) {
         else if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.MEDIUM))) {
             PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.MEDIUM;
         }
-        //else if (other.gameObject.name.Contains(Dragon.GlobalModelENUM.LARGE)) {
         else if (other.gameObject.name.Contains(nameof(PlayerStatController.GlobalModelENUM.LARGE))) {
             PlayerStatController.globalModel = PlayerStatController.GlobalModelENUM.LARGE;
         }
