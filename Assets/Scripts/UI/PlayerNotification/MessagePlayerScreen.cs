@@ -19,6 +19,11 @@ public class MessagePlayerScreen : MonoBehaviour
     [SerializeField] Vector3 screenInterpolationEndPoint;
     [SerializeField] float interpolationSpeed;
 
+    //Remove current popup
+    bool showPopup = true;
+    Coroutine timer;
+    
+
     private void Awake()
     {
         if (!Panel)
@@ -52,6 +57,7 @@ public class MessagePlayerScreen : MonoBehaviour
         if (!isDisplaying)
         {
             sendMessage(mb);
+            
         }
     }
 
@@ -61,8 +67,9 @@ public class MessagePlayerScreen : MonoBehaviour
         Title.text = mb.title;
         Body.text = mb.body;
         isDisplaying = true;
-
+        timer = StartCoroutine(popupTimer());
         setMessengerIcon(mb.messenger);
+        
     }
 
     private void setMessengerIcon(NotificationMessenger.Messenger messenger)
@@ -71,28 +78,52 @@ public class MessagePlayerScreen : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pendingMessages.Clear();
         }
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
+            
             if (pendingMessages.Count != 0)
             {
-                Debug.Log(pendingMessages.Count);
-
                 sendMessage(pendingMessages[0]);
                 pendingMessages.RemoveAt(0);
-                Debug.Log(pendingMessages.Count);
 
             }
             else {
+                StopCoroutine(timer);
+                Panel.SetActive(false);
+                isDisplaying = false;
+            }
+        } 
+        if (!showPopup){
+            showPopup = true; //Resetting the timer for the popup
+            if (pendingMessages.Count != 0)
+            {
+
+
+                sendMessage(pendingMessages[0]);
+                pendingMessages.RemoveAt(0);
+
+
+            }
+            else {
+                
                 Panel.SetActive(false);
                 isDisplaying = false;
             }
         }
         Panel.transform.position = Vector3.MoveTowards(Panel.transform.position, screenInterpolationEndPoint, interpolationSpeed);
+    }
+
+    IEnumerator popupTimer()
+    {
+
+        yield return new WaitForSeconds(5);
+  
+        showPopup = false;
     }
 
     private bool isDuplicate(MessageBody newMessageBody)
