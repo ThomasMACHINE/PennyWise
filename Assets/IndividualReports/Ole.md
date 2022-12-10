@@ -35,15 +35,6 @@ Developing and seeing the game come together was fun. It also made me look at mo
 It also led to me looking at other games, and trying to figure out how different aspects were made and why they was made that way, like the interview with Glen Schofield (link: https://www.youtube.com/watch?v=TEXdJU9ZUX8). 
 
 
-Rubric 
-Description	min	def	max
-Gameplay video	5	10	20
-Code video	0	10	15
-Good Code	10	20	30
-Bad Code	10	20	30
-Development process	10	20	30
-Reflection	10	20	30
-
 ### Point division 
 | | |
 |----|----|
