@@ -2,9 +2,9 @@
 
 This is a game where you play as a dragon who is on a mission to kidnap the princess.
 
-- Our gamedesign document: https://github.com/ThomasMACHINE/PennyWise/wiki/Game-Design
-- Our Original gamedesign document: https://github.com/ThomasMACHINE/PennyWise/wiki/Original-Game-Design-and-Ideas
-- Our 2D assets: https://github.com/ThomasMACHINE/PennyWise/wiki/2D-Assets
+- Our gamedesign document: [Here](https://github.com/ThomasMACHINE/PennyWise/wiki/Game-Design)
+- Our Original gamedesign document: [Here](https://github.com/ThomasMACHINE/PennyWise/wiki/Original-Game-Design-and-Ideas)
+- Our 2D assets: [Here](https://github.com/ThomasMACHINE/PennyWise/wiki/2D-Assets)
 
 Or you can go to the wiki and find these documents there.
 
@@ -19,7 +19,7 @@ Or you can go to the wiki and find these documents there.
  - 2D Animations were made by Susanne
  - 3D Models (Dragon and NPCs) were made by Susanne
  - 3D animations of models were made by Thomas
- - Music was created for the game by extern: Birger Wessel Audio (Link to their youtube channel: https://www.youtube.com/channel/UCgvNONj7uLkhVaEoIFIzDRQ) 
+ - Music was created for the game by extern: Birger Wessel Audio. Link to their youtube channel: [Here](https://www.youtube.com/channel/UCgvNONj7uLkhVaEoIFIzDRQ) 
  
  ## Videos
  - Trailer
@@ -28,10 +28,11 @@ Or you can go to the wiki and find these documents there.
  
  ## Individual reports:
  
- - Susanne: https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Susanne.md
- - Thomas (ADD LINK TO OWN SELFREFLECTION)
- - Fredrik (ADD LINK TO OWN SELFREFLECTION)
- - Ole: https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Ole.md
+[Susanne](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Susanne.md)
+[Thomas](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Thomas.md)
+[Fredrik](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Fredrik.md)
+[Ole](https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Ole.md)
+
 ### Work Distribution Matrix
 | | Susanne | Thomas | Fredrik | Ole | (EXTERN) Birger |
 |----|----|----|----|----|----|
@@ -68,7 +69,7 @@ Another fault with Unity is the lack of multiplayer implementation, which would 
 #### Process and Communication systems during development
 We used the team roles established from the teacher, where each member selfassignes an animal. Susanne was the Bear, Thomas was the Rabbit, Fredrik the Wolf and Ole was the Cat. Most of the team fit snuggly into these roles, we were not a large enough team to encompass all the roles, and as such we were missing the owl and the puppy, the owl which makes sure progress is made was added to the role of the bear and puppy was easily accepted by everyone as all the group members were able to push forward with entusiasm.
 
-The following image is a screenshot of the video explaining the roles. The video can be found here: https://www.youtube.com/watch?v=WB6w7ovocpk
+The following image is a screenshot of the video explaining the roles. The video can be found here: [Link](https://www.youtube.com/watch?v=WB6w7ovocpk)
 ![image](https://user-images.githubusercontent.com/60709685/205981735-df13084e-7ef3-42c5-a3ca-b221da84d80a.png)
 
 In regards to communication, not all students are in Gjøvik and as such, everything happened online via Discord. We used the channel provided to us from the game programming server, as well as creating our own server for more indepth discussions. 

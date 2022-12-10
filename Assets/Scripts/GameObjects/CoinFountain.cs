@@ -122,7 +122,7 @@ public class CoinFountain : MonoBehaviour
     }
     IEnumerator GetTotalCoins()
     {
-        int totalCoins = 0;
+        totalCoins = 0;
         // definitely more performant ways to do this
         // but this pseudo-while(true) loop is much easier to implement
         // should use the fancy job system but dont want to install the package and relearn all that
