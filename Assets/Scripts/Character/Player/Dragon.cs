@@ -437,6 +437,7 @@ public class Dragon : MonoBehaviour
     /// indicator on the ground meanwhile.
     /// </summary>
     IEnumerator DisableGuardDetectionForATime(GameObject guardObject) {
+        icons.UpdateRoarUsed(true);
         CapsuleCollider colliderCapsule = guardObject.GetComponent<CapsuleCollider>();
         Renderer renderer = guardObject.GetComponent<Renderer>();
         colliderCapsule.enabled = false;
@@ -450,6 +451,7 @@ public class Dragon : MonoBehaviour
         renderer.material.color = guardRedColor;
         // Allow user to roar again
         roarUsedRecently = false;
+        icons.UpdateRoarUsed(false);
     }
 
     /// <summary>

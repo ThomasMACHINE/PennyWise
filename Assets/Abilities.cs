@@ -11,7 +11,25 @@ public class Abilities : MonoBehaviour
         objects = GameObject.FindGameObjectsWithTag("icon");
     }
 
+    //Removes the roar icon if roar has been used recently
+    public void UpdateRoarUsed(bool showCooldown){
+        if (showCooldown){
+            foreach (var obj in objects){
+                if (obj.name == "Roar"){
+                    obj.SetActive(false);
+                    
+                }
+            }
+        } else {
+            foreach (var obj in objects){
+                if (obj.name == "Roar"){
+                    obj.SetActive(true);
+                    
+                }
+            }
+        }
 
+    }
 
     public void UpdateIcons(string size) {
         //var objects = GameObject.FindGameObjectsWithTag("icon");
@@ -43,7 +61,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Carry":
-                    if (size == "Dragon_MEDIUM" || size == "Dragon_LARGE"){
+                    if (size == "Dragon_MEDIUM"){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);

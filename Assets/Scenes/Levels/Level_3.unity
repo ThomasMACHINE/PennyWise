@@ -2107,6 +2107,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 115854329492269177, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 366034838988595479, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
       propertyPath: guard
       value: 
@@ -2203,6 +2207,10 @@ PrefabInstance:
       propertyPath: guard
       value: 
       objectReference: {fileID: 1146283723}
+    - target: {fileID: 8382858797297111652, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d8c24b6e9285b74cbb6ca370663722d, type: 3}
 --- !u!114 &382447040 stripped
