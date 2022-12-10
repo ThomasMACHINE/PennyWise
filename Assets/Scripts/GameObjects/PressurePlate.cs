@@ -40,8 +40,6 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    
-
     // Checks if the player touches/steps on the pressure plate.
     private void OnTriggerEnter(Collider other) {
 		if(other.tag.Equals(playerString)) {
@@ -61,12 +59,9 @@ public class PressurePlate : MonoBehaviour
             }
 		}
     }
-    // Clean up. Can't see what the intent is here.
-    // If the player leaves the platform, disable the invoke. (Crate not counting here)
+
     private void OnTriggerExit(Collider other) {
         disableEvent.Invoke();
     }
-
-
 
 }
