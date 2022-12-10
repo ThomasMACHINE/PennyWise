@@ -31,8 +31,7 @@ Or you can go to the wiki and find these documents there.
  - Susanne: https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Susanne.md
  - Thomas (ADD LINK TO OWN SELFREFLECTION)
  - Fredrik (ADD LINK TO OWN SELFREFLECTION)
- - Ole  (ADD LINK TO OWN SELFREFLECTION)
-
+ - Ole: https://github.com/ThomasMACHINE/PennyWise/blob/6984e3d4acc15c5eb750d753093ee285cb43b54f/Assets/IndividualReports/Ole.md
 ### Work Distribution Matrix
 | | Susanne | Thomas | Fredrik | Ole | (EXTERN) Birger |
 |----|----|----|----|----|----|
