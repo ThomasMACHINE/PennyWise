@@ -6,23 +6,26 @@ public class Abilities : MonoBehaviour
 {
 
     static GameObject[] objects;
+    private string iconString = "icon";
+    private string roarString = "Roar";
+
 
     void Awake() {
-        objects = GameObject.FindGameObjectsWithTag("icon");
+        objects = GameObject.FindGameObjectsWithTag(iconString);
     }
 
     //Removes the roar icon if roar has been used recently
     public void UpdateRoarUsed(bool showCooldown){
         if (showCooldown){
             foreach (var obj in objects){
-                if (obj.name == "Roar"){
+                if (obj.name == roarString){
                     obj.SetActive(false);
                     
                 }
             }
         } else {
             foreach (var obj in objects){
-                if (obj.name == "Roar"){
+                if (obj.name == roarString){
                     obj.SetActive(true);
                     
                 }

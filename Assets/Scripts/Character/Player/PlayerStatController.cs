@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerStatController : MonoBehaviour
 {
@@ -55,7 +55,8 @@ public class PlayerStatController : MonoBehaviour
             SetNewDragon(activeDragon.NextDragon);
         }
         else {
-            Debug.Log("ERROR IMPENDING. (TO DEV: PLESE MAKE SURE THAT NAMING CONVENTION IS FOLLOWED)!");
+            // You should not be able to reach this code, but reaching this code would mean that something went horribly wrong.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         //Update UI - AbilityIcons & EvolveBar
         icons.UpdateIcons(activeDragon.name);
@@ -71,7 +72,7 @@ public class PlayerStatController : MonoBehaviour
         }
     }
 
-    //Test fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.
+    //Fix for faulty instance. NOTE: should check if the guard "vision" overlap with player position and return true if it does.
     //NullReferenceException: Object reference not set to an instance of an object
     public bool IsCaught() {
         throw new NotImplementedException();
@@ -93,7 +94,6 @@ public class PlayerStatController : MonoBehaviour
         CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
         if(activeDragon.NextDragon == null)
         {
-            Debug.Log("There is no higher tier dragon!");
             return;
         }
         SetNewDragon(activeDragon.NextDragon);
@@ -112,15 +112,12 @@ public class PlayerStatController : MonoBehaviour
 
         if (newDragon == null)
         {
-            Debug.Log("There is no lower tier dragon!");
             return;
         }
         // Set the new dragon and drop the coins used to evolve
         SetNewDragon(newDragon);
-
-        //CoinScore.globalCoinScore -= activeDragon.CoinToEvolve;
-        //NOTE: drop coin amount equal to evolve req. (2 for medium -> small, 5 for large -> medium atm)
-        //Sound
+        
+        //NOTE: drop coin amount equal to evolve req. (2 for medium -> small, 3 for large -> medium as of 10.11)
         coinDropSound.Play();
         coinDropper.DropCoins(newDragon.GetComponent<Dragon>().CoinToEvolve, newDragon.transform.position);
     }
@@ -139,7 +136,6 @@ public class PlayerStatController : MonoBehaviour
 
         if (newDragon == null)
         {
-            Debug.Log("There is no lower tier dragon!");
             return;
         }
         // Set the new dragon and drop the coins used to evolve
@@ -158,7 +154,8 @@ public class PlayerStatController : MonoBehaviour
         // Set States and Orientation of the new dragon
         activeDragon.gameObject.SetActive(false);
         newDragon.SetActive(true);
-        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0); // Add a bit of height so that player does not get stuck in ground
+        // Add a bit of height so that player does not get stuck in ground
+        newDragon.transform.position = activeDragon.transform.position + new Vector3(0, 0.5f ,0);
         newDragon.transform.rotation = activeDragon.transform.rotation;
         // Make the camera target the new model
         cameraController.SetNewTarget(newDragon);

@@ -89,7 +89,7 @@ public class CoinFountain : MonoBehaviour
         newCoin.gameObject.SetActive(true);
 
         Vector2 direction = Random.insideUnitCircle.normalized;
-                                                                                                                                                        // using Y in place of Z cus the vector is along a 2d plane and thus only has 2 dimensions
+        // using Y in place of Z since the vector is along a 2d plane and thus only has 2 dimensions
         newCoin.transform.position = gameObject.transform.position + new Vector3(direction.x * Random.Range(minCoinDistance, maxCoinDistance),-startingCoinDepth, direction.y * Random.Range(minCoinDistance, maxCoinDistance));
 
         newCoin.GetComponent<Collider>().isTrigger = true;  

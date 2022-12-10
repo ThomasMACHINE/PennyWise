@@ -18,6 +18,10 @@ public class PressurePlate : MonoBehaviour
     public UnityEvent smallEvent;
     public UnityEvent mediumEvent;
     public UnityEvent largeEvent;
+    private string playerString = "Player";
+    private string smallSizeString = "SMALL";
+    private string mediumSizeString = "MEDIUM";
+    private string largeSizeString = "LARGE";
 
     public UnityEvent disableEvent;
 
@@ -40,18 +44,18 @@ public class PressurePlate : MonoBehaviour
 
     // Checks if the player touches/steps on the pressure plate.
     private void OnTriggerEnter(Collider other) {
-		if(other.tag.Equals("Player")) {
+		if(other.tag.Equals(playerString)) {
             // Could possibly add a container platform so the player is in the middle. Will need the size of the models to effectivly implement.
-			if (other.gameObject.name.Contains("SMALL")) {
+			if (other.gameObject.name.Contains(smallSizeString)) {
                 smallEvent.Invoke();
             }
-            else if (other.gameObject.name.Contains("MEDIUM")) {
+            else if (other.gameObject.name.Contains(mediumSizeString)) {
                 mediumEvent.Invoke();
             }
-            else if (other.gameObject.name.Contains("LARGE")) {
+            else if (other.gameObject.name.Contains(largeSizeString)) {
                 largeEvent.Invoke();
             }
-            //Should never be able to see this, but you should help with testing.
+            //Should never be able to see this, but should help with testing.
             else {
                 Debug.LogError("No valid dragon model entered the pressure plate");
             }

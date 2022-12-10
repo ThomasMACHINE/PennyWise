@@ -60,6 +60,7 @@ public class CameraController : MonoBehaviour
             currentDistance = 3;
         }
         else {
+            // Should not be able to reach here
             Debug.Log("CameraController could not get name of model in use");
         }
         trackedObject = target.transform;
