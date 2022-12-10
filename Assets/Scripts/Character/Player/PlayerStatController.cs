@@ -23,6 +23,10 @@ public class PlayerStatController : MonoBehaviour
     //Sound
     public AudioSource coinDropSound;
 
+    private string smallDragonString = "Dragon_SMALL";
+    private string mediumDragonString = "Dragon_MEDIUM";
+    private string largeDragonString = "Dragon_LARGE";
+
     
     //Name of model in use
     public enum GlobalModelENUM
@@ -42,15 +46,15 @@ public class PlayerStatController : MonoBehaviour
             evolveBar.UpdateEvolveScore(activeDragon.calculateTotalMoneyDragon(CoinScore.globalCoinScore));
         }
         else if (globalModel == GlobalModelENUM.MEDIUM) {
-            activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
-            activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(false);
-            activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(true);
+            activeDragon.gameObject.transform.parent.Find(smallDragonString).gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find(largeDragonString).gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find(mediumDragonString).gameObject.SetActive(true);
             SetNewDragon(activeDragon.NextDragon);            
         }
         else if (globalModel == GlobalModelENUM.LARGE) {
-            activeDragon.gameObject.transform.parent.Find("Dragon_SMALL").gameObject.SetActive(false);
-            activeDragon.gameObject.transform.parent.Find("Dragon_MEDIUM").gameObject.SetActive(false);
-            activeDragon.gameObject.transform.parent.Find("Dragon_LARGE").gameObject.SetActive(true);
+            activeDragon.gameObject.transform.parent.Find(smallDragonString).gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find(mediumDragonString).gameObject.SetActive(false);
+            activeDragon.gameObject.transform.parent.Find(largeDragonString).gameObject.SetActive(true);
             SetNewDragon(activeDragon.NextDragon);
             SetNewDragon(activeDragon.NextDragon);
         }

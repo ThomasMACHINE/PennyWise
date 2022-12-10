@@ -27,11 +27,16 @@ public class CoinFountain : MonoBehaviour
     [SerializeField] float startingCoinDepth = 0.5f;
     [SerializeField] float minCoinDistance = 1.0f;
     [SerializeField] float maxCoinDistance = 2.75f;
-
     [SerializeField] GameObject coin;
+    private string coinString = "Coin";
+    private string smallDragonString = "Dragon_SMALL";
+    private string mediumDragonString = "Dragon_MEDIUM";
+    private string playerModelsString = "Player_Models";
+
+
     private void Awake()
     {
-        if (coin.tag != "Coin")
+        if (coin.tag != coinString)
             Debug.LogError("The coin Prefab does not have the coin tag!");
         if (initialCoinsDeployed > maxDeployedCoins)
             Debug.LogError("initial number of deployed coins is greater than max number, we will go out of bounds");
@@ -42,7 +47,7 @@ public class CoinFountain : MonoBehaviour
         coins = new GameObject[maxDeployedCoins];
         // find the gameobject that's parent of dragon models
         // need to do this in a roundabout way since GameObject.Find CANNOT find disabled objects
-        GameObject dragonModels = GameObject.Find("Player_Models");
+        GameObject dragonModels = GameObject.Find(playerModelsString);
         switch (targetLevel)
         {
             case dragonType.small:
@@ -52,10 +57,10 @@ public class CoinFountain : MonoBehaviour
                 targetLevelValue = 0;
                 break;
             case dragonType.medium:
-                targetLevelValue = dragonModels.transform.Find("Dragon_SMALL").GetComponent<Dragon>().CoinToEvolve;
+                targetLevelValue = dragonModels.transform.Find(smallDragonString).GetComponent<Dragon>().CoinToEvolve;
                 break;
             case dragonType.large:
-                targetLevelValue = dragonModels.transform.Find("Dragon_MEDIUM").GetComponent<Dragon>().CoinToEvolve;
+                targetLevelValue = dragonModels.transform.Find(mediumDragonString).GetComponent<Dragon>().CoinToEvolve;
                 break;
         }
         StartCoroutine(GetTotalCoins());

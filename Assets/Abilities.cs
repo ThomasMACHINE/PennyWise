@@ -8,6 +8,9 @@ public class Abilities : MonoBehaviour
     static GameObject[] objects;
     private string iconString = "icon";
     private string roarString = "Roar";
+    private string smallDragonString = "Dragon_SMALL";
+    private string mediumDragonString = "Dragon_MEDIUM";
+    private string largeDragonString = "Dragon_LARGE";
 
 
     void Awake() {
@@ -40,7 +43,7 @@ public class Abilities : MonoBehaviour
             switch(obj.name){
                 
                 case "Glide":
-                    if (size == "Dragon_SMALL"){
+                    if (size == smallDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -48,7 +51,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Hide":
-                    if (size == "Dragon_SMALL" || size == "Dragon_MEDIUM"){
+                    if (size == smallDragonString || size == mediumDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -56,7 +59,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "DoubleJump":
-                    if (size == "Dragon_MEDIUM"){
+                    if (size == mediumDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -64,7 +67,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Carry":
-                    if (size == "Dragon_MEDIUM"){
+                    if (size == mediumDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -72,7 +75,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Roar":
-                    if (size == "Dragon_LARGE"){
+                    if (size == largeDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -80,7 +83,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Small":
-                    if (size == "Dragon_SMALL"){
+                    if (size == smallDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -88,7 +91,7 @@ public class Abilities : MonoBehaviour
                     break;
 
                 case "Medium":
-                    if (size == "Dragon_MEDIUM"){
+                    if (size == mediumDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
@@ -96,7 +99,7 @@ public class Abilities : MonoBehaviour
                     break;
                 
                 case "Large":
-                    if (size == "Dragon_LARGE"){
+                    if (size == largeDragonString){
                         obj.SetActive(true);
                     } else {
                         obj.SetActive(false);
