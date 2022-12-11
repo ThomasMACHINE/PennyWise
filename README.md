@@ -24,7 +24,7 @@ Or you can go to the wiki and find these documents there.
  ## Videos
  - Trailer
  - Full Gameplay 
- - A video showing off the code that is tightinly integrated with the game engine that is difficult to see from the text of the programming.
+ - Hidden Code: [Here](https://youtu.be/sXGV8TLOTHU)
  
  ## Individual reports:
  
