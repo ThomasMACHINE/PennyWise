@@ -14,6 +14,15 @@ It was an interesting lesson on how your own code and design is not inherently o
 One thing I regret not bringing up was using a shared document for codestyling, especially for C#, microsoft provides excellent advice for having consistent looking ode.
 
 # Good Code
+To start of with I like simple solutions, in the GamePauseMenu we wanted to make instructions for the player, my idea for this was that instead of making plenty of Panels with many UI element, we can instead make the images on Paint for each instruction page and rotate through them. The UI simply has arrows, the script holds a list of images.
+
+<img width="559" alt="image" src="https://user-images.githubusercontent.com/53544690/206933297-a91984f1-7633-4516-b624-21f846516093.png">
+
+And the thought process is simple, the User can either get the picture before (left) or the next (right) through the pictures, by clicking the arrow keys in the UI. 
+
+<img width="676" alt="image" src="https://user-images.githubusercontent.com/53544690/206933436-be1c3eca-15a4-4b0a-a1ac-0c6fd78ac350.png">
+
+
 
 I was quite happy with my NPC "framework", this was not used heavily in the game, only being utilised for the GoldGolem. One of the problems I like to solve are: "We have to repeat so much code in order to make many different instances of very similar things."
 
