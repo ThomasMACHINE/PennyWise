@@ -240,6 +240,9 @@ MonoBehaviour:
   Body: {fileID: 7130309878592026177}
   MessengerIcon: {fileID: 5227078889044397914}
   messengerStorage: {fileID: 4777927981611593086}
+  screenInterpolationStartPoint: {x: 0, y: 0, z: 0}
+  screenInterpolationEndPoint: {x: 0, y: 0, z: 0}
+  interpolationSpeed: 0
 --- !u!1 &7130309877216276278
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Enter To Close
+  m_text: Press F To Close
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

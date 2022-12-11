@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     /// Checks if the player wants to roar, and if able to do so, performs the action
     /// </summary>
     private void CheckRoar() { //Should change this button to be E since E no longer evolves the dragon
-        if (Input.GetKeyDown(KeyCode.L) && statController.activeDragon.size == Dragon.DragonSize.LARGE) {
+        if (Input.GetKeyDown(KeyCode.E) && statController.activeDragon.size == Dragon.DragonSize.LARGE) {
             statController.activeDragon.RoarDragon();
             }
         }

@@ -83,7 +83,7 @@ public class MessagePlayerScreen : MonoBehaviour
         {
             pendingMessages.Clear();
         }
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.F))
         {
             
             if (pendingMessages.Count != 0)
