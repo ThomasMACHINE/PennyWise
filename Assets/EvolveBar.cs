@@ -16,9 +16,10 @@ public class EvolveBar : MonoBehaviour
     public Text text;
     private string evolveMessage = "Press E to evolve!";
     static GameObject[] objects;
+    private string iconString = "icon";
 
     void Awake() {
-        objects = GameObject.FindGameObjectsWithTag("icon");
+        objects = GameObject.FindGameObjectsWithTag(iconString);
     }
     
 

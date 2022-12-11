@@ -11,6 +11,7 @@ public class Messagezone : MonoBehaviour{
     [SerializeField] GameObject self;
     [SerializeField] string titleText;
     [SerializeField] string bodyText;
+    private string playerString = "Player";
 
     void sendMessage()
     {
@@ -19,7 +20,7 @@ public class Messagezone : MonoBehaviour{
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(playerString))
         {
             sendMessage();
             self.SetActive(false);

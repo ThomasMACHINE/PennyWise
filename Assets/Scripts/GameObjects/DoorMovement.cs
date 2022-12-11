@@ -30,7 +30,7 @@ public class DoorMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, step);
     }
 
-    // primarily intended to be invoked as an event, see PressurePlate.cs and EventInvokeOnRightClick.cs
+    // primarily intended to be invoked as an event, see PressurePlate.cs
     public void setOpen(bool newState){
         if (newState) {
             target = pointB;

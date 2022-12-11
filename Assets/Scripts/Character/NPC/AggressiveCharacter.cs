@@ -31,8 +31,6 @@ public abstract class AggressiveCharacter : Character, IAggressiveEnemy
             RaycastHit hit;
             if (Physics.Raycast(eyes.position, direction, out hit, searchRadius, playerMask)) // The tilda is a fancy way to invert the bitmask of the layerMask (Checking for collision with anything that is not player)
             {
-                Debug.Log("Hello I can see u");
-                Debug.Log(hit.collider.gameObject.name);
                 IsHunting = true;
             }
         } // If player is outside searchRadius

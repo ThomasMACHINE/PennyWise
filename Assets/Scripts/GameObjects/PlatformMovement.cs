@@ -18,6 +18,7 @@ public class PlatformMovement : MonoBehaviour
     [SerializeField] bool active = true;
     [SerializeField] bool loop = true;
     [SerializeField] bool playerCanRidePlatform = false;
+    private string playerString = "Player";
 
     void Start() {
         pointA = this.gameObject.transform.position;
@@ -46,14 +47,14 @@ public class PlatformMovement : MonoBehaviour
     }
     // Checks if the player is touching the platform.
     private void OnCollisionEnter(Collision collision) {       
-       if (collision.gameObject.tag.Equals("Player") && playerCanRidePlatform) {
+       if (collision.gameObject.tag.Equals(playerString) && playerCanRidePlatform) {
             collision.transform.SetParent(platformMoveParent);
      }
     }
-    // Checks if the player is not touching the platform (left)
+    // Checks if the player is not touching the platform (player has left the platform)
     private void OnCollisionExit(Collision collision) {       
     
-       if (collision.gameObject.tag.Equals("Player") && playerCanRidePlatform) {
+       if (collision.gameObject.tag.Equals(playerString) && playerCanRidePlatform) {
             collision.transform.SetParent(null);
      }
     }

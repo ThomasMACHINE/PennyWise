@@ -96,8 +96,14 @@ public class Dragon : MonoBehaviour
     public bool hidden;
     private bool isCarryingBush;
     private Bush heldBush;
+    private string guardString = "Guard";
+    private string stairsString = "Stairs";
+    private string holderString = "Holder";
+    private string coinString = "Coin";
+    private string bushString = "Bush";
+    private int timeToWaitBeforeTurningGuardBackOn = 5;
 
-    //Possible dragonsizes
+    //Possible dragon sizes
     public enum DragonSize
     {
         none, SMALL, MEDIUM, LARGE
@@ -105,7 +111,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] public DragonSize size;
 
     private void Awake() {
-        guardObjectsInScene = GameObject.FindGameObjectsWithTag("Guard");
+        guardObjectsInScene = GameObject.FindGameObjectsWithTag(guardString);
         modelCollider = GetComponent<Collider>();
         rigBody = GetComponent<Rigidbody>();
         toggleHold = false;
@@ -355,6 +361,7 @@ public class Dragon : MonoBehaviour
             case DragonSize.LARGE:
                 break;
 
+            // should not be able to reach this
             default:
                 Debug.LogWarning("Dragon Does not have a Size set");
                 break;
@@ -373,7 +380,7 @@ public class Dragon : MonoBehaviour
         if (size == DragonSize.MEDIUM)
         {
             hidden = false;
-           insideBush = null;
+            insideBush = null;
         }
         //Large
         if (size == DragonSize.LARGE)
@@ -386,7 +393,6 @@ public class Dragon : MonoBehaviour
     /// Checks if Character is in contact with a Ground tagged GameObject
     /// </summary>
     public bool IsGrounded()
-    // TODO  - Not registering the grounded properly if the ground gameObject does not use the ground layer in the inspector (next to the tag).
     {
         bool isGrounded = Physics.CheckSphere(Bottom.transform.position, 0.3f, groundLayer);
         if (isGrounded) { jumpCount = 1; }
@@ -395,12 +401,12 @@ public class Dragon : MonoBehaviour
     }
 
     /// <summary>
-    /// WIP. NOTE: does only work when moving forward. Could be performance issue due to calling in update loop
+    /// Allows the player to clib up stairs by checking if the knee and/or foot is blocked. If the foot is blocked, but not the knee -> climb
     /// </summary>
     public void CanClimb() {
         RaycastHit hitLower;
         // Colliding with an object at the feet
-        if (Physics.Raycast(stepRayLower.transform.position, this.transform.TransformDirection(Vector3.forward), out hitLower, 0.3f, LayerMask.GetMask("Stairs"))) {
+        if (Physics.Raycast(stepRayLower.transform.position, this.transform.TransformDirection(Vector3.forward), out hitLower, 0.3f, LayerMask.GetMask(stairsString))) {
            RaycastHit hitHigher;
            // If the same object is not blocking the knees (or whatever the height is set to)
             if (!Physics.Raycast(stepRayHigher.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.3f)) {
@@ -444,7 +450,7 @@ public class Dragon : MonoBehaviour
         //Changes the colour  to white (RBA 0(black - 255 (white))).
         renderer.material.color = guardWhiteColor;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(timeToWaitBeforeTurningGuardBackOn);
         //Changes the colour back.
         colliderCapsule.enabled = true;
 
@@ -476,9 +482,9 @@ public class Dragon : MonoBehaviour
         if (size == DragonSize.SMALL){
             return score;
         } else if (size == DragonSize.MEDIUM){
-            return score + 2; //Hardcoded should be avoided
+            return score + 2; 
         } else if (size == DragonSize.LARGE){
-            return score + 5; //Hardcoded should be avoided
+            return score + 5;
         }else{
             Debug.LogError("DragonSize could not be determined. Name: " + name);
             return 0;
@@ -490,9 +496,9 @@ public class Dragon : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        if (this.gameObject.CompareTag("Holder")) {}
+        if (this.gameObject.CompareTag(holderString)) {}
         else {
-        if (other.gameObject.CompareTag("Guard")) {
+        if (other.gameObject.CompareTag(guardString)) {
             GameObject guardObjectField = other.gameObject;
             
             if(IsDragonVisible()) {
@@ -504,7 +510,7 @@ public class Dragon : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag(coinString))
         {
             //Sound
             coinPickUpSound.Play();
@@ -520,7 +526,7 @@ public class Dragon : MonoBehaviour
             }
             
         }
-        if (other.gameObject.CompareTag("Bush")){
+        if (other.gameObject.CompareTag(bushString)){
             InteractBushEnter(other.gameObject, this.size);
         }
         }
@@ -530,7 +536,7 @@ public class Dragon : MonoBehaviour
     /// On trigger exit function
     /// </summary>
     void OnTriggerExit(Collider other){
-        if (other.gameObject.CompareTag("Bush")){
+        if (other.gameObject.CompareTag(bushString)){
             InteractBushLeave();
         }
     }

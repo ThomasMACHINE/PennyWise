@@ -29,7 +29,6 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         GetAheadPosition();
-       // ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
         currentDistance += Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed * Time.deltaTime * factorOfScaling;
         currentDistance = Mathf.Clamp(currentDistance, 0, maxDistance);
         
@@ -60,6 +59,7 @@ public class CameraController : MonoBehaviour
             currentDistance = 3;
         }
         else {
+            // Should not be able to reach here
             Debug.Log("CameraController could not get name of model in use");
         }
         trackedObject = target.transform;

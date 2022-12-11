@@ -13,5 +13,5 @@ public class CoinScore
     public static int tempglobalTotalCoinScore{ get; set; }
 
     public static bool flagCheck{ get; set; }
-    //Small dragon 0, medium 1-3, large 3+ TEMP VALUES
+    //Small dragon 0, medium 1-3, large 3+
 }

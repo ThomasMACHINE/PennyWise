@@ -6,15 +6,13 @@ public class Interactable : MonoBehaviour
 {
     
     public Transform theDest;
+    private string holderString = "Holder";
 
     public void Hold(){
-        //GetComponent<Rigidbody>().useGravity = false;
-        //GetComponent<Rigidbody>().freezeRotation = true;
-        //this.transform.position = Vector3.MoveTowards(GameObject.Find("Holder").position, theDest.position, 1 * Time.fixedDeltaTime);
         this.transform.position = theDest.position;
         
         //Moves and rotates with parent object
-        this.transform.parent = GameObject.Find("Holder").transform;
+        this.transform.parent = GameObject.Find(holderString).transform;
     }
 
     public void Drop(){

@@ -28,23 +28,14 @@ public class FallingRockSpawner : MonoBehaviour
         StartCoroutine(coroutine);        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-     // every 2 seconds spawn a falling rock
+     // every # seconds spawn a falling rock (value from editor)
     private IEnumerator WaitAndSpawnRock(float waitTime)
     {
-
-        //x, -24 -> 25, y, 0 -> 284
-       // Vector3 location = new Vector3(Random.Range(-24f, 25f),178.4f,Random.Range(0f, 284f));
         while (true)
         {
             yield return new WaitForSeconds(waitTime);
-            //Instantiate(fallingRock, location, Quaternion.identity);
             Vector3 location = new Vector3(Random.Range(x_coord1, x_coord2),Random.Range(y_coord1, y_coord2),Random.Range(z_coord1, z_coord2));
+            // since the falling rock model is actually a mountain, one would need to turn the prefab model on its head
             Instantiate(fallingRock, location, transform.rotation *  Quaternion.Euler(180, 0, 0));
         }
     }
