@@ -22,16 +22,15 @@ Or you can go to the wiki and find these documents there.
  - Music was created for the game by extern: Birger Wessel Audio. Link to their youtube channel: [Here](https://www.youtube.com/channel/UCgvNONj7uLkhVaEoIFIzDRQ) 
  
  ## Videos
- - Trailer
- - Full Gameplay 
+ - Full Gameplay [Here](https://youtu.be/p8_9YTA5AYA)
  - Hidden Code: [Here](https://youtu.be/sXGV8TLOTHU)
  
  ## Individual reports:
  
-[Susanne](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Susanne.md)
-[Thomas](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Thomas.md)
-[Fredrik](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Fredrik.md)
-[Ole](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Ole.md)
+- [Susanne](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Susanne.md)
+- [Thomas](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Thomas.md)
+- [Fredrik](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Fredrik.md)
+- [Ole](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/IndividualReports/Ole.md)
 
 ### Work Distribution Matrix
 | | Susanne | Thomas | Fredrik | Ole | (EXTERN) Birger |
