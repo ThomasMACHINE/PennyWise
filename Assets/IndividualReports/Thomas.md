@@ -2,7 +2,7 @@
 |----|----|
 |Gameplay video  | 20 | 
 |Code video | 10 | 
-|Good Code  | 30 |
+|Good Code  | 25 |
 |Bad Code| 10 |
 |Development process | 15 | 
 |Reflection |  20 | 
