@@ -88,7 +88,7 @@ This shows the whole of the script, granting some free movement methods and sear
 In addition to this, there are some components like [CharacterGPS](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/CharacterGPS.cs).
 This is used in Character, and is an example of programming using composition. This is something I think is nice for larger systems, as it makes more sense to split up the solution into more cohesive units. In this example, when the GoldGolem is moving, it does not need to do any calculations to find its next position, this is all processed by the GPS and returned to the GoldGolem who mindlessly walks there.
 
-Another effect was that these Characters no longer ran on their own update cycle, but instead could be controlled by another script like [NPCHiveMind](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/NpcHiveMind.cs) which would find any characters in the scene and ensure allow customization of how often they search/move at one location. 
+Another effect was that these Characters no longer ran on their own update cycle, but instead could be controlled by another script like [NPCHiveMind](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/NpcHiveMind.cs) which would find any characters in the scene and allow customization of how often they search/move at one location. 
 
 # Bad Code
 
