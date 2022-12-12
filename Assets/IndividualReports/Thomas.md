@@ -98,5 +98,11 @@ Ideally we would have conformed to a code style document, that could have decrea
 
 In a previous iteration we had an issue with the Dragon Roar, when the Dragon roars, a seperate coroutine is ran which will reset the Guard states to not scared. The issue was that this coroutine could be spammed by the user spamming roar, leading to unpredictable outcomes as new coroutines are ran at the same time. The solution was easy, both in a game balancing sense and prevention. We resolved this by adding a cooldown so that the Roar could not be used too often. [Commit that fixed this issue](https://github.com/ThomasMACHINE/PennyWise/commit/06ef1332888f5b23dc758d1f1cbb69e5b110b95e)
 
+A really cool feature of c# is property wrapping, in Java the standard procedure is to generate Setters and Getters and set ur fields as private (or LomBok lol). In c# we can define the different access levels for reading and writing to the variables. You would not sabotage your code on purpose, which is why putting ur fields as public is not necessarily the end of the world. But I do feel like adding property wrappers could have improved the security of the code. 
 
+<img width="449" alt="image" src="https://user-images.githubusercontent.com/53544690/207029471-5d5d0f7c-ad1b-483e-9187-218c9b1ee5a5.png">
+
+PlayerStatController is the script that tells all other scripts which Dragon is active, normally it will only change this itself. But now that is publically available, and there is no restriction on setting the variable, one could set a new Dragon by mistake and the other scripts that checks this variable would cascade down to all other scripts reading the Active Dragon.
+
+Another way I would have liked to solve some of the variables changing is using a subscription model. Currently most scripts are actively reading the current dragon from PlayerStatController ensure that they are using the correct one, if the other scripts could trust PlayerStatController to notify them when it changes, the other scripts could run on a read once, store value basis.
 
