@@ -55,7 +55,7 @@ The end result of this was very pleasing! This code now follows the vision of Pl
 
 **Good Code - Framework**
 
-I was quite happy with my NPC "framework", this was not used heavily in the game, only being utilised for the GoldGolem.
+I was quite happy with my NPC "framework", this was not used heavily in the game, only being utilised for the GoldGolem. Ideally this would have been developed quicker and everything would have been added through this, but it started with a Guard that walked between 2 points and with many evolutions of this I feel like I made something I can consider well made. 
 
 The useage for this framework would be to seamlessly add in new Characters to the game, and skipping most of the boilerplate code. There are 2 main scripts, Character and AggressiveCharacter.
 
@@ -105,4 +105,14 @@ A really cool feature of c# is property wrapping, in Java the standard procedure
 PlayerStatController is the script that tells all other scripts which Dragon is active, normally it will only change this itself. But now that is publically available, and there is no restriction on setting the variable, one could set a new Dragon by mistake and the other scripts that checks this variable would cascade down to all other scripts reading the Active Dragon.
 
 Another way I would have liked to solve some of the variables changing is using a subscription model. Currently most scripts are actively reading the current dragon from PlayerStatController ensure that they are using the correct one, if the other scripts could trust PlayerStatController to notify them when it changes, the other scripts could run on a read once, store value basis.
+
+## Predescessor to the CharacterGPS
+
+[PathWalker](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/PathWalker.cs) was the first attempt at abstracting the movement logic from the NPC's. PathWalker takes in a list of GameObjects, which the Level-Designer can lay out on the map as points for the NPC to walk between. 
+<img width="928" alt="image" src="https://user-images.githubusercontent.com/53544690/207716577-00d0b172-eafd-44f0-8362-5e1ba654f97e.png">
+
+Firstly, I think the idea of what Pathwalker does is somewhat flawed. Given that we are not busy, move towards our target position. In development, only the aggressive characters would make use of this, as Pathwalker needs to stop if they are instead supposed to be chasing the player. The planned solution was to have another pathwalking script which would take control and chase the player when this happens. This would mean that the NPC would still have to control this variable itself, and I think we can make it more cohesive than that. After reflecting on this I think a good solution would be a base PathWalking class, which only travels between points. Then we could make child classes with more expressive logic like checking for player and setting them as the target. If no player is found, call the base Movement function. This way we would have a solid implementation for path-walking that could be extended for further use. Like a new child class that can be tricked to chase coins if they are nearby. 
+
+
+Lastly, I think abstracting out the update loop is important as it is a constant call to each GameObject with this script. [NPCHiveMind](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/NpcHiveMind.cs) is an example of how we can controll how often certain functions are called. By doing this for each components of the system we can group them up in such a way gives us controll over how often they are called and can save us resources. An example could be Physics, if the Physics calculations are starting to eat up all the resources we could decrease the frequency till we find a stable point where the user does not notice and we save up resources for the computer.
 
