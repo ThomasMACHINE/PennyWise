@@ -42,6 +42,8 @@ Our group had a great mix of skills. When producing a game you need a multitude 
 I think the work went great, Ideally I would have liked to do some more polishing to our development process. It would have been cool to formulate tickets as stories and work with Story Driven Development. Requirements on tickets would also have been an improvement as that would force the group to align on the criterias the feature should meet. No problems occured when it came to this as most tickets were resolved well and with high quality. Regardless, it is about working in a way and following procedures which minimizes the probability and severity of errors, so I still think it would have been benificial.
 
 # Good Code
+
+## Simple, clean solutions
 To start of, I like simple solutions, in the GamePauseMenu we wanted to make instructions for the player, my idea for this was that instead of making plenty of Panels with many UI elements, we can instead make the images on Paint for each instruction page and navigate through them like the picture app on your phone. The UI simply has 1 arrow on each side, the script holds a list of images.
 
 <img width="559" alt="image" src="https://user-images.githubusercontent.com/53544690/206933297-a91984f1-7633-4516-b624-21f846516093.png">
@@ -52,10 +54,11 @@ And the thought process is simple, the User can either get the picture before (l
 
 All in all I feel like I have sprinkled a lot of nice simple solutions into the codebase like this. Another example is the PlayerNotifier: [MessagePlayerScreen.cs](https://github.com/ThomasMACHINE/PennyWise/blob/417b681ceb9afd65fb808348e542fe3d49099f3b/Assets/Scripts/UI/PlayerNotification/MessagePlayerScreen.cs) The functional use of this script would be to create any other random script that contacted this script, sending along a message to be displayed to the user. Beyond setting up the UI for the text fields and icons, the script is simple and does what it needs to do. Messages are queued unless they can be shown instantly, and when removed the next message in the queue will be shown. If there are none, it will then deactivate itself, awaiting a new message.
 
-**PlayerController, PlayerStatController, Dragon**
+## PlayerController, PlayerStatController, Dragon
+
 The end result of this was very pleasing! This code now follows the vision of PlayerController checking for Input, PlayerStatController doing the processing and controlling Dragon and other things like UI and Score. And Dragon allowing the designer to customize dragons that can be controlled by the PlayerStatController.
 
-**Good Code - Framework**
+## Architecture - NPC Framework
 
 I was quite happy with my NPC "framework", this was not used heavily in the game, only being utilised for the GoldGolem. Ideally this would have been developed quicker and everything would have been added through this, but it started with a Guard that walked between 2 points and with many evolutions of this I feel like I made something I can consider well made. 
 
