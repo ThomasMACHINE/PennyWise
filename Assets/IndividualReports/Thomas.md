@@ -54,7 +54,7 @@ And the thought process is simple, the User can either get the picture before (l
 
 All in all I feel like I have sprinkled a lot of nice simple solutions into the codebase like this. Another example is the PlayerNotifier: [MessagePlayerScreen.cs](https://github.com/ThomasMACHINE/PennyWise/blob/417b681ceb9afd65fb808348e542fe3d49099f3b/Assets/Scripts/UI/PlayerNotification/MessagePlayerScreen.cs) The functional use of this script would be to create any other random script that contacted this script, sending along a message to be displayed to the user. Beyond setting up the UI for the text fields and icons, the script is simple and does what it needs to do. Messages are queued unless they can be shown instantly, and when removed the next message in the queue will be shown. If there are none, it will then deactivate itself, awaiting a new message.
 
-## PlayerController, PlayerStatController, Dragon
+## Architecture - PlayerController, PlayerStatController, Dragon
 
 The end result of this was very pleasing! This code now follows the vision of PlayerController checking for Input, PlayerStatController doing the processing and controlling Dragon and other things like UI and Score. And Dragon allowing the designer to customize dragons that can be controlled by the PlayerStatController.
 
@@ -114,7 +114,7 @@ PlayerStatController is the script that tells all other scripts which Dragon is 
 
 Another way I would have liked to solve some of the variables changing is using a subscription model. Currently most scripts are actively reading the current dragon from PlayerStatController ensure that they are using the correct one, if the other scripts could trust PlayerStatController to notify them when it changes, the other scripts could run on a read once, store value basis.
 
-## Predescessor to the CharacterGPS
+## Predecessor to the CharacterGPS
 
 [PathWalker](https://github.com/ThomasMACHINE/PennyWise/blob/master/Assets/Scripts/Character/NPC/PathWalker.cs) was the first attempt at abstracting the movement logic from the NPC's. PathWalker takes in a list of GameObjects, which the Level-Designer can lay out on the map as points for the NPC to walk between. 
 <img width="928" alt="image" src="https://user-images.githubusercontent.com/53544690/207716577-00d0b172-eafd-44f0-8362-5e1ba654f97e.png">
